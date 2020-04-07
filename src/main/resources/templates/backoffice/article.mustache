@@ -1,0 +1,65 @@
+{{> backoffice/header}}
+
+<form>
+    <div class = "row">
+        <div class="col-lg-9">
+            <div class="card mb-4">
+                <div class="card-header">
+                    Title
+                </div>
+                <div class="card-body">
+                    <input type="text" id="title" name="title" value="{{articletitle}}" class="form-control">
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    Content
+                </div>
+                <div class="card-body">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10">{{articlecontent}}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card mb-4">
+                <div class="card-header">
+                    General
+                </div>
+                <div class="card-body">
+                    <p><b>Author: </b>{{author.firstName}} {{author.lastName}}</p>
+                    <a href="#" class="btn btn-info btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-info-circle"></i>
+                    </span>
+                        <span class="text">Save as draft</span>
+                    </a>
+                    <div class="my-2"></div>
+                    <a href="#" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-check"></i>
+                    </span>
+                        <span class="text">Publish</span>
+                    </a>
+                    <a href="#" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-trash"></i>
+                    </span>
+                        <span class="text">{{delete}}</span>
+                    </a>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    Featured Image
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="../../{{featuredimage}}" alt="featured image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{{> backoffice/footer}}
