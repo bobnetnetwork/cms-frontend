@@ -1,6 +1,6 @@
 package network.bobnet.cms.controller.api
 
-import network.bobnet.cms.repository.UserRepository
+import network.bobnet.cms.repository.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable

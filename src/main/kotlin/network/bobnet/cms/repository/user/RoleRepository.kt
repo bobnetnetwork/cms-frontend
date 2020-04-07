@@ -1,4 +1,4 @@
-package network.bobnet.cms.repository
+package network.bobnet.cms.repository.user
 
 import network.bobnet.cms.model.user.Role
 import org.springframework.data.jpa.repository.JpaRepository

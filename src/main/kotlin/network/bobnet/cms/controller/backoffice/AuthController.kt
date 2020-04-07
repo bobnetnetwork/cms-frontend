@@ -1,4 +1,4 @@
-package network.bobnet.cms.controller.backend
+package network.bobnet.cms.controller.backoffice
 
 
 import network.bobnet.cms.controller.SiteInfoController
@@ -11,18 +11,18 @@ class AuthController(private val siteInfoController: SiteInfoController) {
     @GetMapping("/login")
     fun login(model: Model): String {
         model.addAttribute(siteInfoController.getSiteInfo(model))
-        return "login"
+        return "backoffice/auth/login"
     }
 
     @GetMapping("/register")
     fun register(model: Model): String {
         model.addAttribute(siteInfoController.getSiteInfo(model))
-        return "register"
+        return "backoffice/auth/register"
     }
 
     @GetMapping("/forgot-password")
     fun forgotPassword(model: Model): String {
         model.addAttribute(siteInfoController.getSiteInfo(model))
-        return "forgotpassword"
+        return "backoffice/auth/forgotpassword"
     }
 }

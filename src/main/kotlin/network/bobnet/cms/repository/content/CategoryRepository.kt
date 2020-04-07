@@ -1,4 +1,4 @@
-package network.bobnet.cms.repository
+package network.bobnet.cms.repository.content
 
 import network.bobnet.cms.model.content.Category
 import org.springframework.data.jpa.repository.JpaRepository

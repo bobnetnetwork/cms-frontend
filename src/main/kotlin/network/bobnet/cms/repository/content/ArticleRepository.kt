@@ -1,4 +1,4 @@
-package network.bobnet.cms.repository
+package network.bobnet.cms.repository.content
 
 import network.bobnet.cms.model.content.Article
 import org.springframework.data.repository.CrudRepository
