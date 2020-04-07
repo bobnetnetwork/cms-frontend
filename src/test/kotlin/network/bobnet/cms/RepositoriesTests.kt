@@ -1,5 +1,9 @@
 package network.bobnet.cms
 
+import network.bobnet.cms.model.Article
+import network.bobnet.cms.model.User
+import network.bobnet.cms.repository.ArticleRepository
+import network.bobnet.cms.repository.UserRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,7 +21,7 @@ class RepositoriesTests @Autowired constructor(
     fun `When findByIdOrNull then return Article`() {
         val juergen = User("springjuergen", "Juergen", "Hoeller")
         entityManager.persist(juergen)
-        val article = Article("Spring Framework 5.0 goes GA", "Dear Spring community ...", "Lorem ipsum", juergen)
+        val article = Article("Spring Framework 5.0 goes GA", "Dear Spring community ...", "Lorem ipsum", "",juergen)
         entityManager.persist(article)
         entityManager.flush()
         val found = articleRepository.findByIdOrNull(article.id!!)

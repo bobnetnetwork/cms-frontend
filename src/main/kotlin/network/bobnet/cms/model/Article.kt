@@ -1,4 +1,4 @@
-package network.bobnet.cms
+package network.bobnet.cms.model
 
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -8,15 +8,8 @@ class Article(
         var title: String,
         var headline: String,
         var content: String,
+        var featuredImage: String,
         @ManyToOne var author: User,
-        var slug: String = title.toString(),
+        @Column(name = "slug") var slug: String = title.toString(),
         var addedAt: LocalDateTime = LocalDateTime.now(),
-        @Id @GeneratedValue var id: Long? = null)
-
-@Entity
-class User(
-        var login: String,
-        var firstname: String,
-        var lastname: String,
-        var description: String? = null,
         @Id @GeneratedValue var id: Long? = null)

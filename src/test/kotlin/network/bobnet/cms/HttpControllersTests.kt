@@ -2,9 +2,12 @@ package network.bobnet.cms
 
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
+import network.bobnet.cms.model.Article
+import network.bobnet.cms.model.User
+import network.bobnet.cms.repository.ArticleRepository
+import network.bobnet.cms.repository.UserRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -23,8 +26,8 @@ class HttpControllersTests(@Autowired val mockMvc: MockMvc) {
     @Test
     fun `List articles`() {
         val juergen = User("springjuergen", "Juergen", "Hoeller")
-        val spring5Article = Article("Spring Framework 5.0 goes GA", "Dear Spring community ...", "Lorem ipsum", juergen)
-        val spring43Article = Article("Spring Framework 4.3 goes GA", "Dear Spring community ...", "Lorem ipsum", juergen)
+        val spring5Article = Article("Spring Framework 5.0 goes GA", "Dear Spring community ...", "Lorem ipsum", "",juergen)
+        val spring43Article = Article("Spring Framework 4.3 goes GA", "Dear Spring community ...", "Lorem ipsum", "",juergen)
         every { articleRepository.findAllByOrderByAddedAtDesc() } returns listOf(spring5Article, spring43Article)
         mockMvc.perform(get("/api/article/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk)
