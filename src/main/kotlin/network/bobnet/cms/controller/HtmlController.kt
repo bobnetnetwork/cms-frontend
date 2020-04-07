@@ -57,22 +57,26 @@ class HtmlController(private val repository: ArticleRepository,
         return "article"
     }
     @GetMapping("/admin")
-    fun admin(): String {
+    fun admin(model: Model): String {
+        model.addAttribute(getSiteInfo(model))
         return "admin"
     }
 
     @GetMapping("/login")
-    fun login(): String {
+    fun login(model: Model): String {
+        model.addAttribute(getSiteInfo(model))
         return "login"
     }
 
     @GetMapping("/register")
-    fun register(): String {
+    fun register(model: Model): String {
+        model.addAttribute(getSiteInfo(model))
         return "register"
     }
 
     @GetMapping("/forgot-password")
-    fun forgotPassword(): String {
+    fun forgotPassword(model: Model): String {
+        model.addAttribute(getSiteInfo(model))
         return "forgotpassword"
     }
 
