@@ -56,6 +56,25 @@ class HtmlController(private val repository: ArticleRepository,
         model["featuredImage"] = article.featuredImage
         return "article"
     }
+    @GetMapping("/admin")
+    fun admin(): String {
+        return "admin"
+    }
+
+    @GetMapping("/login")
+    fun login(): String {
+        return "login"
+    }
+
+    @GetMapping("/register")
+    fun register(): String {
+        return "register"
+    }
+
+    @GetMapping("/forgot-password")
+    fun forgotPassword(): String {
+        return "forgotpassword"
+    }
 
     fun Article.render() = RenderedArticle(
             slug,
