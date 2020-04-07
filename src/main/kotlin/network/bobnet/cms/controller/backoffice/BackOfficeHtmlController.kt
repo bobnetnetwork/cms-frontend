@@ -4,6 +4,7 @@ import network.bobnet.cms.controller.SiteInfoController
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.model.user.User
 import network.bobnet.cms.repository.content.ArticleRepository
+import network.bobnet.cms.util.Translator
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -49,6 +50,7 @@ class BackOfficeHtmlController (private val repository: ArticleRepository,
         model["articlecontent"] = article.content
         model["author"] = article.author
         model["featuredimage"] = article.featuredImage
+        model["delete"] = Translator.toLocale("delete")
         return "backoffice/article"
     }
 
