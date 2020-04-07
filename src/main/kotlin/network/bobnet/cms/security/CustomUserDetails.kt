@@ -1,6 +1,6 @@
 package network.bobnet.cms.security
 
-import network.bobnet.cms.model.User
+import network.bobnet.cms.model.user.User
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority

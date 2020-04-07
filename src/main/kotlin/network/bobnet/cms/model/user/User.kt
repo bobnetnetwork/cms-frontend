@@ -1,14 +1,14 @@
-package network.bobnet.cms.model
+package network.bobnet.cms.model.user
 
 import java.util.*
 import javax.persistence.*
 
 @Entity
-open class User(var firstName: String = "",
-                var lastName: String = "",
-                var userName: String = "",
-                var email: String = "",
-                var passWord: String = "") {
+class User(var firstName: String = "",
+           var lastName: String = "",
+           var userName: String = "",
+           var email: String = "",
+           var passWord: String = "") {
     @Id
     @GeneratedValue
     var id: Long = 0

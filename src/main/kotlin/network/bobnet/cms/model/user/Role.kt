@@ -1,4 +1,4 @@
-package network.bobnet.cms.model
+package network.bobnet.cms.model.user
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

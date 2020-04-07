@@ -1,6 +1,6 @@
 package network.bobnet.cms.repository
 
-import network.bobnet.cms.model.Article
+import network.bobnet.cms.model.content.Article
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository
 interface ArticleRepository : CrudRepository<Article, Long> {
     fun findBySlug(slug: String): Article?
     fun findAllByOrderByAddedAtDesc(): Iterable<Article>
+    fun findByCategoryIds(categorID: Long): Iterable<Article>
 }

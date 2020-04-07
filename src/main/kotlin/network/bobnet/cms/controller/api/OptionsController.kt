@@ -1,4 +1,4 @@
-package network.bobnet.cms.controller
+package network.bobnet.cms.controller.api
 
 import network.bobnet.cms.repository.OptionsRepository
 import org.springframework.http.HttpStatus

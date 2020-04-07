@@ -1,6 +1,6 @@
 package network.bobnet.cms.repository
 
-import network.bobnet.cms.model.User
+import network.bobnet.cms.model.user.User
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 

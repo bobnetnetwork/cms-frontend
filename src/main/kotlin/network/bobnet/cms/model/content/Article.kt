@@ -1,5 +1,6 @@
-package network.bobnet.cms.model
+package network.bobnet.cms.model.content
 
+import network.bobnet.cms.model.user.User
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -10,6 +11,7 @@ class Article(
         var content: String,
         var featuredImage: String,
         @ManyToOne var author: User,
-        @Column(name = "slug") var slug: String = title.toString(),
+        var slug: String,
         var addedAt: LocalDateTime = LocalDateTime.now(),
-        @Id @GeneratedValue var id: Long? = null)
+        @Id @GeneratedValue var id: Long? = null,
+        @ManyToMany val categoryIds: Set<Category>?= null)

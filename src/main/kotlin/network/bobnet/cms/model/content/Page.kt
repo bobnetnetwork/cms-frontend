@@ -1,5 +1,6 @@
-package network.bobnet.cms.model
+package network.bobnet.cms.model.content
 
+import network.bobnet.cms.model.user.User
 import java.time.LocalDateTime
 import javax.persistence.*
 
