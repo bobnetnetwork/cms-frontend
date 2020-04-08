@@ -3,7 +3,7 @@
 
 An open source CMS based on Kotlin and Spring boot. 
 
-##Motivation
+## Motivation
 
 Basically, the project was started for self-training.
 
@@ -11,12 +11,12 @@ Basically, the project was started for self-training.
 
 Whether you use this project, have learned something from it, or just like it, please consider supporting it by <a href="https://ko-fi.com/bobnetnetwork">buying me a coffee</a>, so I can dedicate more time on open-source projects like this :)
 
-##Technologies
+## Technologies
 * Spring boot
 * Kotlin
 * Mustache
 * Bootstrap
 * Maven
 
-##License
+## License
 This project is licensed under the GPLv3 License - see the [LICENSE.md](LICENSE.md) file for details
