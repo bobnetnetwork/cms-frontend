@@ -1,18 +1,24 @@
 package network.bobnet.cms.controller
 
 import network.bobnet.cms.model.Options
+import network.bobnet.cms.model.user.User
 import network.bobnet.cms.repository.OptionsRepository
+import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.util.Translator
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
+import org.springframework.web.context.request.RequestContextHolder
+import org.springframework.web.context.request.ServletRequestAttributes
 import org.springframework.web.server.ResponseStatusException
 import java.util.*
 
+
 @Controller
-class DisplayLanguageController(private val optionsRepository: OptionsRepository) {
+class DisplayLanguageController(private val optionsRepository: OptionsRepository,
+                                private val userRepository: UserRepository) {
 
     private fun getSiteInfo(model: Model): Model {
         val names = mutableListOf<String>()
@@ -33,7 +39,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    private fun getSideBarLabels(model: Model): Model{
+    private fun getSideBarLabels(model: Model): Model {
         model["lang.dashboard"] = Translator.toLocale("lang.dashboard")
         model["lang.contents"] = Translator.toLocale("lang.contents")
         model["lang.articles"] = Translator.toLocale("lang.articles")
@@ -47,9 +53,35 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
+    private fun getTopBarLabels(model: Model): Model {
+        val user = getLoggedInUser()
+        if (user != null) {
+            model["loggedInUserFirstName"] = user.firstName
+            model["loggedInUserLastName"] = user.lastName
+        }
+        return model
+    }
+
+    private fun getLoggedInUser(): User? {
+        val request = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes?)
+                ?.request
+        var loggedInUserCookieExists: Boolean = false
+        var username =""
+
+        request?.cookies?.forEach {
+            if(it.name.equals("logged_in_user")){
+                loggedInUserCookieExists = true;
+                username = it.value
+            }
+        }
+        return userRepository.findOneByUserName(username)
+    }
+
+
     private fun getBasicsLabelsAndInfos(model: Model): Model {
         getSiteInfo(model)
         getSideBarLabels(model)
+        getTopBarLabels(model)
         return model
     }
 

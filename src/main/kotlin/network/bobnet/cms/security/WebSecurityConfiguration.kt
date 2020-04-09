@@ -1,6 +1,5 @@
 package network.bobnet.cms.security
 
-import network.bobnet.cms.security.handler.RefererRedirectionAuthenticationSuccessHandler
 import network.bobnet.cms.service.CustomUserDetailsService
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -10,8 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 
 @EnableWebSecurity
 open class WebSecurityConfiguration(private val customUserDetailsService: CustomUserDetailsService,
-                                    private val passwordEncoderAndMatcher: PasswordEncoder,
-                                    private val refererRedirectionAuthenticationSuccessHandler: RefererRedirectionAuthenticationSuccessHandler)
+                                    private val passwordEncoderAndMatcher: PasswordEncoder)
     : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
@@ -23,6 +21,7 @@ open class WebSecurityConfiguration(private val customUserDetailsService: Custom
                 .formLogin().loginPage("/login")
                 .and()
                 .logout()
+                .deleteCookies("logged_in_user")
                 .logoutUrl("/logout");
     }
 
