@@ -2,7 +2,7 @@ package network.bobnet.cms.controller.frontend
 
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.BlogProperties
-import network.bobnet.cms.controller.SiteInfoController
+import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Category
 import network.bobnet.cms.model.user.User
 import network.bobnet.cms.repository.content.ArticleRepository
@@ -19,12 +19,12 @@ import java.time.LocalDateTime
 @Controller
 class FrontendHtmlController(private val repository: ArticleRepository,
                              private val properties: BlogProperties,
-                             private val categoriRepository: CategoryRepository,
-                             private val siteInfoController: SiteInfoController) {
+                             private val categoryRepository: CategoryRepository,
+                             private val displayLanguageController: DisplayLanguageController) {
 
     @GetMapping("/")
     fun blog(model: Model): String {
-        model.addAttribute(siteInfoController.getSiteInfo(model))
+        model.addAttribute(displayLanguageController.getFrontendLabels(model))
         model["title"] = properties.title
         model["banner"] = properties.banner
         model["articles"] = repository.findAllByOrderByAddedAtDesc().map { it.render() }
@@ -33,7 +33,7 @@ class FrontendHtmlController(private val repository: ArticleRepository,
 
     @GetMapping("/article/{slug}")
     fun article(@PathVariable slug: String, model: Model): String {
-        model.addAttribute(siteInfoController.getSiteInfo(model))
+        model.addAttribute(displayLanguageController.getFrontendLabels(model))
         val article = repository
                 .findBySlug(slug)
                 ?.render()
@@ -46,8 +46,8 @@ class FrontendHtmlController(private val repository: ArticleRepository,
 
     @GetMapping("/categories/{slug]")
     fun category(@PathVariable slug: String, model: Model): String {
-        model.addAttribute(siteInfoController.getSiteInfo(model))
-        val category = categoriRepository
+        model.addAttribute(displayLanguageController.getFrontendLabels(model))
+        val category = categoryRepository
                 .findBySlug(slug)
                 ?.render()
                 ?: throw ResponseStatusException(NOT_FOUND, "This article does not exist")
@@ -60,8 +60,8 @@ class FrontendHtmlController(private val repository: ArticleRepository,
 
     @GetMapping("/categories")
     fun categories(model: Model): String{
-        model.addAttribute(siteInfoController.getSiteInfo(model))
-        model["categories"] = categoriRepository.findAllByOrderByAddedAtDesc().map { it.render() }
+        model.addAttribute(displayLanguageController.getFrontendLabels(model))
+        model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }
         return "frontend/categories"
     }
 

@@ -11,14 +11,14 @@
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../../webjars/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{home}}/webjars/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- TinyMCE -->
-    <script src="../../webjars/tinymce/5.1.6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="{{home}}/webjars/tinymce/5.1.6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
             selector: 'textarea#contentEditor',
@@ -102,4 +102,4 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">{{lang.editArticle}}</h1>
+                <h1 class="h3 mb-4 text-gray-800">{{title}}</h1>
