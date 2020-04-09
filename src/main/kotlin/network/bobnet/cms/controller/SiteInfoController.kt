@@ -16,6 +16,8 @@ class SiteInfoController(private val optionsRepository: OptionsRepository) {
         names.add("sitename")
         names.add("sitedescription")
         names.add("home")
+        names.add("sitelanguage")
+        names.add("tinymcelang")
         for (name in names) {
             val options = optionsRepository
                     .findByName(name)
@@ -24,6 +26,10 @@ class SiteInfoController(private val optionsRepository: OptionsRepository) {
             model[name] = options.value
         }
         return model
+    }
+
+    fun getSiteLanguage(): String{
+        return optionsRepository.findByName("sitelanguage").toString()
     }
 
     fun Options.render() = RenderOptions(
