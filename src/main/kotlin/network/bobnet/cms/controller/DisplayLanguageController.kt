@@ -21,6 +21,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         names.add("home")
         names.add("sitelanguage")
         names.add("tinymcelang")
+        names.add("copyright")
         for (name in names) {
             val options = optionsRepository
                     .findByName(name)
@@ -34,6 +35,15 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
 
     private fun getSideBarLabels(model: Model): Model{
         model["lang.dashboard"] = Translator.toLocale("lang.dashboard")
+        model["lang.contents"] = Translator.toLocale("lang.contents")
+        model["lang.articles"] = Translator.toLocale("lang.articles")
+        model["lang.categories"] = Translator.toLocale("lang.categories")
+        model["lang.tags"] = Translator.toLocale("lang.tags")
+        model["lang.pages"] = Translator.toLocale("lang.pages")
+        model["lang.aministration"] = Translator.toLocale("lang.aministration")
+        model["lang.users"] = Translator.toLocale("lang.users")
+        model["lang.roles"] = Translator.toLocale("lang.roles")
+        model["lang.settings"] = Translator.toLocale("lang.settings")
         return model
     }
 
