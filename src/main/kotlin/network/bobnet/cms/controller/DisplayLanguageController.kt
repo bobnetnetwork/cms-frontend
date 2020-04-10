@@ -59,6 +59,12 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         if (user != null) {
             model["loggedInUserFirstName"] = user.firstName
             model["loggedInUserLastName"] = user.lastName
+            model["loggedInUserUserName"] = user.userName
+            model["lang.logout"] = Translator.toLocale("lang.logout")
+            model["lang.profile"] = Translator.toLocale("lang.profile")
+            model["lang.readyToLeave"] = Translator.toLocale("lang.readyToLeave")
+            model["lang.readyToLeaveDesc"] = Translator.toLocale("lang.readyToLeaveDesc")
+            model["lang.cancel"] = Translator.toLocale("lang.cancel")
         }
         return model
     }
