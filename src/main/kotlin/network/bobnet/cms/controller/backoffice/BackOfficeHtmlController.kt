@@ -29,12 +29,6 @@ class BackOfficeHtmlController (private val displayLanguageController: DisplayLa
         return "profile"
     }
 
-    @GetMapping("/admin/users")
-    fun users(model: Model): String{
-
-        return "users"
-    }
-
     @GetMapping("/admin/users/{username}")
     fun editUser(@PathVariable username: String, model: Model): String{
 

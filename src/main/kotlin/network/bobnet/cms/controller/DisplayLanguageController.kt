@@ -161,6 +161,17 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
+    fun getUsersLabels(model: Model): Model {
+        model.addAttribute(getBasicsLabelsAndInfos(model))
+        model["title"] = Translator.toLocale("lang.users")
+        model["lang.name"] = Translator.toLocale("lang.name")
+        model["lang.registeredAt"] = Translator.toLocale("lang.registeredAt")
+        model["lang.previous"] = Translator.toLocale("lang.previous")
+        model["lang.next"] = Translator.toLocale("lang.next")
+        model["lang.addNew"] = Translator.toLocale("lang.addNew")
+        return model
+    }
+
     fun getSiteLanguage(): String{
         return optionsRepository.findByName("sitelanguage").toString()
     }

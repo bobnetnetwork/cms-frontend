@@ -22,7 +22,7 @@ class ArticlesController (
                     private val categoryRepository: CategoryRepository) {
 
     @GetMapping("/admin/articles")
-    fun edit(model: Model): String{
+    fun articles(model: Model): String{
         model.addAttribute(displayLanguageController.getArticlesLabels(model))
         model["articles"] = articleRepository.findAllByOrderByAddedAtDesc().map { it.render() }
         return "backoffice/articles"

@@ -1,5 +1,6 @@
 package network.bobnet.cms.model.user
 
+import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
@@ -17,6 +18,7 @@ class User(var firstName: String = "",
     var accountNonLocked: Boolean = true
     var credentialsNonExpired: Boolean = true
     var enabled: Boolean = true
+    var registeredAt: LocalDateTime = LocalDateTime.now()
     @OneToMany(fetch = FetchType.EAGER, cascade = arrayOf(CascadeType.ALL))
     var roles: MutableSet<Role> = HashSet()
     constructor(user: User) : this(user.firstName, user.lastName, user.userName, user.email, user.passWord) {
@@ -31,6 +33,7 @@ class User(var firstName: String = "",
         accountNonLocked = user.accountNonLocked
         credentialsNonExpired = user.credentialsNonExpired
         enabled = user.enabled
+        registeredAt = user.registeredAt
         roles = user.roles
     }
 }
