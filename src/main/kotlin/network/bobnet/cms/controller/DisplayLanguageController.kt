@@ -4,6 +4,7 @@ import network.bobnet.cms.model.Options
 import network.bobnet.cms.model.user.User
 import network.bobnet.cms.repository.OptionsRepository
 import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.util.LoggedInUser
 import network.bobnet.cms.util.Translator
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.http.HttpStatus
@@ -54,29 +55,13 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
     }
 
     private fun getTopBarLabels(model: Model): Model {
-        val user = getLoggedInUser()
+        val user = LoggedInUser(userRepository).getUser()
         if (user != null) {
             model["loggedInUserFirstName"] = user.firstName
             model["loggedInUserLastName"] = user.lastName
         }
         return model
     }
-
-    private fun getLoggedInUser(): User? {
-        val request = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes?)
-                ?.request
-        var loggedInUserCookieExists: Boolean = false
-        var username =""
-
-        request?.cookies?.forEach {
-            if(it.name.equals("logged_in_user")){
-                loggedInUserCookieExists = true;
-                username = it.value
-            }
-        }
-        return userRepository.findOneByUserName(username)
-    }
-
 
     private fun getBasicsLabelsAndInfos(model: Model): Model {
         getSiteInfo(model)

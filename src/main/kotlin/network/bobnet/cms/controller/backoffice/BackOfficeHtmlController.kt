@@ -1,6 +1,8 @@
 package network.bobnet.cms.controller.backoffice
 
 import network.bobnet.cms.controller.DisplayLanguageController
+import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.util.LoggedInUser
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,26 +13,12 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Controller
-class BackOfficeHtmlController (private val displayLanguageController: DisplayLanguageController){
+class BackOfficeHtmlController (private val displayLanguageController: DisplayLanguageController,
+                                private val userRepository: UserRepository){
 
     @GetMapping("/admin")
-    fun admin(request: HttpServletRequest, response: HttpServletResponse, principal: Principal, model: Model): String {
-        val cookies = request.cookies
-        var loggedInUserCookieExists: Boolean = false
-
-        if (cookies != null){
-            cookies.forEach {
-                if(it.name.equals("logged_in_user")){
-                    loggedInUserCookieExists = true;
-                }
-            }
-        }
-
-        if(!loggedInUserCookieExists){
-            val cookie = Cookie("logged_in_user", principal.name)
-            cookie.setMaxAge(7 * 24 * 60 * 60); // expires in 7 days
-            response.addCookie(cookie)
-        }
+    fun admin(response: HttpServletResponse, model: Model): String {
+        LoggedInUser(userRepository).setUser(response)
         model.addAttribute(displayLanguageController.getDashboardLabels(model))
         return "backoffice/admin"
     }
