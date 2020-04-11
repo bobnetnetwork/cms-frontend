@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletRequest
 
 @Configuration
 class CustomLocaleResolver : AcceptHeaderLocaleResolver(), WebMvcConfigurer {
-    var LOCALES = Arrays.asList(
+    var locales: MutableList<Locale> = listOf(
             Locale("en"),
-            Locale("fr"))
+            Locale("fr")) as MutableList<Locale>
 
     override fun resolveLocale(request: HttpServletRequest): Locale {
         val headerLang = request.getHeader("Accept-Language")
-        return if (headerLang == null || headerLang.isEmpty()) Locale.getDefault() else Locale.lookup(Locale.LanguageRange.parse(headerLang), LOCALES)
+        return if (headerLang == null || headerLang.isEmpty()) Locale.getDefault() else Locale.lookup(Locale.LanguageRange.parse(headerLang), locales)
     }
 
     @Bean

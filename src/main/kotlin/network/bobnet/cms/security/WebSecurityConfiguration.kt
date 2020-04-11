@@ -9,16 +9,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler
-
-
-
 
 
 @EnableWebSecurity
-open class WebSecurityConfiguration(private val customUserDetailsService: CustomUserDetailsService,
-                                    private val passwordEncoderAndMatcher: PasswordEncoder,
-                                    private val userRepository: UserRepository)
+class WebSecurityConfiguration(private val customUserDetailsService: CustomUserDetailsService,
+                               private val passwordEncoderAndMatcher: PasswordEncoder,
+                               private val userRepository: UserRepository)
     : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
@@ -33,7 +29,7 @@ open class WebSecurityConfiguration(private val customUserDetailsService: Custom
                 .and()
                 .logout()
                 .deleteCookies("logged_in_user")
-                .logoutUrl("/logout");
+                .logoutUrl("/logout")
     }
 
     override fun configure(auth: AuthenticationManagerBuilder) {

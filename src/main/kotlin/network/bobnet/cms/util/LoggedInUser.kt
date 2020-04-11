@@ -13,36 +13,35 @@ class LoggedInUser(private val userRepository: UserRepository){
     fun getUser(): User? {
         val request = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes?)
                 ?.request
-        var loggedInUserCookieExists: Boolean = false
+        var loggedInUserCookieExists = false
         var username =""
 
         request?.cookies?.forEach {
-            if(it.name.equals("logged_in_user")){
-                loggedInUserCookieExists = true;
+            if(it.name == "logged_in_user"){
+                loggedInUserCookieExists = true
                 username = it.value
             }
         }
         return userRepository.findOneByUserName(username)
     }
-    
+
     fun setUser(response: HttpServletResponse){
-        var request= (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request
+        val request= (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request
 
 
-        var loggedInUserCookieExists: Boolean = false
+        var loggedInUserCookieExists = false
 
         request.cookies?.forEach {
-            if(it.name.equals("logged_in_user")){
-                loggedInUserCookieExists = true;
+            if(it.name == "logged_in_user"){
+                loggedInUserCookieExists = true
             }
         }
 
         if(!loggedInUserCookieExists){
-            var principal: User = SecurityContextHolder.getContext().authentication.principal as User
+            val principal: User = SecurityContextHolder.getContext().authentication.principal as User
             val cookie = Cookie("logged_in_user", principal.userName)
-            cookie.maxAge = 7 * 24 * 60 * 60; // expires in 7 days
+            cookie.maxAge = 7 * 24 * 60 * 60 // expires in 7 days
             response.addCookie(cookie)
         }
     }
-
 }

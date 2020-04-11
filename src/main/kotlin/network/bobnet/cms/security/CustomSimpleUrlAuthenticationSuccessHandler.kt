@@ -7,12 +7,10 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache
 import org.springframework.security.web.savedrequest.RequestCache
-import org.springframework.security.web.savedrequest.SavedRequest
 import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-import javax.servlet.http.HttpSession
 
 @Component
 class CustomSimpleUrlAuthenticationSuccessHandler(private val userRepository: UserRepository): AuthenticationSuccessHandler, SimpleUrlAuthenticationSuccessHandler() {
@@ -49,23 +47,6 @@ class CustomSimpleUrlAuthenticationSuccessHandler(private val userRepository: Us
         logger.debug("Redirecting to DefaultSavedRequest Url: $targetUrl")
         redirectStrategy.sendRedirect(request, response, targetUrl)
 
-
-
-
-
-
-
-        if(request != null && response != null){
-
-            response.status = HttpServletResponse.SC_OK
-            val session: HttpSession = request.getSession()
-            val valami = savedRequest.headerNames
-            if(savedRequest != null){
-                //response.sendRedirect(savedRequest.);
-            }
-            setUseReferer(true);
-
-        }
     }
 
 }

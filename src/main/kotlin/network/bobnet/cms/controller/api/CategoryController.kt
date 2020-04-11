@@ -15,8 +15,8 @@ class CategoryController(private val categoryRepository: CategoryRepository) {
 
     @GetMapping("/{slug}")
     fun findOne(@PathVariable slug: String): ResponseEntity<Category>? {
-        var category: Category? = categoryRepository.findBySlug(slug)
-        var id: Long? = category?.id
+        val category: Category? = categoryRepository.findBySlug(slug)
+        val id: Long? = category?.id
         return id?.let {
             categoryRepository.findById(it).map { category ->
             ResponseEntity.ok(category)

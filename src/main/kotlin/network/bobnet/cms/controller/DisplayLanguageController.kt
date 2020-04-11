@@ -1,7 +1,6 @@
 package network.bobnet.cms.controller
 
 import network.bobnet.cms.model.Options
-import network.bobnet.cms.model.user.User
 import network.bobnet.cms.repository.OptionsRepository
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.util.LoggedInUser
@@ -11,8 +10,6 @@ import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
-import org.springframework.web.context.request.RequestContextHolder
-import org.springframework.web.context.request.ServletRequestAttributes
 import org.springframework.web.server.ResponseStatusException
 import java.util.*
 

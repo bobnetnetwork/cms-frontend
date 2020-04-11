@@ -1,8 +1,7 @@
 package network.bobnet.cms.controller.backoffice
 
 import network.bobnet.cms.controller.DisplayLanguageController
-import network.bobnet.cms.model.content.Article
-import network.bobnet.cms.model.content.Category
+import network.bobnet.cms.model.data.RenderedArticle
 import network.bobnet.cms.model.user.User
 import network.bobnet.cms.repository.content.ArticleRepository
 import network.bobnet.cms.repository.content.CategoryRepository
@@ -31,7 +30,7 @@ class ArticlesController (
     @GetMapping("/admin/articles/{slug}")
     fun article(@PathVariable slug: String, model: Model): String{
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
-        val article = if(slug.equals("new")){
+        val article = if(slug == "new"){
             RenderedArticle("", "", "", "", "", User("", ""), LocalDateTime.now(), 0)
         }else{
             articleRepository
@@ -46,45 +45,5 @@ class ArticlesController (
         model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }
         return "backoffice/article"
     }
-
-    fun Article.render() = id?.let {
-        RenderedArticle(
-                slug,
-                title,
-                headline,
-                content,
-                featuredImage,
-                author,
-                addedAt,
-                it
-
-        )
-    }
-
-    data class RenderedArticle(
-            val slug: String,
-            val title: String,
-            val headline: String,
-            val content: String,
-            val featuredImage: String,
-            val author: User,
-            val addedAt: LocalDateTime,
-            val id: Long)
-
-    fun Category.render() = RenderCategory(
-            slug,
-            name,
-            featuredImage,
-            description,
-            id
-    )
-
-    data class RenderCategory(
-            val slug: String,
-            val name: String,
-            val featuredImage: String,
-            val description: String,
-            val id: Long?)
-
 
 }
