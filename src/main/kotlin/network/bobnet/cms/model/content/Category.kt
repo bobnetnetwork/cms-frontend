@@ -13,8 +13,8 @@ data class Category (
         @ManyToOne var author: User,
         @Column(unique=true) var slug: String,
         var addedAt: LocalDateTime = LocalDateTime.now(),
-        @Id @GeneratedValue var id: Long? = null,
-        @ManyToMany val articles: Set<Article>? = null){
+        @Id @GeneratedValue var id: Long? = null/*,
+        @ManyToMany val articles: Set<Article>? = null*/){
 
     fun render() = RenderCategory(
             slug,

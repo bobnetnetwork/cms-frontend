@@ -46,7 +46,7 @@ class FrontendHtmlController(private val repository: ArticleRepository,
         model["ctageoryname"] = category.name
         model["featuredimage"] = category.featuredImage
         model["categorydescription"] = category.description
-        model["articles"] = category.id?.let { it -> repository.findByCategoryIds(it).map { it.render() } }!!
+        //model["articles"] = category.id?.let { it -> repository.findByCategoryIds(it).map { it.render() } }!!
         return "frontend/category"
     }
 
