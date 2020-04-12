@@ -34,6 +34,13 @@
                 {{/articles}}
                 </tbody>
             </table>
+            <div>
+                <nobr>
+                    {{#hasPrev}}<a href="/admin/articles?page={{prev}}">Prev</a>&nbsp;&nbsp;&nbsp;{{/hasPrev}}
+                    {{#hasNext}}<a href="/admin/articles?page={{next}}">Next</a>{{/hasNext}}
+                </nobr>
+            </div>
+
         </div>
     </div>
 </div>

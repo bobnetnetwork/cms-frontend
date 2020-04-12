@@ -33,6 +33,14 @@
 		<system>GitHub</system>
 		<url>https://github.com/bobnetnetwork/cms/issues</url>
 	</issueManagement>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub BobNET Network Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/bobnetnetwork/cms</url>
+    </repository>
+  </distributionManagement>
   <properties>
     <kotlin.version>1.3.71</kotlin.version>
     <java.version>1.8</java.version>

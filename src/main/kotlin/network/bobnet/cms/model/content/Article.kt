@@ -7,15 +7,15 @@ import javax.persistence.*
 
 @Entity
 class Article(
-        var title: String,
-        var headline: String,
-        var content: String,
-        var featuredImage: String,
-        @ManyToOne var author: User,
-        var slug: String,
+        var title: String = "",
+        var headline: String = "",
+        var content: String = "",
+        var featuredImage: String = "",
+        @ManyToOne(cascade = [(CascadeType.ALL)]) var author: User = User(),
+        var slug: String = "",
         var addedAt: LocalDateTime = LocalDateTime.now(),
-        @Id @GeneratedValue var id: Long? = null,
-        @ManyToMany val categoryIds: Set<Category>?= null){
+        @Id @GeneratedValue var id: Long? = null/*,
+        @ManyToMany val categoryIds: Set<Category>?= null*/){
 
     fun render() = id?.let {
         RenderedArticle(
