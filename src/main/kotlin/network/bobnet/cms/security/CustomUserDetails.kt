@@ -7,28 +7,26 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.util.stream.Collectors
 
-open class CustomUserDetails : User, UserDetails {
+class CustomUserDetails(user: User) : User(user), UserDetails {
 
     private val log = LoggerFactory.getLogger(CustomUserDetails::class.java)
-
-    constructor(user: User) : super(user)
 
     override fun getAuthorities(): Collection<GrantedAuthority> {
         return roles
                 .stream()
                 .map { role ->
-                    log.debug("Granting Authority to user with role: " + role.toString())
+                    log.debug("Granting Authority to user with role: $role")
                     SimpleGrantedAuthority(role.toString())
                 }
                 .collect(Collectors.toList())
     }
 
     override fun getPassword(): String {
-        return super.passWord!!
+        return super.passWord
     }
 
     override fun getUsername(): String {
-        return super.userName!!
+        return super.userName
     }
 
     override fun isEnabled(): Boolean {
