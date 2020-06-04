@@ -1,5 +1,6 @@
 package network.bobnet.cms.model.content
 
+import network.bobnet.cms.model.data.RenderCategory
 import network.bobnet.cms.model.user.User
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -12,5 +13,14 @@ data class Category (
         @ManyToOne var author: User,
         @Column(unique=true) var slug: String,
         var addedAt: LocalDateTime = LocalDateTime.now(),
-        @Id @GeneratedValue var id: Long? = null,
-        @ManyToMany val articles: Set<Article>? = null)
+        @Id @GeneratedValue var id: Long? = null/*,
+        @ManyToMany val articles: Set<Article>? = null*/){
+
+    fun render() = RenderCategory(
+            slug,
+            name,
+            featuredImage,
+            description,
+            id
+    )
+}

@@ -1,5 +1,6 @@
 package network.bobnet.cms.controller.api
 
+import network.bobnet.cms.model.user.User
 import network.bobnet.cms.repository.user.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException
 class UserController(private val repository: UserRepository) {
 
     @GetMapping("/")
-    fun findAll() = repository.findAll()
+    fun findAll(): MutableIterable<User> = repository.findAll()
 
     @GetMapping("/{login}")
     fun findOne(@PathVariable login: String) =

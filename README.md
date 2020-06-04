@@ -9,7 +9,7 @@ Basically, the project was started for self-training.
 
 ## Buy me a coffee
 
-Whether you use this project, have learned something from it, or just like it, please consider supporting it by <a href="https://ko-fi.com/bobnetnetwork">buying me a coffee</a>, so I can dedicate more time on open-source projects like this :)
+Whether you use this project, have learned something from it, or just like it, please consider supporting it by [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C0C51L9LE), so I can dedicate more time on open-source projects like this :)
 
 ## Technologies
 * Spring boot
