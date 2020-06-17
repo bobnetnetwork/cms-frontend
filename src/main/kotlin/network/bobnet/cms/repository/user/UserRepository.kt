@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface UserRepository : CrudRepository<User, Long> {
     fun findOneByUserName(userName: String): User?
+    fun findAllByOrderByRegisteredAtDesc(): Iterable<User>
 }

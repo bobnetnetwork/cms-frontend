@@ -9,6 +9,6 @@ data class Page(var title: String,
                 var headline: String,
                 var content: String,
                 @ManyToOne var author: User,
-                @Column(name = "slug") var slug: String = title.toString(),
+                @Column(name = "slug") var slug: String = title,
                 var addedAt: LocalDateTime = LocalDateTime.now(),
                 @Id @GeneratedValue var id: Long? = null)

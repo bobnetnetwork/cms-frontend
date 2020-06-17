@@ -1,16 +1,15 @@
 package network.bobnet.cms.security.encoder.config
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 
 @Configuration
-open class PasswordEncoderAndMatcherConfig {
+class PasswordEncoderAndMatcherConfig {
 
     @Bean
-    open fun passwordEncoderAndMatcher(): PasswordEncoder {
+    fun passwordEncoderAndMatcher(): PasswordEncoder {
         return object : PasswordEncoder {
             override fun encode(rawPassword: CharSequence?): String {
                 return BCryptPasswordEncoder().encode(rawPassword)
