@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "blog.banner.content",
+      "type": "java.lang.String",
+      "description": "Description for blog.banner.content."
+    },
+    {
+      "name": "blog.banner.title",
+      "type": "java.lang.String",
+      "description": "Description for blog.banner.title."
+    },
+    {
+      "name": "blog.title",
+      "type": "java.lang.String",
+      "description": "Description for blog.title."
+    }
+  ] }

@@ -1,5 +1,7 @@
 package network.bobnet.cms.model.user
 
+import network.bobnet.cms.model.data.RenderedUser
+import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
@@ -12,12 +14,13 @@ class User(var firstName: String = "",
     @Id
     @GeneratedValue
     var id: Long = 0
-    var version: Int = 0
-    var accountNonExpired: Boolean = true
-    var accountNonLocked: Boolean = true
-    var credentialsNonExpired: Boolean = true
-    var enabled: Boolean = true
-    @OneToMany(fetch = FetchType.EAGER, cascade = arrayOf(CascadeType.ALL))
+    final var version: Int = 0
+    final var accountNonExpired: Boolean = true
+    final var accountNonLocked: Boolean = true
+    final var credentialsNonExpired: Boolean = true
+    final var enabled: Boolean = true
+    final var registeredAt: LocalDateTime = LocalDateTime.now()
+    @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
     var roles: MutableSet<Role> = HashSet()
     constructor(user: User) : this(user.firstName, user.lastName, user.userName, user.email, user.passWord) {
         id = user.id
@@ -31,6 +34,19 @@ class User(var firstName: String = "",
         accountNonLocked = user.accountNonLocked
         credentialsNonExpired = user.credentialsNonExpired
         enabled = user.enabled
+        registeredAt = user.registeredAt
         roles = user.roles
+    }
+
+    fun render() {
+        RenderedUser(
+                id,
+                email,
+                firstName,
+                lastName,
+                userName,
+                registeredAt
+
+        )
     }
 }
