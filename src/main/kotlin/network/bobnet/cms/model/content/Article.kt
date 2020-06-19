@@ -11,7 +11,7 @@ class Article(
         var headline: String = "",
         var content: String = "",
         var featuredImage: String = "",
-        @ManyToOne(cascade = [(CascadeType.ALL)]) var author: User = User(),
+        @ManyToOne(cascade = [CascadeType.ALL]) var author: User = User(),
         var slug: String = "",
         var addedAt: LocalDateTime = LocalDateTime.now(),
         @Id @GeneratedValue var id: Long? = null/*,
