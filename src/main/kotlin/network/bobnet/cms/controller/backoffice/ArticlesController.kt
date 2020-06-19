@@ -31,7 +31,7 @@ class ArticlesController (
         val articles = articleService.findAll(pageNumber, ROW_PER_PAGE)
         val count = articleService.count()
         val hasPrev: Boolean = pageNumber > 1
-        val hasNext: Boolean = (pageNumber * ROW_PER_PAGE) < count
+        val hasNext: Boolean = pageNumber * ROW_PER_PAGE < count
 
         model.addAttribute(displayLanguageController.getArticlesLabels(model))
         model["articles"] = articles
