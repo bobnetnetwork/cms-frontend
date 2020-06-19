@@ -69,7 +69,6 @@ class ArticlesController (
 
             article.slug = slug
             article.id = articleService.findBySlug(slug).id
-
             articleService.update(article)
             return "redirect:/admin/articles/" + article.slug
         }catch(ex: Exception){

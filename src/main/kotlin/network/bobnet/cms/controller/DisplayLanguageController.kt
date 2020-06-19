@@ -1,5 +1,6 @@
 package network.bobnet.cms.controller
 
+import network.bobnet.cms.config.TemplateVersionConfig
 import network.bobnet.cms.model.Options
 import network.bobnet.cms.repository.OptionsRepository
 import network.bobnet.cms.repository.user.UserRepository
@@ -16,7 +17,8 @@ import java.util.*
 
 @Controller
 class DisplayLanguageController(private val optionsRepository: OptionsRepository,
-                                private val userRepository: UserRepository) {
+                                private val userRepository: UserRepository,
+                                private val templateVersionConfig: TemplateVersionConfig) {
 
     private fun getSiteInfo(model: Model): Model {
         val names = mutableListOf<String>()
@@ -68,6 +70,12 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
 
     private fun getBasicsLabelsAndInfos(model: Model): Model {
         getSiteInfo(model)
+        getCSSJSVersions(model)
+        return model
+    }
+
+    private fun getAdminBasicsLabelsAndInfos(model: Model): Model{
+        getBasicsLabelsAndInfos(model)
         getSideBarLabels(model)
         getTopBarLabels(model)
         return model
@@ -79,9 +87,20 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
     }
 
     fun getDashboardLabels(model: Model): Model {
-        model.addAttribute(getBasicsLabelsAndInfos(model))
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model["title"] = Translator.toLocale("lang.dashboard")
 
+        return model
+    }
+
+    fun getCSSJSVersions(model: Model): Model{
+        model["bootstrap-version"] = templateVersionConfig.bootstrap
+        model["font-awesome-version"] = templateVersionConfig.font_awesome
+        model["jquery-version"] = templateVersionConfig.jquery
+        model["tinymce-version"] = templateVersionConfig.tinymce
+        model["chart-js-version"] = templateVersionConfig.chart_js
+        model["jquery-easing-version"] = templateVersionConfig.jquery_easing
+        model["datatables-version"] = templateVersionConfig.datatables
         return model
     }
 
@@ -130,7 +149,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
     }
 
     fun getArticlesLabels(model: Model): Model {
-        model.addAttribute(getBasicsLabelsAndInfos(model))
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model["title"] = Translator.toLocale("lang.articles")
         model["lang.title"] = Translator.toLocale("lang.title")
         model["lang.author"] = Translator.toLocale("lang.author")
@@ -142,7 +161,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
     }
 
     fun getArticleEditorLabels(model: Model): Model {
-        model.addAttribute(getBasicsLabelsAndInfos(model))
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model["lang.delete"] = Translator.toLocale("lang.delete")
         model["lang.title"] = Translator.toLocale("lang.title")
         model["lang.content"] = Translator.toLocale("lang.content")

@@ -1,5 +1,6 @@
 package network.bobnet.cms.controller.frontend
 
+import network.bobnet.cms.config.TemplateVersionConfig
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.repository.content.ArticleRepository
 import network.bobnet.cms.repository.content.CategoryRepository
