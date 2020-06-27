@@ -54,6 +54,7 @@
     <chart.js.version>2.9.3</chart.js.version>
     <datatables.version>1.10.21</datatables.version>
     <tinymce.version>5.2.2</tinymce.version>
+    <mariadb.version>2.6.1</mariadb.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
@@ -109,9 +110,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <scope>runtime</scope>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>${mariadb.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
