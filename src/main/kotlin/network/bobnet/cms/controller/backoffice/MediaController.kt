@@ -3,7 +3,6 @@ package network.bobnet.cms.controller.backoffice
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.filestorage.FileStorage
 import network.bobnet.cms.model.content.File
-import network.bobnet.cms.repository.content.FileRepository
 import network.bobnet.cms.service.FileService
 import org.apache.commons.io.IOUtils
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletResponse
 
 @Controller
 class MediaController(
-        private val fileRepository: FileRepository,
         private val displayLanguageController: DisplayLanguageController,
         private val fileService: FileService) {
 
@@ -53,8 +51,8 @@ class MediaController(
     @PostMapping("/admin/media/upload")
     fun uploadMultipartFile(@RequestParam("uploadfile") file: MultipartFile, model: Model): String {
         model.addAttribute(displayLanguageController.getMediaLabels(model))
-        var media: File = File()
-        var originalfileName: String = file.originalFilename.toString()
+        val media = File()
+        val originalfileName: String = file.originalFilename.toString()
         media.fileName = originalfileName.substring(0, originalfileName.lastIndexOf('.'))
         media.mimeType = file.contentType.toString()
         //fileStorage.init()
@@ -65,8 +63,13 @@ class MediaController(
     }
 
     @GetMapping("/admin/media/{slug}")
-    fun showMedia(@PathVariable slug: String): String{
-
+    fun showMedia(model: Model, @PathVariable slug: String): String{
+        model.addAttribute(displayLanguageController.getMediaLabels(model))
+        val media: File = fileService.findById(slug.toLong())!!
+        val ext: String = media.mimeType.substring(media.mimeType.lastIndexOf('/')+1, media.mimeType.lastIndex+1)
+        var url: String =  model.getAttribute("home") as String
+        url += "/filestorage/" + media.fileName + "." + ext
+        model["mediaURL"] = url
         return "backoffice/media/show"
     }
 
