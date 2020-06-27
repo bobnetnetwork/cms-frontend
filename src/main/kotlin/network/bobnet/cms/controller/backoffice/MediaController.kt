@@ -1,6 +1,7 @@
 package network.bobnet.cms.controller.backoffice
 
 import network.bobnet.cms.controller.DisplayLanguageController
+import network.bobnet.cms.filestorage.ExtendedFile
 import network.bobnet.cms.filestorage.FileStorage
 import network.bobnet.cms.model.content.File
 import network.bobnet.cms.service.FileService
@@ -52,9 +53,11 @@ class MediaController(
     fun uploadMultipartFile(@RequestParam("uploadfile") file: MultipartFile, model: Model): String {
         model.addAttribute(displayLanguageController.getMediaLabels(model))
         val media = File()
+        val extendedFile = ExtendedFile(file)
         val originalfileName: String = file.originalFilename.toString()
         media.fileName = originalfileName.substring(0, originalfileName.lastIndexOf('.'))
         media.mimeType = file.contentType.toString()
+        media.slug = extendedFile.slug
         //fileStorage.init()
         media.url = fileStorage.store(file)
 

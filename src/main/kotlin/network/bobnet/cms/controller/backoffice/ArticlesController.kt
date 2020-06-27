@@ -6,6 +6,7 @@ import network.bobnet.cms.repository.content.CategoryRepository
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.service.ArticleService
 import network.bobnet.cms.util.LoggedInUser
+import org.apache.commons.text.StringEscapeUtils
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
@@ -48,6 +49,7 @@ class ArticlesController (
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
         return try{
             val article = articleService.findBySlug(slug)
+            article.content = StringEscapeUtils.unescapeHtml4(article.content)
             model["add"] = false
             model["article"] = article
             model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }
@@ -70,6 +72,7 @@ class ArticlesController (
 
             article.slug = slug
             article.id = articleService.findBySlug(slug).id
+            article.content = StringEscapeUtils.escapeHtml4(article.content)
             articleService.update(article)
             "redirect:/admin/articles/" + article.slug
         }catch(ex: Exception){
@@ -96,6 +99,7 @@ class ArticlesController (
         return try{
             article.author = LoggedInUser(userRepository).getUser()!!
             article.slug = slugify(article.title)
+            article.content = StringEscapeUtils.escapeHtml4(article.content)
             val newArticle: Article = articleService.save(article)
             "redirect:/admin/articles/" + newArticle.slug
         }catch (ex: Exception){

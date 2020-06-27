@@ -7,7 +7,7 @@ data class RenderedArticle(
         val slug: String,
         val title: String,
         val headline: String,
-        val content: String,
+        var content: String,
         val featuredImage: String,
         val author: User,
         val addedAt: LocalDateTime,

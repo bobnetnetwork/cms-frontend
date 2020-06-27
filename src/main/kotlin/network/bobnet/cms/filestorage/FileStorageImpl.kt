@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service
 import org.springframework.util.FileSystemUtils
 import org.springframework.web.multipart.MultipartFile
 import java.lang.RuntimeException
+import java.text.Normalizer
 
 @Service
 class FileStorageImpl: FileStorage{
@@ -21,8 +22,10 @@ class FileStorageImpl: FileStorage{
     var rootLocation: Path = Paths.get("filestorage")
 
     override fun store(file: MultipartFile): String{
-        Files.copy(file.inputStream, this.rootLocation.resolve(file.originalFilename))
-        return "/filestorage/"+file.originalFilename
+        var extendedFile = ExtendedFile(file)
+
+        Files.copy(file.inputStream, this.rootLocation.resolve(extendedFile.fullName))
+        return "/filestorage/"+extendedFile.fullName
     }
 
     override fun loadFile(filename: String): Resource {
@@ -48,4 +51,11 @@ class FileStorageImpl: FileStorage{
     override fun loadFiles(): Stream<Path> {
         return Files.walk(this.rootLocation, 1).filter{path -> path != this.rootLocation }.map(this.rootLocation::relativize)
     }
+
+    private fun slugify(word: String, replacement: String = "-") = Normalizer
+            .normalize(word, Normalizer.Form.NFD)
+            .replace("[^\\p{ASCII}]".toRegex(), "")
+            .replace("[^a-zA-Z0-9\\s]+".toRegex(), "").trim()
+            .replace("\\s+".toRegex(), replacement)
+            .toLowerCase()
 }
