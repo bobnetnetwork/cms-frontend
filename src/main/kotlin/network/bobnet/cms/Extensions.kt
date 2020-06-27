@@ -1,5 +1,6 @@
 package network.bobnet.cms
 
+import java.text.Normalizer
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatterBuilder
 import java.time.temporal.ChronoField
@@ -32,4 +33,11 @@ class Extensions {
             .split(" ")
             .joinToString("-")
             .replace("-+".toRegex(), "-")
+
+    fun slugify(word: String, replacement: String = "-") = Normalizer
+            .normalize(word, Normalizer.Form.NFD)
+            .replace("[^\\p{ASCII}]".toRegex(), "")
+            .replace("[^a-zA-Z0-9\\s]+".toRegex(), "").trim()
+            .replace("\\s+".toRegex(), replacement)
+            .toLowerCase()
 }

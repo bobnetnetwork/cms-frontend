@@ -1,5 +1,6 @@
 package network.bobnet.cms.controller.backoffice
 
+import network.bobnet.cms.Extensions
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.repository.content.CategoryRepository
@@ -13,7 +14,6 @@ import org.springframework.ui.set
 import org.springframework.web.bind.annotation.*
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.text.Normalizer
 
 
 @Controller
@@ -26,6 +26,8 @@ class ArticlesController (
     private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
 
     private final val ROW_PER_PAGE: Int = 5
+
+    private val extensions = Extensions()
 
     @GetMapping("/admin/articles")
     fun articles(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String{
@@ -98,7 +100,7 @@ class ArticlesController (
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
         return try{
             article.author = LoggedInUser(userRepository).getUser()!!
-            article.slug = slugify(article.title)
+            article.slug = extensions.slugify(article.title)
             article.content = StringEscapeUtils.escapeHtml4(article.content)
             val newArticle: Article = articleService.save(article)
             "redirect:/admin/articles/" + newArticle.slug
@@ -109,12 +111,4 @@ class ArticlesController (
             "backoffice/article"
         }
     }
-
-    private fun slugify(word: String, replacement: String = "-") = Normalizer
-            .normalize(word, Normalizer.Form.NFD)
-            .replace("[^\\p{ASCII}]".toRegex(), "")
-            .replace("[^a-zA-Z0-9\\s]+".toRegex(), "").trim()
-            .replace("\\s+".toRegex(), replacement)
-            .toLowerCase()
-
 }
