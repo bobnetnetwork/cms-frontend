@@ -8,7 +8,7 @@ import java.io.FileReader
 import java.util.*
 
 @Controller
-class TemplateVersionConfig {
+class TemplateVersionConfig() {
     lateinit var bootstrap : String
     lateinit var font_awesome : String
     lateinit var jquery : String
@@ -17,23 +17,23 @@ class TemplateVersionConfig {
     lateinit var jquery_easing : String
     lateinit var datatables : String
 
-    constructor(){
+    init {
         readVersions()
     }
 
     private fun readVersions(){
-        var model : Model
-        var reader : FileReader
-        var mavenreader : MavenXpp3Reader = MavenXpp3Reader()
-        var project : MavenProject
-        var pomfile : String = "pom.xml"
+        val model : Model
+        val reader : FileReader
+        val mavenReader : MavenXpp3Reader = MavenXpp3Reader()
+        val project : MavenProject
+        val pomFile : String = "pom.xml"
 
         try{
-            reader = FileReader(pomfile)
-            model = mavenreader.read(reader)
+            reader = FileReader(pomFile)
+            model = mavenReader.read(reader)
             project = MavenProject(model)
 
-            var properties : Properties = project.properties
+            val properties : Properties = project.properties
 
             bootstrap = properties["bootstrap.version"] as String
             font_awesome = properties["font-awesome.version"] as String

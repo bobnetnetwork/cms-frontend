@@ -1,45 +1,45 @@
 package network.bobnet.cms.service
 
-import network.bobnet.cms.model.content.Article
-import network.bobnet.cms.repository.content.ArticleRepository
+import network.bobnet.cms.model.content.File
+import network.bobnet.cms.repository.content.FileRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
+import org.springframework.stereotype.Service
 
 @Service
-class ArticleService{
+class FileService{
 
     @Autowired
-    private lateinit var articleRepository: ArticleRepository
+    private lateinit var fileRepository: FileRepository
 
     private fun existsById(id: Long): Boolean {
-        return articleRepository.existsById(id)
+        return fileRepository.existsById(id)
     }
 
-    fun findById(id: Long): Article? {
-        return articleRepository.findById(id).orElse(null)
+    fun findById(id: Long): File? {
+        return fileRepository.findById(id).orElse(null)
     }
 
-    fun findBySlug(slug: String): Article {
-        return articleRepository.findBySlug(slug)
+    fun findBySlug(slug: String): File {
+        return fileRepository.findBySlug(slug)
     }
 
-    fun findAll(pageNumber: Int, rowNumber: Int): MutableList<Article>{
-        val articles: MutableList<Article> = mutableListOf<Article>()
+    fun findAll(pageNumber: Int, rowNumber: Int): MutableList<File>{
+        val articles: MutableList<File> = mutableListOf<File>()
         val sortedByLastUpdateDesc : Pageable
 
         sortedByLastUpdateDesc = PageRequest.of(pageNumber -1, rowNumber, Sort.by("id").ascending())
-        articleRepository.findAll(sortedByLastUpdateDesc).forEach{
+        fileRepository.findAll(sortedByLastUpdateDesc).forEach{
             articles.add(it)
         }
 
         return articles
     }
 
-    fun save(article: Article): Article{
-        if(article.title.isEmpty()){
+    fun save(file: File): File {
+        /*if(article.title.isEmpty()){
             throw Exception("Title is required")
         }
         if(article.content.isEmpty()){
@@ -47,12 +47,12 @@ class ArticleService{
         }
         if(article.id != null && existsById(article.id!!)){
             throw Exception("Article with id: " + article.id + " already exists")
-        }
-        return articleRepository.save(article)
+        }*/
+        return fileRepository.save(file)
     }
 
-    fun update(article: Article){
-        if(article.title.isEmpty()){
+    fun update(file: File){
+        /*if(article.title.isEmpty()){
             throw Exception("Title is required")
         }
         if(article.content.isEmpty()){
@@ -60,19 +60,19 @@ class ArticleService{
         }
         if(!existsById(article.id!!)){
             throw Exception("Cannot find Article with id: " + article.id)
-        }
-        articleRepository.save(article)
+        }*/
+        fileRepository.save(file)
     }
 
     fun deleteById(id: Long){
         if(!existsById(id)){
             throw Exception("Cannot find Article with id: $id")
         }else {
-            articleRepository.deleteById(id)
+            fileRepository.deleteById(id)
         }
     }
 
     fun count(): Long{
-        return articleRepository.count()
+        return fileRepository.count()
     }
 }

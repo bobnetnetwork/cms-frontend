@@ -1,6 +1,5 @@
 package network.bobnet.cms.controller.frontend
 
-import network.bobnet.cms.config.TemplateVersionConfig
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.repository.content.ArticleRepository
 import network.bobnet.cms.repository.content.CategoryRepository
@@ -29,7 +28,7 @@ class FrontendHtmlController(private val repository: ArticleRepository,
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
         val article = repository
                 .findBySlug(slug)
-                ?.render()
+                .render()
                 ?: throw ResponseStatusException(NOT_FOUND, "This article does not exist")
         model["title"] = article.title
         model["article"] = article
