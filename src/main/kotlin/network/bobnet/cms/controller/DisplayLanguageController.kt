@@ -82,11 +82,6 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    fun getLoginLabels(model: Model): Model {
-        model.addAttribute(getBasicsLabelsAndInfos(model))
-        return model
-    }
-
     fun getDashboardLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model["title"] = Translator.toLocale("lang.dashboard")
@@ -149,11 +144,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    fun getArticlesLabels(model: Model): Model {
-        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
-        model["title"] = Translator.toLocale("lang.articles")
-        model["lang.title"] = Translator.toLocale("lang.title")
-        model["lang.author"] = Translator.toLocale("lang.author")
+    fun getContentLabels(model: Model): Model{
         model["lang.createdAt"] = Translator.toLocale("lang.createdAt")
         model["lang.previous"] = Translator.toLocale("lang.previous")
         model["lang.next"] = Translator.toLocale("lang.next")
@@ -161,13 +152,19 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
+    fun getArticlesLabels(model: Model): Model {
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
+        model.addAttribute(getContentLabels(model))
+        model["title"] = Translator.toLocale("lang.articles")
+        model["lang.title"] = Translator.toLocale("lang.title")
+        model["lang.author"] = Translator.toLocale("lang.author")
+        return model
+    }
+
     fun getMediaLabels(model: Model): Model{
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
+        model.addAttribute(getContentLabels(model))
         model["title"] = Translator.toLocale("lang.media")
-        model["lang.createdAt"] = Translator.toLocale("lang.createdAt")
-        model["lang.previous"] = Translator.toLocale("lang.previous")
-        model["lang.next"] = Translator.toLocale("lang.next")
-        model["lang.addNew"] = Translator.toLocale("lang.addNew")
         model["lang.title"] = Translator.toLocale("lang.title")
         model["lang.mimeType"] = Translator.toLocale("lang.mimeType")
         return model
@@ -199,10 +196,6 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         model["lang.next"] = Translator.toLocale("lang.next")
         model["lang.addNew"] = Translator.toLocale("lang.addNew")
         return model
-    }
-
-    fun getSiteLanguage(): String{
-        return optionsRepository.findByName("sitelanguage").toString()
     }
 
     fun Options.render() = RenderOptions(
