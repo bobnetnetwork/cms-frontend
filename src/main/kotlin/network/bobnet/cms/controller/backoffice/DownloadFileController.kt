@@ -1,7 +1,7 @@
 package network.bobnet.cms.controller.backoffice
 
 import network.bobnet.cms.filestorage.FileStorage
-import network.bobnet.cms.model.content.FileInfo
+import network.bobnet.cms.model.content.File
 import java.util.stream.Collectors
 
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,8 +25,8 @@ class DownloadFileController {
      */
     @GetMapping("/files")
     fun getListFiles(model: Model): String {
-        val fileInfos: List<FileInfo> = fileStorage.loadFiles().map{
-            path -> FileInfo(path.fileName.toString(),
+        val fileInfos: List<File> = fileStorage.loadFiles().map{
+            path -> File(path.fileName.toString(),
                 MvcUriComponentsBuilder.fromMethodName(DownloadFileController::class.java,
                         "downloadFile", path.fileName.toString()).build().toString())
         }
