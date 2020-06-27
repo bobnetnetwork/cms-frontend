@@ -50,6 +50,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         model["lang.users"] = Translator.toLocale("lang.users")
         model["lang.roles"] = Translator.toLocale("lang.roles")
         model["lang.settings"] = Translator.toLocale("lang.settings")
+        model["lang.media"] = Translator.toLocale("lang.media")
         return model
     }
 
@@ -157,6 +158,18 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         model["lang.previous"] = Translator.toLocale("lang.previous")
         model["lang.next"] = Translator.toLocale("lang.next")
         model["lang.addNew"] = Translator.toLocale("lang.addNew")
+        return model
+    }
+
+    fun getMediaLabels(model: Model): Model{
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
+        model["title"] = Translator.toLocale("lang.media")
+        model["lang.createdAt"] = Translator.toLocale("lang.createdAt")
+        model["lang.previous"] = Translator.toLocale("lang.previous")
+        model["lang.next"] = Translator.toLocale("lang.next")
+        model["lang.addNew"] = Translator.toLocale("lang.addNew")
+        model["lang.title"] = Translator.toLocale("lang.title")
+        model["lang.mimeType"] = Translator.toLocale("lang.mimeType")
         return model
     }
 

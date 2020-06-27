@@ -6,5 +6,6 @@ data class RenderedFile(
         val fileName: String,
         val url: String,
         val slug: String,
+        val mimeType: String,
         val addedAt: LocalDateTime,
         val id: Long)

@@ -20,8 +20,9 @@ class FileStorageImpl: FileStorage{
     val log: Logger = LoggerFactory.getLogger(this::class.java)
     var rootLocation: Path = Paths.get("filestorage")
 
-    override fun store(file: MultipartFile) {
+    override fun store(file: MultipartFile): String{
         Files.copy(file.inputStream, this.rootLocation.resolve(file.originalFilename))
+        return "/filestorage/"+file.originalFilename
     }
 
     override fun loadFile(filename: String): Resource {

@@ -17,6 +17,7 @@ class UploadFileController {
 
     @GetMapping("/upload")
     fun index(): String {
+
         return "multipartfile/uploadform.html"
     }
 
