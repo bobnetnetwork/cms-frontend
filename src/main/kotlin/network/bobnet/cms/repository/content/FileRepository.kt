@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository
 interface FileRepository : PagingAndSortingRepository<File, Long>, JpaSpecificationExecutor<File> {
     fun findBySlug(slug: String): File
     fun findAllByOrderByAddedAtDesc(): Iterable<File>
-    //fun findByCategoryIds(categoryIds: Long): Iterable<Article>
 }

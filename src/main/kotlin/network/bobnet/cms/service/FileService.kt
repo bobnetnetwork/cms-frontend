@@ -27,8 +27,8 @@ class FileService{
     }
 
     fun findAll(pageNumber: Int, rowNumber: Int): MutableList<File>{
-        var articles: MutableList<File> = mutableListOf<File>()
-        var sortedByLastUpdateDesc : Pageable
+        val articles: MutableList<File> = mutableListOf<File>()
+        val sortedByLastUpdateDesc : Pageable
 
         sortedByLastUpdateDesc = PageRequest.of(pageNumber -1, rowNumber, Sort.by("id").ascending())
         fileRepository.findAll(sortedByLastUpdateDesc).forEach{

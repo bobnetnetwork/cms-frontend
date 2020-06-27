@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.*
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.text.Normalizer
 
 
@@ -24,7 +24,7 @@ class ArticlesController (
 
     private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
 
-    private final val ROW_PER_PAGE = 5
+    private final val ROW_PER_PAGE: Int = 5
 
     @GetMapping("/admin/articles")
     fun articles(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String{
@@ -46,18 +46,19 @@ class ArticlesController (
     @GetMapping("/admin/articles/{slug}")
     fun showEditArticle(@PathVariable slug: String, model: Model): String{
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
-        var article: Article = Article()
-        try{
-            article = articleService.findBySlug(slug)
+        return try{
+            val article = articleService.findBySlug(slug)
+            model["add"] = false
+            model["article"] = article
+            model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }
+
+            "backoffice/article"
         }catch(ex: Exception){
             model["errorMessage"] = ex.stackTrace.toString()
             logger.error(ex.stackTrace.toString())
+            "backoffice/article"
         }
-        model["add"] = false
-        model["article"] = article
-        model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }
 
-        return "backoffice/article"
     }
 
 
@@ -65,24 +66,24 @@ class ArticlesController (
     @PostMapping("/admin/articles/{slug}")
     fun editArticle(@PathVariable slug: String, model: Model, @ModelAttribute("article") article: Article): String{
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
-        try{
+        return try{
 
             article.slug = slug
             article.id = articleService.findBySlug(slug).id
             articleService.update(article)
-            return "redirect:/admin/articles/" + article.slug
+            "redirect:/admin/articles/" + article.slug
         }catch(ex: Exception){
             model["errorMessage"] = ex.stackTrace.toString()
             logger.error(ex.stackTrace.toString())
             model["add"] = false
-            return "backoffice/article"
+            "backoffice/article"
         }
     }
 
     @GetMapping("/admin/articles/new")
     fun showAddArticle(model: Model): String{
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
-        var article: Article = Article()
+        val article = Article()
         model["add"] = true
         model["article"] = article
 
@@ -92,16 +93,16 @@ class ArticlesController (
     @PostMapping("/admin/articles/new")
     fun addArticle(model: Model, @ModelAttribute("article") article: Article): String{
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
-        try{
+        return try{
             article.author = LoggedInUser(userRepository).getUser()!!
             article.slug = slugify(article.title)
             val newArticle: Article = articleService.save(article)
-            return "redirect:/admin/articles/" + newArticle.slug
+            "redirect:/admin/articles/" + newArticle.slug
         }catch (ex: Exception){
             model["errorMessage"] = ex.stackTrace.toString()
             logger.error(ex.stackTrace.toString())
             model["add"] = true
-            return return "backoffice/article"
+            "backoffice/article"
         }
     }
 

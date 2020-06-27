@@ -6,7 +6,6 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache
-import org.springframework.security.web.savedrequest.RequestCache
 import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 import javax.servlet.http.HttpServletRequest
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 class CustomSimpleUrlAuthenticationSuccessHandler(private val userRepository: UserRepository): AuthenticationSuccessHandler, SimpleUrlAuthenticationSuccessHandler() {
-    private val  requestCache: RequestCache = HttpSessionRequestCache()
+    private val  requestCache = HttpSessionRequestCache()
 
     override fun onAuthenticationSuccess(request: HttpServletRequest?, response: HttpServletResponse?, authentication: Authentication?) {
 
