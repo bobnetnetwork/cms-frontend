@@ -27,15 +27,15 @@ class FileService{
     }
 
     fun findAll(pageNumber: Int, rowNumber: Int): MutableList<File>{
-        val articles: MutableList<File> = mutableListOf<File>()
+        val files: MutableList<File> = mutableListOf<File>()
         val sortedByLastUpdateDesc : Pageable
 
         sortedByLastUpdateDesc = PageRequest.of(pageNumber -1, rowNumber, Sort.by("id").ascending())
         fileRepository.findAll(sortedByLastUpdateDesc).forEach{
-            articles.add(it)
+            files.add(it)
         }
 
-        return articles
+        return files
     }
 
     fun save(file: File): File {

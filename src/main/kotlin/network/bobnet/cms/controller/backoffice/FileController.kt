@@ -19,7 +19,7 @@ import java.nio.file.Files
 import javax.servlet.http.HttpServletResponse
 
 @Controller
-class MediaController(
+class FileController(
         private val displayLanguageController: DisplayLanguageController,
         private val fileService: FileService) {
 
@@ -29,7 +29,7 @@ class MediaController(
     @Autowired
     lateinit var fileStorage: FileStorage
 
-    @GetMapping("/admin/media")
+    @GetMapping("/admin/file")
     fun files(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String{
         val files = fileService.findAll(pageNumber, ROW_PER_PAGE)
         val count = fileService.count()
@@ -42,45 +42,45 @@ class MediaController(
         model["prev"] = pageNumber - 1
         model["hasNext"] = hasNext
         model["next"] = pageNumber + 1
-        return "backoffice/media"
+        return "backoffice/file/list"
     }
 
-    @GetMapping("/admin/media/upload")
+    @GetMapping("/admin/file/upload")
     fun fileUpload(model: Model): String{
         model.addAttribute(displayLanguageController.getMediaLabels(model))
-        return "backoffice/media/upload"
+        return "backoffice/file/upload"
     }
 
-    @PostMapping("/admin/media/upload")
+    @PostMapping("/admin/file/upload")
     fun uploadMultipartFile(@RequestParam("uploadfile") file: MultipartFile, model: Model): String {
         try{
             model.addAttribute(displayLanguageController.getMediaLabels(model))
-            val media = File()
+            val newFile = File()
             val extendedFile = ExtendedFile(file)
             val originalfileName: String = file.originalFilename.toString()
-            media.fileName = originalfileName.substring(0, originalfileName.lastIndexOf('.'))
-            media.mimeType = file.contentType.toString()
-            media.slug = extendedFile.slug
+            newFile.fileName = originalfileName.substring(0, originalfileName.lastIndexOf('.'))
+            newFile.mimeType = file.contentType.toString()
+            newFile.slug = extendedFile.slug
             //fileStorage.init()
-            media.url = fileStorage.store(file)
+            newFile.url = fileStorage.store(file)
 
-            fileService.save(media)
+            fileService.save(newFile)
         }catch (ex: Exception){
             logger.error(ex.stackTrace.toString())
         }
 
-        return "redirect:/admin/media/"
+        return "redirect:/admin/file/"
     }
 
-    @GetMapping("/admin/media/{slug}")
+    @GetMapping("/admin/file/{slug}")
     fun showMedia(model: Model, @PathVariable slug: String): String{
         model.addAttribute(displayLanguageController.getMediaLabels(model))
-        val media: File = fileService.findById(slug.toLong())!!
-        val ext: String = media.mimeType.substring(media.mimeType.lastIndexOf('/')+1, media.mimeType.lastIndex+1)
+        val newFile: File = fileService.findById(slug.toLong())!!
+        val ext: String = newFile.mimeType.substring(newFile.mimeType.lastIndexOf('/')+1, newFile.mimeType.lastIndex+1)
         var url: String =  model.getAttribute("home") as String
-        url += "/filestorage/" + media.fileName + "." + ext
+        url += "/filestorage/" + newFile.fileName + "." + ext
         model["mediaURL"] = url
-        return "backoffice/media/show"
+        return "backoffice/file/show"
     }
 
     @GetMapping("/filestorage/{slug}")
