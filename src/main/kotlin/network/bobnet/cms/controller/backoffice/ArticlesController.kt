@@ -6,14 +6,13 @@ import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.repository.content.CategoryRepository
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.service.ArticleService
+import network.bobnet.cms.service.LogService
 import network.bobnet.cms.util.LoggedInUser
 import org.apache.commons.text.StringEscapeUtils
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.*
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 
 @Controller
@@ -23,7 +22,7 @@ class ArticlesController (
                     private val articleService: ArticleService,
                     private val userRepository: UserRepository) {
 
-    private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
+    private val logger: LogService = LogService(this.javaClass)
 
     private final val ROW_PER_PAGE: Int = 5
 

@@ -5,6 +5,7 @@ import network.bobnet.cms.filestorage.ExtendedFile
 import network.bobnet.cms.filestorage.FileStorage
 import network.bobnet.cms.model.content.File
 import network.bobnet.cms.service.FileService
+import network.bobnet.cms.service.LogService
 import org.apache.commons.io.IOUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -23,6 +24,7 @@ class MediaController(
         private val fileService: FileService) {
 
     private final val ROW_PER_PAGE = 10
+    private val logger: LogService = LogService(this.javaClass)
 
     @Autowired
     lateinit var fileStorage: FileStorage
@@ -51,17 +53,22 @@ class MediaController(
 
     @PostMapping("/admin/media/upload")
     fun uploadMultipartFile(@RequestParam("uploadfile") file: MultipartFile, model: Model): String {
-        model.addAttribute(displayLanguageController.getMediaLabels(model))
-        val media = File()
-        val extendedFile = ExtendedFile(file)
-        val originalfileName: String = file.originalFilename.toString()
-        media.fileName = originalfileName.substring(0, originalfileName.lastIndexOf('.'))
-        media.mimeType = file.contentType.toString()
-        media.slug = extendedFile.slug
-        //fileStorage.init()
-        media.url = fileStorage.store(file)
+        try{
+            model.addAttribute(displayLanguageController.getMediaLabels(model))
+            val media = File()
+            val extendedFile = ExtendedFile(file)
+            val originalfileName: String = file.originalFilename.toString()
+            media.fileName = originalfileName.substring(0, originalfileName.lastIndexOf('.'))
+            media.mimeType = file.contentType.toString()
+            media.slug = extendedFile.slug
+            //fileStorage.init()
+            media.url = fileStorage.store(file)
 
-        fileService.save(media)
+            fileService.save(media)
+        }catch (ex: Exception){
+            logger.error(ex.stackTrace.toString())
+        }
+
         return "redirect:/admin/media/"
     }
 
