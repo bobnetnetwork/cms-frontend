@@ -54,6 +54,11 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
+    fun getErrorPageLabels(model: Model): Model{
+        getSiteInfo(model)
+        return model
+    }
+
     private fun getTopBarLabels(model: Model): Model {
         val user = LoggedInUser(userRepository).getUser()
         if (user != null) {
