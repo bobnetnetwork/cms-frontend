@@ -22,7 +22,7 @@ class CustomErrorController(private val displayLanguageController: DisplayLangua
         }else{
             httpErrorMessage = HttpErrorMessages(0)
         }
-        displayLanguageController.getErrorPageLabels(model)
+        model.addAttribute(displayLanguageController.getErrorPageLabels(model))
         model["code"] = status
         model["message"] = httpErrorMessage.message
         model["slug"] = httpErrorMessage.slug

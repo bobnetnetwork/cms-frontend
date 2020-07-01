@@ -59,6 +59,12 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
+    fun getSettingsLabels(model: Model): Model{
+        getAdminBasicsLabelsAndInfos(model)
+        model["title"] = Translator.toLocale("lang.settings")
+        return model
+    }
+
     private fun getTopBarLabels(model: Model): Model {
         val user = LoggedInUser(userRepository).getUser()
         if (user != null) {
