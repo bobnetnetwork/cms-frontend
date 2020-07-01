@@ -6,8 +6,12 @@ import network.bobnet.cms.filestorage.FileStorage
 import network.bobnet.cms.model.content.File
 import network.bobnet.cms.service.FileService
 import network.bobnet.cms.service.LogService
+import network.bobnet.cms.util.Translator
 import org.apache.commons.io.IOUtils
+import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.core.env.Environment
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
@@ -25,6 +29,9 @@ class FileController(
 
     private final val ROW_PER_PAGE = 10
     private val logger: LogService = LogService(this.javaClass)
+    @Value("\${spring.http.multipart.max-file-size}")
+    private lateinit var uploadMaxSize: String
+
 
     @Autowired
     lateinit var fileStorage: FileStorage
@@ -65,11 +72,22 @@ class FileController(
             newFile.url = fileStorage.store(file)
 
             fileService.save(newFile)
-        }catch (ex: Exception){
+        }catch(ex: FileSizeLimitExceededException){
+            model["error"] = true
+            model["errorMessage"] = Translator.toLocale("lang.fileSizeLimitExceededException") + " " + uploadMaxSize + "!"
+            logger.error(ex.stackTrace.toString())
+            return "redirect:/admin/file/upload"
+        }
+        catch (ex: Exception){
             logger.error(ex.stackTrace.toString())
         }
 
         return "redirect:/admin/file/"
+    }
+
+    @PostMapping("/admin/file/upload/error/{message}")
+    fun uploadMultipartFileFromError(@RequestParam("uploadfile") file: MultipartFile, model: Model): String {
+        return uploadMultipartFile(file, model)
     }
 
     @GetMapping("/admin/file/{slug}")
@@ -90,5 +108,15 @@ class FileController(
         val ins: InputStream = file.inputStream
         response.contentType = Files.probeContentType(file.file.toPath())
         IOUtils.copy(ins, response.outputStream)
+    }
+
+    @GetMapping("/admin/file/upload/error/{message}")
+    fun uploadError(model: Model, @PathVariable message: String): String{
+        model.addAttribute(displayLanguageController.getMediaLabels(model))
+        model["error"] = true
+        when(message){
+            "file_is_to_big" -> model["errorMessage"] = Translator.toLocale("lang.fileSizeLimitExceededException") + " " + uploadMaxSize + "!"
+        }
+        return "backoffice/file/upload"
     }
 }
