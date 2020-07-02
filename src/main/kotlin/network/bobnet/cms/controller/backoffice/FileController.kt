@@ -67,7 +67,6 @@ class FileController(
             newFile.fileName = originalfileName.substring(0, originalfileName.lastIndexOf('.'))
             newFile.mimeType = file.contentType.toString()
             newFile.slug = extendedFile.slug
-            //fileStorage.init()
             newFile.url = fileStorage.store(file)
 
             fileService.save(newFile)

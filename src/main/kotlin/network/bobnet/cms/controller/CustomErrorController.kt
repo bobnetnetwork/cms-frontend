@@ -16,12 +16,7 @@ class CustomErrorController(private val displayLanguageController: DisplayLangua
     @RequestMapping("/error")
     fun handleError(request: HttpServletRequest, model: Model): String? {
         val status: Int = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE) as Int
-        val httpErrorMessage : HttpErrorMessages
-        if (status != null) {
-           httpErrorMessage = HttpErrorMessages(status)
-        }else{
-            httpErrorMessage = HttpErrorMessages(0)
-        }
+        val httpErrorMessage = HttpErrorMessages(status)
         model.addAttribute(displayLanguageController.getErrorPageLabels(model))
         model["code"] = status
         model["message"] = httpErrorMessage.message
