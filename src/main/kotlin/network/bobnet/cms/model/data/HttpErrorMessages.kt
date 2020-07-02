@@ -1,6 +1,5 @@
 package network.bobnet.cms.model.data
 
-import network.bobnet.cms.repository.OptionsRepository
 import network.bobnet.cms.util.Extensions
 import org.springframework.http.HttpStatus
 

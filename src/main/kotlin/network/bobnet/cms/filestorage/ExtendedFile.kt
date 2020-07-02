@@ -1,6 +1,5 @@
 package network.bobnet.cms.filestorage
 
-import network.bobnet.cms.repository.OptionsRepository
 import org.springframework.web.multipart.MultipartFile
 import network.bobnet.cms.util.Extensions
 
