@@ -27,7 +27,7 @@ class ArticleService{
     }
 
     fun findAll(pageNumber: Int, rowNumber: Int): MutableList<Article>{
-        val articles: MutableList<Article> = mutableListOf<Article>()
+        val articles: MutableList<Article> = mutableListOf()
         val sortedByLastUpdateDesc : Pageable
 
         sortedByLastUpdateDesc = PageRequest.of(pageNumber -1, rowNumber, Sort.by("id").ascending())

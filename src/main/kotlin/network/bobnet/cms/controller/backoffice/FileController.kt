@@ -63,8 +63,8 @@ class FileController(
             model.addAttribute(displayLanguageController.getMediaLabels(model))
             val newFile = File()
             val extendedFile = ExtendedFile(file)
-            val originalfileName: String = file.originalFilename.toString()
-            newFile.fileName = originalfileName.substring(0, originalfileName.lastIndexOf('.'))
+            val originallyName: String = file.originalFilename.toString()
+            newFile.fileName = originallyName.substring(0, originallyName.lastIndexOf('.'))
             newFile.mimeType = file.contentType.toString()
             newFile.slug = extendedFile.slug
             newFile.url = fileStorage.store(file)
