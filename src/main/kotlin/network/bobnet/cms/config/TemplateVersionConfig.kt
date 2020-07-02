@@ -8,13 +8,13 @@ import java.io.FileReader
 import java.util.*
 
 @Controller
-class TemplateVersionConfig() {
+class TemplateVersionConfig {
     lateinit var bootstrap : String
-    lateinit var font_awesome : String
+    lateinit var fontAwesome : String
     lateinit var jquery : String
     lateinit var tinymce : String
-    lateinit var chart_js : String
-    lateinit var jquery_easing : String
+    lateinit var chartJs : String
+    lateinit var jqueryEasing : String
     lateinit var datatables : String
 
     init {
@@ -24,9 +24,9 @@ class TemplateVersionConfig() {
     private fun readVersions(){
         val model : Model
         val reader : FileReader
-        val mavenReader : MavenXpp3Reader = MavenXpp3Reader()
+        val mavenReader = MavenXpp3Reader()
         val project : MavenProject
-        val pomFile : String = "pom.xml"
+        val pomFile = "pom.xml"
 
         try{
             reader = FileReader(pomFile)
@@ -36,11 +36,11 @@ class TemplateVersionConfig() {
             val properties : Properties = project.properties
 
             bootstrap = properties["bootstrap.version"] as String
-            font_awesome = properties["font-awesome.version"] as String
+            fontAwesome = properties["font-awesome.version"] as String
             jquery = properties["jquery.version"] as String
             tinymce = properties["tinymce.version"] as String
-            chart_js = properties["chart.js.version"] as String
-            jquery_easing = properties["jquery-easing.version"] as String
+            chartJs = properties["chart.js.version"] as String
+            jqueryEasing = properties["jquery-easing.version"] as String
             datatables = properties["datatables.version"] as String
 
         }catch(ex : Exception){

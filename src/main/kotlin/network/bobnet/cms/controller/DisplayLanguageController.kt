@@ -102,11 +102,11 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
 
     fun getCSSJSVersions(model: Model): Model{
         model["bootstrap-version"] = templateVersionConfig.bootstrap
-        model["font-awesome-version"] = templateVersionConfig.font_awesome
+        model["font-awesome-version"] = templateVersionConfig.fontAwesome
         model["jquery-version"] = templateVersionConfig.jquery
         model["tinymce-version"] = templateVersionConfig.tinymce
-        model["chart-js-version"] = templateVersionConfig.chart_js
-        model["jquery-easing-version"] = templateVersionConfig.jquery_easing
+        model["chart-js-version"] = templateVersionConfig.chartJs
+        model["jquery-easing-version"] = templateVersionConfig.jqueryEasing
         model["datatables-version"] = templateVersionConfig.datatables
         return model
     }
