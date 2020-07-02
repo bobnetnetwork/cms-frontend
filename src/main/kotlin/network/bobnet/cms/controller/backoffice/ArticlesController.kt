@@ -21,14 +21,13 @@ class ArticlesController (
                     private val displayLanguageController: DisplayLanguageController,
                     private val categoryRepository: CategoryRepository,
                     private val articleService: ArticleService,
-                    private val userRepository: UserRepository,
-                    optionsRepository: OptionsRepository) {
+                    private val userRepository: UserRepository) {
 
     private val logger: LogService = LogService(this.javaClass)
 
     private final val ROW_PER_PAGE: Int = 5
 
-    private val extensions = Extensions(optionsRepository)
+    private val extensions = Extensions()
 
     @GetMapping("/admin/articles")
     fun articles(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String{
