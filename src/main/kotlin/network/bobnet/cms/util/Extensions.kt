@@ -1,4 +1,4 @@
-package network.bobnet.cms
+package network.bobnet.cms.util
 
 import java.text.Normalizer
 import java.time.LocalDateTime

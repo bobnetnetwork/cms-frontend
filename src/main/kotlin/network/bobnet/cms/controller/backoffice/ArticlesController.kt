@@ -1,6 +1,6 @@
 package network.bobnet.cms.controller.backoffice
 
-import network.bobnet.cms.Extensions
+import network.bobnet.cms.util.Extensions
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.repository.content.CategoryRepository
