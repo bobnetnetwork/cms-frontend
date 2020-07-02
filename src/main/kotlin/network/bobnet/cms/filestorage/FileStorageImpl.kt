@@ -20,8 +20,8 @@ class FileStorageImpl(vararg subDir: String = arrayOf()): FileStorage{
 
     val log: Logger = LoggerFactory.getLogger(this::class.java)
 
-    @Value("\${file.storage.root}")
-    private lateinit var root: String
+
+    private var root = "filestorage"
     private val sDir = subDir
     var location: Path = if(subDir.isEmpty()){
         Paths.get(root)

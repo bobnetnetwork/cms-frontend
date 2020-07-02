@@ -1,12 +1,13 @@
 package network.bobnet.cms.util
 
+import network.bobnet.cms.repository.OptionsRepository
 import java.text.Normalizer
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatterBuilder
 import java.time.temporal.ChronoField
 import java.util.*
 
-class Extensions {
+class Extensions(var optionsRepository: OptionsRepository) {
     fun LocalDateTime.format(): String = this.format(englishDateFormatter)
 
     private val daysLookup = (1..31).associate { it.toLong() to getOrdinal(it) }
@@ -47,4 +48,8 @@ class Extensions {
             .replace("[^a-zA-Z0-9\\s]+".toRegex(), "").trim()
             .replace("\\s+".toRegex(), replacement)
             .toLowerCase()
+
+    fun isFirstRun(): Boolean{
+        return optionsRepository.count() == 0L
+    }
 }

@@ -3,6 +3,7 @@ package network.bobnet.cms.controller.backoffice
 import network.bobnet.cms.util.Extensions
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
+import network.bobnet.cms.repository.OptionsRepository
 import network.bobnet.cms.repository.content.CategoryRepository
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.service.ArticleService
@@ -20,13 +21,14 @@ class ArticlesController (
                     private val displayLanguageController: DisplayLanguageController,
                     private val categoryRepository: CategoryRepository,
                     private val articleService: ArticleService,
-                    private val userRepository: UserRepository) {
+                    private val userRepository: UserRepository,
+                    optionsRepository: OptionsRepository) {
 
     private val logger: LogService = LogService(this.javaClass)
 
     private final val ROW_PER_PAGE: Int = 5
 
-    private val extensions = Extensions()
+    private val extensions = Extensions(optionsRepository)
 
     @GetMapping("/admin/articles")
     fun articles(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String{
