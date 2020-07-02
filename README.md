@@ -5,7 +5,7 @@ An open source CMS based on Kotlin and Spring boot.
 
 ## Motivation
 
-Basically, the project was started for self-training.
+I started the project to develop my skills by myself.
 
 ## Buy me a coffee
 
