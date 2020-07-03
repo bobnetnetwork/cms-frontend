@@ -13,6 +13,7 @@ import org.springframework.core.io.UrlResource
 import org.springframework.stereotype.Service
 import org.springframework.util.FileSystemUtils
 import org.springframework.web.multipart.MultipartFile
+import java.io.File
 import java.lang.RuntimeException
 
 @Service
@@ -32,7 +33,9 @@ class FileStorageImpl(vararg subDir: String = arrayOf()): FileStorage{
 
     override fun store(file: MultipartFile): String{
         val extendedFile = ExtendedFile(file)
-
+        if(!Files.isDirectory(location)){
+            init()
+        }
         Files.copy(file.inputStream, this.location.resolve(extendedFile.fullName))
         return getLocationString(extendedFile.fullName)
     }
@@ -60,16 +63,15 @@ class FileStorageImpl(vararg subDir: String = arrayOf()): FileStorage{
         val file = location.resolve(filename)
         val resource = UrlResource(file.toUri())
 
-        if(resource.exists() || resource.isReadable){
-            return resource
-        }else{
-            log.error("No souche file, or no readable!")
-            throw RuntimeException("FAIL!")
-        }
+        return resource
     }
 
     override fun deleteAll() {
         FileSystemUtils.deleteRecursively(location.toFile())
+    }
+
+    fun delete(fileName: String){
+        Files.delete(location.resolve(fileName))
     }
 
     override fun init() {
