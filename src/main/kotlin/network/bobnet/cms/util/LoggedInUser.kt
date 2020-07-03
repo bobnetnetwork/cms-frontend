@@ -17,7 +17,7 @@ class LoggedInUser(private val userRepository: UserRepository){
         var username =""
 
         request?.cookies?.forEach {
-            if(it.name == "logged_in_user"){
+            if(it.name == "logged_in_user"  && it.value.isNotEmpty()){
                 loggedInUserCookieExists = true
                 username = it.value
             }
@@ -32,7 +32,7 @@ class LoggedInUser(private val userRepository: UserRepository){
         var loggedInUserCookieExists = false
 
         request.cookies?.forEach {
-            if(it.name == "logged_in_user"){
+            if(it.name == "logged_in_user" && it.value.isNotEmpty()){
                 loggedInUserCookieExists = true
             }
         }
