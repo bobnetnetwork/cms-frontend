@@ -1,4 +1,4 @@
-package network.bobnet.cms.security
+package network.bobnet.cms.security.handler
 
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.util.LoggedInUser
