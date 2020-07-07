@@ -25,7 +25,6 @@ class WebSecurityConfiguration(private val customUserDetailsService: CustomUserD
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/login")
-                //.successHandler(SavedRequestAwareAuthenticationSuccessHandler())
                 .successHandler(loginSuccessHandler())
                 .and()
                 .logout()
@@ -37,26 +36,6 @@ class WebSecurityConfiguration(private val customUserDetailsService: CustomUserD
         auth.userDetailsService(customUserDetailsService)
                 .passwordEncoder(passwordEncoderAndMatcher)
     }
-
-    /*@Bean
-    fun logoutSuccessHandler(): LogoutSuccessHandler? {
-        return CustomLogoutSuccessHandler()
-    }
-
-    @Bean
-    fun accessDeniedHandler(): AccessDeniedHandler? {
-        return CustomAccessDeniedHandler()
-    }
-
-    @Bean
-    fun authenticationFailureHandler(): AuthenticationFailureHandler? {
-        return CustomAuthenticationFailureHandler()
-    }
-
-    @Bean
-    fun passwordEncoder(): PasswordEncoder? {
-        return BCryptPasswordEncoder()
-    }*/
 
     @Bean
     fun loginSuccessHandler(): AuthenticationSuccessHandler? {
