@@ -14,10 +14,6 @@ class FileService{
     @Autowired
     private lateinit var fileRepository: FileRepository
 
-    private fun existsById(id: Long): Boolean {
-        return fileRepository.existsById(id)
-    }
-
     fun findById(id: Long): File? {
         return fileRepository.findById(id).orElse(null)
     }
@@ -39,37 +35,7 @@ class FileService{
     }
 
     fun save(file: File): File {
-        /*if(article.title.isEmpty()){
-            throw Exception("Title is required")
-        }
-        if(article.content.isEmpty()){
-            throw Exception("Content is required")
-        }
-        if(article.id != null && existsById(article.id!!)){
-            throw Exception("Article with id: " + article.id + " already exists")
-        }*/
         return fileRepository.save(file)
-    }
-
-    fun update(file: File){
-        /*if(article.title.isEmpty()){
-            throw Exception("Title is required")
-        }
-        if(article.content.isEmpty()){
-            throw Exception("Content is required")
-        }
-        if(!existsById(article.id!!)){
-            throw Exception("Cannot find Article with id: " + article.id)
-        }*/
-        fileRepository.save(file)
-    }
-
-    fun deleteById(id: Long){
-        if(!existsById(id)){
-            throw Exception("Cannot find Article with id: $id")
-        }else {
-            fileRepository.deleteById(id)
-        }
     }
 
     fun count(): Long{
