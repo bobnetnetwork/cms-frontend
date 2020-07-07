@@ -25,4 +25,4 @@ jobs:
         env:
           GITHUB_TOKEN: 86a52554b1d843319856f1917af8ccaf16fe2a89
           SONAR_TOKEN: 87aa0e46d12b360cf4b4c6334c6fad598c22dcfa
-        run: mvn verify sonar:sonar
+        run: mvn -DskipTests verify sonar:sonar
