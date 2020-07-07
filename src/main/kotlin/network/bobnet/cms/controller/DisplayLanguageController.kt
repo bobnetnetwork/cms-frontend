@@ -20,6 +20,23 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
                                 private val userRepository: UserRepository,
                                 private val templateVersionConfig: TemplateVersionConfig) {
 
+    private final val DASHBOARD = "lang.dashboard"
+    private final val ARTICLES = "lang.articles"
+    private final val CATEGORIES = "lang.categories"
+    private final val TAGS = "lang.tags"
+    private final val USERS = "lang.users"
+    private final val SETTINGS = "lang.settings"
+    private final val MEDIA = "lang.media"
+    private final val PASSWORD = "lang.passWord"
+    private final val FORGOT_PASSWORD = "lang.forgotPassword"
+    private final val ALREADY_HAVE_AN_ACCOUNT = "lang.alreadyHaveAnAccount"
+    private final val CREATE_AN_ACCOUNT = "lang.createAnAccount"
+    private final val PREVIOUS = "lang.previous"
+    private final val NEXT = "lang.next"
+    private final val ADD_NEW = "lang.addNew"
+    private final val TITLE = "lang.title"
+    private final val AUTHOR = "lang.author"
+
     private fun getSiteInfo(model: Model): Model {
         val names = mutableListOf<String>()
         names.add("sitename")
@@ -40,17 +57,17 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
     }
 
     private fun getSideBarLabels(model: Model): Model {
-        model["lang.dashboard"] = Translator.toLocale("lang.dashboard")
+        model[DASHBOARD] = Translator.toLocale(DASHBOARD)
         model["lang.contents"] = Translator.toLocale("lang.contents")
-        model["lang.articles"] = Translator.toLocale("lang.articles")
-        model["lang.categories"] = Translator.toLocale("lang.categories")
-        model["lang.tags"] = Translator.toLocale("lang.tags")
+        model[ARTICLES] = Translator.toLocale(ARTICLES)
+        model[CATEGORIES] = Translator.toLocale(CATEGORIES)
+        model[TAGS] = Translator.toLocale(TAGS)
         model["lang.pages"] = Translator.toLocale("lang.pages")
         model["lang.aministration"] = Translator.toLocale("lang.aministration")
-        model["lang.users"] = Translator.toLocale("lang.users")
+        model[USERS] = Translator.toLocale(USERS)
         model["lang.roles"] = Translator.toLocale("lang.roles")
-        model["lang.settings"] = Translator.toLocale("lang.settings")
-        model["lang.media"] = Translator.toLocale("lang.media")
+        model[SETTINGS] = Translator.toLocale(SETTINGS)
+        model[MEDIA] = Translator.toLocale(MEDIA)
         return model
     }
 
@@ -61,7 +78,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
 
     fun getSettingsLabels(model: Model): Model{
         getAdminBasicsLabelsAndInfos(model)
-        model["title"] = Translator.toLocale("lang.settings")
+        model["title"] = Translator.toLocale(SETTINGS)
         return model
     }
 
@@ -95,7 +112,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
 
     fun getDashboardLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
-        model["title"] = Translator.toLocale("lang.dashboard")
+        model["title"] = Translator.toLocale(DASHBOARD)
 
         return model
     }
@@ -116,25 +133,25 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         model["lang.welcomeBack"] = Translator.toLocale("lang.welcomeBack")
         model["lang.userNameOrPassWordIsWrong"] = Translator.toLocale("lang.userNameOrPassWordIsWrong")
         model["lang.userName"] = Translator.toLocale("lang.userName")
-        model["lang.passWord"] = Translator.toLocale("lang.passWord")
+        model[PASSWORD] = Translator.toLocale(PASSWORD)
         model["lang.rememberMe"] = Translator.toLocale("lang.rememberMe")
         model["lang.login"] = Translator.toLocale("lang.login")
-        model["lang.forgotPassword"] = Translator.toLocale("lang.forgotPassword")
-        model["lang.createAnAccount"] = Translator.toLocale("lang.createAnAccount")
+        model[FORGOT_PASSWORD] = Translator.toLocale(FORGOT_PASSWORD)
+        model[CREATE_AN_ACCOUNT] = Translator.toLocale(CREATE_AN_ACCOUNT)
         return model
     }
 
     fun getRegistrationPageLabels(model: Model): Model {
         model.addAttribute(getBasicsLabelsAndInfos(model))
-        model["lang.createAnAccount"] = Translator.toLocale("lang.createAnAccount")
+        model[CREATE_AN_ACCOUNT] = Translator.toLocale(CREATE_AN_ACCOUNT)
         model["lang.firstName"] = Translator.toLocale("lang.firstName")
         model["lang.lastName"] = Translator.toLocale("lang.lastName")
         model["lang.emailAddress"] = Translator.toLocale("lang.emailAddress")
-        model["lang.passWord"] = Translator.toLocale("lang.passWord")
+        model[PASSWORD] = Translator.toLocale(PASSWORD)
         model["lang.repeatePassWord"] = Translator.toLocale("lang.repeatePassWord")
         model["lang.registerAccount"] = Translator.toLocale("lang.registerAccount")
-        model["lang.forgotPassword"] = Translator.toLocale("lang.forgotPassword")
-        model["lang.alreadyHaveAnAccount"] = Translator.toLocale("lang.alreadyHaveAnAccount")
+        model[FORGOT_PASSWORD] = Translator.toLocale(FORGOT_PASSWORD)
+        model[ALREADY_HAVE_AN_ACCOUNT] = Translator.toLocale(ALREADY_HAVE_AN_ACCOUNT)
         return model
     }
 
@@ -144,8 +161,8 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         model["lang.forgotYourPassWordDesc"] = Translator.toLocale("lang.forgotYourPassWordDesc")
         model["lang.enterEmail"] = Translator.toLocale("lang.enterEmail")
         model["lang.resetPassWord"] = Translator.toLocale("lang.resetPassWord")
-        model["lang.createAnAccount"] = Translator.toLocale("lang.createAnAccount")
-        model["lang.alreadyHaveAnAccount"] = Translator.toLocale("lang.alreadyHaveAnAccount")
+        model[CREATE_AN_ACCOUNT] = Translator.toLocale(CREATE_AN_ACCOUNT)
+        model[ALREADY_HAVE_AN_ACCOUNT] = Translator.toLocale(ALREADY_HAVE_AN_ACCOUNT)
         return model
     }
 
@@ -157,26 +174,26 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
 
     fun getContentLabels(model: Model): Model{
         model["lang.createdAt"] = Translator.toLocale("lang.createdAt")
-        model["lang.previous"] = Translator.toLocale("lang.previous")
-        model["lang.next"] = Translator.toLocale("lang.next")
-        model["lang.addNew"] = Translator.toLocale("lang.addNew")
+        model[PREVIOUS] = Translator.toLocale(PREVIOUS)
+        model[NEXT] = Translator.toLocale(NEXT)
+        model[ADD_NEW] = Translator.toLocale(ADD_NEW)
         return model
     }
 
     fun getArticlesLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model.addAttribute(getContentLabels(model))
-        model["title"] = Translator.toLocale("lang.articles")
-        model["lang.title"] = Translator.toLocale("lang.title")
-        model["lang.author"] = Translator.toLocale("lang.author")
+        model["title"] = Translator.toLocale(ARTICLES)
+        model[TITLE] = Translator.toLocale(TITLE)
+        model[AUTHOR] = Translator.toLocale(AUTHOR)
         return model
     }
 
     fun getMediaLabels(model: Model): Model{
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model.addAttribute(getContentLabels(model))
-        model["title"] = Translator.toLocale("lang.media")
-        model["lang.title"] = Translator.toLocale("lang.title")
+        model["title"] = Translator.toLocale(MEDIA)
+        model[TITLE] = Translator.toLocale(TITLE)
         model["lang.mimeType"] = Translator.toLocale("lang.mimeType")
         return model
     }
@@ -184,15 +201,15 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
     fun getArticleEditorLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model["lang.delete"] = Translator.toLocale("lang.delete")
-        model["lang.title"] = Translator.toLocale("lang.title")
+        model[TITLE] = Translator.toLocale(TITLE)
         model["lang.content"] = Translator.toLocale("lang.content")
         model["lang.saveAsDraft"] = Translator.toLocale("lang.saveAsDraft")
         model["lang.general"] = Translator.toLocale("lang.general")
         model["lang.publish"] = Translator.toLocale("lang.publish")
         model["lang.featuredImage"] = Translator.toLocale("lang.featuredImage")
-        model["lang.categories"] = Translator.toLocale("lang.categories")
-        model["lang.tags"] = Translator.toLocale("lang.tags")
-        model["lang.author"] = Translator.toLocale("lang.author")
+        model[CATEGORIES] = Translator.toLocale(CATEGORIES)
+        model[TAGS] = Translator.toLocale(TAGS)
+        model[AUTHOR] = Translator.toLocale(AUTHOR)
         model["lang.excerpt"] = Translator.toLocale("lang.excerpt")
         model["title"] = Translator.toLocale("lang.editArticle")
         return model
@@ -200,12 +217,12 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
 
     fun getUsersLabels(model: Model): Model {
         model.addAttribute(getBasicsLabelsAndInfos(model))
-        model["title"] = Translator.toLocale("lang.users")
+        model["title"] = Translator.toLocale(USERS)
         model["lang.name"] = Translator.toLocale("lang.name")
         model["lang.registeredAt"] = Translator.toLocale("lang.registeredAt")
-        model["lang.previous"] = Translator.toLocale("lang.previous")
-        model["lang.next"] = Translator.toLocale("lang.next")
-        model["lang.addNew"] = Translator.toLocale("lang.addNew")
+        model[PREVIOUS] = Translator.toLocale(PREVIOUS)
+        model[NEXT] = Translator.toLocale(NEXT)
+        model[ADD_NEW] = Translator.toLocale(ADD_NEW)
         return model
     }
 
