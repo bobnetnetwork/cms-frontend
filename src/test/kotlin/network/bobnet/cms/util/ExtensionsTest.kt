@@ -1,10 +1,9 @@
 package network.bobnet.cms.util
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
-
 import org.mockito.MockitoAnnotations.initMocks
-import org.assertj.core.api.Assertions.assertThat
 
 
 class ExtensionsTest {

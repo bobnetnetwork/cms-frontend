@@ -1,13 +1,12 @@
 package network.bobnet.cms.filestorage
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
-
 import org.mockito.MockitoAnnotations.initMocks
-import org.assertj.core.api.Assertions.assertThat
-import org.springframework.web.multipart.MultipartFile
 import org.springframework.http.MediaType
 import org.springframework.mock.web.MockMultipartFile
+import org.springframework.web.multipart.MultipartFile
 import java.nio.charset.StandardCharsets
 
 class ExtendedFileTest {

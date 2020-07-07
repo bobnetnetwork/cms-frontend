@@ -5,8 +5,8 @@ import network.bobnet.cms.repository.user.RoleRepository
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.service.SetupService
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import javax.servlet.http.HttpServletRequest

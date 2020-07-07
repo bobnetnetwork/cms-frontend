@@ -1,12 +1,12 @@
 package network.bobnet.cms.controller.backoffice
 
-import network.bobnet.cms.util.Extensions
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.repository.content.CategoryRepository
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.service.ArticleService
 import network.bobnet.cms.service.LogService
+import network.bobnet.cms.util.Extensions
 import network.bobnet.cms.util.LoggedInUser
 import org.apache.commons.text.StringEscapeUtils
 import org.springframework.stereotype.Controller
