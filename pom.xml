@@ -50,7 +50,7 @@
     <springmockk.version>2.0.2</springmockk.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <bootstrap.version>4.5.0</bootstrap.version>
-    <font-awesome.version>5.13.0</font-awesome.version>
+    <font-awesome.version>5.13.1</font-awesome.version>
     <chart.js.version>2.9.3</chart.js.version>
     <bootstrap.datepicker.version>1.9.0</bootstrap.datepicker.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
