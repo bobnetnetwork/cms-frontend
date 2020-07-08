@@ -20,18 +20,18 @@ class SetupController(private val optionsRepository: OptionsRepository, private 
     }
 
     @PostMapping("/setup")
-    fun runSetup(request: HttpServletRequest, model: Model, @RequestParam("sitename") siteName: String, @RequestParam("sitedescription") siteDescription: String, @RequestParam("language") language: String, @RequestParam("copyright") copyright: String, @RequestParam("username") userName: String, @RequestParam("password") password: String):String {
+    fun runSetup(request: HttpServletRequest, model: Model, @RequestParam queryMap: Map<String, String>):String {
         val installer = SetupService(optionsRepository, userRepository, roleRepository)
 
         val requestURL = request.requestURL.toString()
 
-        installer.siteName = siteName
-        installer.siteDescription = siteDescription
+        installer.siteName = queryMap["siteName"].toString()
+        installer.siteDescription = queryMap["siteDescription"].toString()
         installer.home = requestURL.substring(0, requestURL.lastIndexOf("/"))
-        installer.language = language
-        installer.copyright = copyright
-        installer.userName = userName
-        installer.password = password
+        installer.language = queryMap["language"].toString()
+        installer.copyright = queryMap["copyright"].toString()
+        installer.userName = queryMap["userName"].toString()
+        installer.password = queryMap["password"].toString()
 
         installer.save()
 
