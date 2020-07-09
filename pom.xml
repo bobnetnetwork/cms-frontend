@@ -56,10 +56,7 @@
     <jquery-easing.version>1.4.1</jquery-easing.version>
     <webjars.locator.version>0.40</webjars.locator.version>
     <mariadb.version>2.6.1</mariadb.version>
-    <sonar.projectKey>bobnetnetwork_cms</sonar.projectKey>
     <sonar.organization>bobnetnetwork</sonar.organization>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.login>97da9ab9c575aadcb0c84c77a45151e899acf4fb</sonar.login>
   </properties>
 
   <repositories>
