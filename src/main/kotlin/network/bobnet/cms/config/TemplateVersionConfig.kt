@@ -16,6 +16,7 @@ class TemplateVersionConfig {
     lateinit var chartJs : String
     lateinit var jqueryEasing : String
     lateinit var datatables : String
+    lateinit var animateCSS: String
 
     init {
         readVersions()
@@ -42,6 +43,7 @@ class TemplateVersionConfig {
             chartJs = properties["chart.js.version"] as String
             jqueryEasing = properties["jquery-easing.version"] as String
             datatables = properties["datatables.version"] as String
+            animateCSS = properties["animate.css.version"] as String
 
         }catch(ex : Exception){
             ex.printStackTrace()

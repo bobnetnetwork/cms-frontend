@@ -57,6 +57,7 @@
     <jquery-easing.version>1.4.1</jquery-easing.version>
     <webjars.locator.version>0.40</webjars.locator.version>
     <mariadb.version>2.6.1</mariadb.version>
+    <animate.css.version>3.5.2</animate.css.version>
     <sonar.projectKey>bobnetnetwork_cms</sonar.projectKey>
     <sonar.organization>bobnetnetwork</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -187,6 +188,14 @@
       <artifactId>commons-text</artifactId>
       <version>1.8</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.webjars/animate.css -->
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>animate.css</artifactId>
+      <version>${animate.css.version}</version>
+    </dependency>
+
 
 
   </dependencies>

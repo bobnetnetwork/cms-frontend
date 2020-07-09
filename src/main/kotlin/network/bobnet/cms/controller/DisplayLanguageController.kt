@@ -125,6 +125,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         model["chart-js-version"] = templateVersionConfig.chartJs
         model["jquery-easing-version"] = templateVersionConfig.jqueryEasing
         model["datatables-version"] = templateVersionConfig.datatables
+        model["animate-css"] = templateVersionConfig.animateCSS
         return model
     }
 
