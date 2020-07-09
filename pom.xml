@@ -58,6 +58,7 @@
     <webjars.locator.version>0.40</webjars.locator.version>
     <mariadb.version>2.6.1</mariadb.version>
     <animate.css.version>3.5.2</animate.css.version>
+    <aos.version>2.1.1</aos.version>
     <sonar.projectKey>bobnetnetwork_cms</sonar.projectKey>
     <sonar.organization>bobnetnetwork</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -195,6 +196,14 @@
       <artifactId>animate.css</artifactId>
       <version>${animate.css.version}</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.webjars.npm/aos -->
+    <dependency>
+      <groupId>org.webjars.npm</groupId>
+      <artifactId>aos</artifactId>
+      <version>${aos.version}</version>
+    </dependency>
+
 
 
 
