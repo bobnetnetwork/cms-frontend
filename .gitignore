@@ -29,5 +29,5 @@ build/
 
 ### VS Code ###
 .vscode/
-
-filestorage/
+filestorage/*
+!filestorage
