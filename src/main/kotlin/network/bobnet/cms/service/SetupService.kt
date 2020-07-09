@@ -22,6 +22,7 @@ class SetupService (
     lateinit var copyright: String
     lateinit var userName: String
     lateinit var password: String
+    lateinit var userMail: String
 
     fun save() {
         initRoles()
@@ -38,6 +39,7 @@ class SetupService (
         val user = User()
         user.userName = userName
         user.passWord = BCryptPasswordEncoder().encode(password)
+        user.email = userMail
         user.roles.add(roleRepository.findByRolename("admin"))
         userRepository.save(user)
     }
