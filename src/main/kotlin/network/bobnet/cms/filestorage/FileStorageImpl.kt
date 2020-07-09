@@ -71,6 +71,10 @@ class FileStorageImpl(vararg subDir: String = arrayOf()): FileStorage{
     }
 
     override fun init() {
+        var loc: Path = Paths.get(root)
+        if(!Files.isDirectory(loc)){
+            Files.createDirectory(loc)
+        }
         Files.createDirectory(location)
     }
 
