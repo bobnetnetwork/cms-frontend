@@ -61,6 +61,7 @@
     <aos.version>2.1.1</aos.version>
     <waypoints.version>4.0.1</waypoints.version>
     <owl.carousel.version>2.3.4</owl.carousel.version>
+    <isotope-layout.version>3.0.6</isotope-layout.version>
     <sonar.projectKey>bobnetnetwork_cms</sonar.projectKey>
     <sonar.organization>bobnetnetwork</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -220,6 +221,12 @@
       <version>${owl.carousel.version}</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.webjars.npm/isotope-layout -->
+    <dependency>
+      <groupId>org.webjars.npm</groupId>
+      <artifactId>isotope-layout</artifactId>
+      <version>${isotope-layout.version}</version>
+    </dependency>
 
 
   </dependencies>

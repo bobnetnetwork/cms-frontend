@@ -20,6 +20,7 @@ class TemplateVersionConfig {
     lateinit var aos: String
     lateinit var waypoints: String
     lateinit var owlCarousel: String
+    lateinit var isotopeLayout: String
 
     init {
         readVersions()
@@ -50,6 +51,7 @@ class TemplateVersionConfig {
             aos = properties["aos.version"] as String
             waypoints = properties["waypoints.version"] as String
             owlCarousel = properties["owl.carousel.version"] as String
+            isotopeLayout = properties["isotope-layout.version"] as String
 
         }catch(ex : Exception){
             ex.printStackTrace()

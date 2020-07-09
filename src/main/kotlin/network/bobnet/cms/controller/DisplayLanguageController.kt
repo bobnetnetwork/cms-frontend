@@ -129,6 +129,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         model["aos"] = templateVersionConfig.aos
         model["waypoints"] = templateVersionConfig.waypoints
         model["owlCarousel"] = templateVersionConfig.owlCarousel
+        model["isotopeLayout"] = templateVersionConfig.isotopeLayout
         return model
     }
 
