@@ -6,7 +6,6 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.3.1.RELEASE</version>
-    <relativePath></relativePath>
   </parent>
   <groupId>network.bobnet</groupId>
   <artifactId>cms</artifactId>
@@ -43,8 +42,8 @@
   <properties>
     <datatables.version>1.10.21</datatables.version>
     <tinymce.version>5.2.2</tinymce.version>
-    <kotlin.version>1.3.72</kotlin.version>
-    <java.version>11</java.version>
+    <kotlin.version>1.4-M3</kotlin.version>
+    <java.version>14</java.version>
     <maven.version>3.6.3</maven.version>
     <jquery.version>3.5.1</jquery.version>
     <springmockk.version>2.0.2</springmockk.version>
@@ -62,6 +61,29 @@
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.login>97da9ab9c575aadcb0c84c77a45151e899acf4fb</sonar.login>
   </properties>
+
+  <repositories>
+    <repository>
+      <id>bintray.kotlin.eap</id>
+      <name>Bintray Kotlin EAP Repository</name>
+      <url>https://dl.bintray.com/kotlin/kotlin-eap</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>bintray.kotlin.eap</id>
+      <name>Bintray Kotlin EAP Repository</name>
+      <url>https://dl.bintray.com/kotlin/kotlin-eap</url>
+    </pluginRepository>
+  </pluginRepositories>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
