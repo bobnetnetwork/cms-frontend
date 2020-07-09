@@ -4,7 +4,7 @@ on:
       - dev
   pull_request:
     types: [opened, synchronize, reopened]
-name: Main Workflow
+name: Dev Build
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
@@ -17,8 +17,11 @@ jobs:
           java-version: '14'
           java-package: jdk
           architecture: x64
-      - name: SonarCloud Scan
+      - name: Test
         env:
           GITHUB_TOKEN: 86a52554b1d843319856f1917af8ccaf16fe2a89
-          SONAR_TOKEN: 87aa0e46d12b360cf4b4c6334c6fad598c22dcfa
-        run: mvn -DskipTests verify sonar:sonar
+        run: mvn test
+      - name: Build
+        env:
+          GITHUB_TOKEN: 86a52554b1d843319856f1917af8ccaf16fe2a89
+        run: mvn clean deploy

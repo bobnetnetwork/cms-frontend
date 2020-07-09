@@ -1,0 +1,24 @@
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    types: [opened, synchronize, reopened]
+name: SonarCloud Scan
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '14'
+          java-package: jdk
+          architecture: x64
+      - name: SonarCloud Scan
+        env:
+          GITHUB_TOKEN: 86a52554b1d843319856f1917af8ccaf16fe2a89
+          SONAR_TOKEN: 87aa0e46d12b360cf4b4c6334c6fad598c22dcfa
+        run: mvn -DskipTests verify sonar:sonar
