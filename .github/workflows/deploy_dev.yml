@@ -20,7 +20,7 @@ jobs:
       - name: Test
         env:
           GITHUB_TOKEN: 86a52554b1d843319856f1917af8ccaf16fe2a89
-        run: mvn test
+        run: mvn clean test
       - name: Build
         env:
           GITHUB_TOKEN: 86a52554b1d843319856f1917af8ccaf16fe2a89
