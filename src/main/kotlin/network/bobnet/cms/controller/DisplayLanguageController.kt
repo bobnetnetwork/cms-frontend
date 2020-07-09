@@ -128,6 +128,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         model["animate-css"] = templateVersionConfig.animateCSS
         model["aos"] = templateVersionConfig.aos
         model["waypoints"] = templateVersionConfig.waypoints
+        model["owlCarousel"] = templateVersionConfig.owlCarousel
         return model
     }
 

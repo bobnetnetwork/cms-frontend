@@ -19,6 +19,7 @@ class TemplateVersionConfig {
     lateinit var animateCSS: String
     lateinit var aos: String
     lateinit var waypoints: String
+    lateinit var owlCarousel: String
 
     init {
         readVersions()
@@ -48,6 +49,7 @@ class TemplateVersionConfig {
             animateCSS = properties["animate.css.version"] as String
             aos = properties["aos.version"] as String
             waypoints = properties["waypoints.version"] as String
+            owlCarousel = properties["owl.carousel.version"] as String
 
         }catch(ex : Exception){
             ex.printStackTrace()
