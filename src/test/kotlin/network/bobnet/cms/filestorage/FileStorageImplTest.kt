@@ -34,14 +34,14 @@ class FileStorageImplTest {
     fun checkLoadFile(){
         val resource = underTest.loadFile("test-contract1.pdf")
         val b = resource.exists() && resource.isReadable
-        assertThat(b).isTrue()
+        assertThat(b).isTrue
     }
 
     @Test
     fun checkLoadFileIsNotExist(){
         val resource = underTest.loadFile("test-contract23.pdf")
         val b = resource.exists() && resource.isReadable
-        assertThat(b).isFalse()
+        assertThat(b).isFalse
     }
 
     @Test
@@ -50,7 +50,7 @@ class FileStorageImplTest {
         underTest.delete("test-contract2.pdf")
         val resource = underTest.loadFile("test-contract2.pdf")
         val b = resource.exists() && resource.isReadable
-        assertThat(b).isFalse()
+        assertThat(b).isFalse
     }
 
     @Test
@@ -60,7 +60,7 @@ class FileStorageImplTest {
         val resource1 = underTest.loadFile("test-contract1.pdf")
         val resource2 = underTest.loadFile("test-contract2.pdf")
         val b = resource1.exists() && resource1.isReadable && resource2.exists() && resource2.isReadable
-        assertThat(b).isFalse()
+        assertThat(b).isFalse
     }
 
 }

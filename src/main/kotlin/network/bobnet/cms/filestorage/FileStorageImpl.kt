@@ -57,9 +57,8 @@ class FileStorageImpl(vararg subDir: String = arrayOf()): FileStorage{
 
     override fun loadFile(filename: String): Resource {
         val file = location.resolve(filename)
-        val resource = UrlResource(file.toUri())
 
-        return resource
+        return UrlResource(file.toUri())
     }
 
     override fun deleteAll() {
@@ -71,7 +70,7 @@ class FileStorageImpl(vararg subDir: String = arrayOf()): FileStorage{
     }
 
     override fun init() {
-        var loc: Path = Paths.get(root)
+        val loc: Path = Paths.get(root)
         if(!Files.isDirectory(loc)){
             Files.createDirectory(loc)
         }
