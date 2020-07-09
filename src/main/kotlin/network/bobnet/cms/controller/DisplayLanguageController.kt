@@ -127,6 +127,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         model["datatables-version"] = templateVersionConfig.datatables
         model["animate-css"] = templateVersionConfig.animateCSS
         model["aos"] = templateVersionConfig.aos
+        model["waypoints"] = templateVersionConfig.waypoints
         return model
     }
 

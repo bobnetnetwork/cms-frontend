@@ -59,6 +59,7 @@
     <mariadb.version>2.6.1</mariadb.version>
     <animate.css.version>3.5.2</animate.css.version>
     <aos.version>2.1.1</aos.version>
+    <waypoints.version>4.0.1</waypoints.version>
     <sonar.projectKey>bobnetnetwork_cms</sonar.projectKey>
     <sonar.organization>bobnetnetwork</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -204,7 +205,12 @@
       <version>${aos.version}</version>
     </dependency>
 
-
+    <!-- https://mvnrepository.com/artifact/org.webjars.npm/waypoints -->
+    <dependency>
+      <groupId>org.webjars.bower</groupId>
+      <artifactId>waypoints</artifactId>
+      <version>${waypoints.version}</version>
+    </dependency>
 
 
   </dependencies>

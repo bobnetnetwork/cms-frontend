@@ -18,6 +18,7 @@ class TemplateVersionConfig {
     lateinit var datatables : String
     lateinit var animateCSS: String
     lateinit var aos: String
+    lateinit var waypoints: String
 
     init {
         readVersions()
@@ -46,6 +47,7 @@ class TemplateVersionConfig {
             datatables = properties["datatables.version"] as String
             animateCSS = properties["animate.css.version"] as String
             aos = properties["aos.version"] as String
+            waypoints = properties["waypoints.version"] as String
 
         }catch(ex : Exception){
             ex.printStackTrace()
