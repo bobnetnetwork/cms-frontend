@@ -24,8 +24,6 @@ jobs:
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB }}
-        run: |
-          mkdir -p ~/.m2
-          echo "<settings><servers><server><id>gh</id><username>bobesz</username><password>\${{ secrets.GITHUB }}</password></server></servers></settings>" > ~/.m2/settings.xml
-          REPO="gh::default::https://maven.pkg.github.com/${GITHUB_REPOSITORY}"
-          mvn deploy -DaltReleaseDeploymentRepository="${REPO}" -DaltSnapshotDeploymentRepository="${REPO}"
+          SONATYPE_USERNAME: bobesz
+          SONATYPE_PASSWORD: 395858ade0560fdd5ecc587fe88fc2de3938c742
+        run:  mvn -B --settings .mvn/settings.xml deploy -Dregistry=https://maven.pkg.github.com/bobnetnetwork/cms -Dtoken=${GITHUB_TOKEN}
