@@ -9,7 +9,7 @@ import org.springframework.ui.set
 import org.springframework.web.bind.annotation.*
 
 @Controller
-class CategoryController (
+class CategoriesController (
                         private val displayLanguageController: DisplayLanguageController,
                         private val categoryService: CategoryService){
 
@@ -18,14 +18,14 @@ class CategoryController (
     private final val CATEGORIES_TEMPLATE = "backoffice/categories"
     private final val CATEGORY_TEMPLATE = "backoffice/category"
 
-    @GetMapping("/admin/category")
+    @GetMapping("/admin/categories")
     fun categories(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String{
         val categories = categoryService.findAll(pageNumber, ROW_PER_PAGE)
         val count = categoryService.count()
         val hasPrev: Boolean = pageNumber > 1
         val hasNext: Boolean = pageNumber * ROW_PER_PAGE < count
 
-        model.addAttribute(displayLanguageController.getArticlesLabels(model))
+        model.addAttribute(displayLanguageController.getCategoriesLabels(model))
         model["categories"] = categories
         model["hasPrev"] = hasPrev
         model["prev"] = pageNumber - 1
@@ -34,25 +34,25 @@ class CategoryController (
         return CATEGORIES_TEMPLATE
     }
 
-    @GetMapping("/admin/category/{slug}")
+    @GetMapping("/admin/categories/{slug}")
     fun showCategory(@PathVariable slug: String, model: Model): String{
 
         return CATEGORY_TEMPLATE
     }
 
-    @PostMapping("/admin/category/{slug}")
+    @PostMapping("/admin/categories/{slug}")
     fun editCategory(@PathVariable slug: String, model: Model, @ModelAttribute("category") category: Category): String{
 
         return CATEGORY_TEMPLATE
     }
 
-    @GetMapping("/admin/category/new")
+    @GetMapping("/admin/categories/new")
     fun showNewCategory(model: Model): String{
 
         return CATEGORY_TEMPLATE
     }
 
-    @PostMapping("/admin/category/new")
+    @PostMapping("/admin/categories/new")
     fun addNewCategory(model: Model, @ModelAttribute("category") category: Category): String{
 
         return CATEGORY_TEMPLATE

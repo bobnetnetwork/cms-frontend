@@ -183,7 +183,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
     fun getArticlesLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model.addAttribute(getContentLabels(model))
-        model["title"] = Translator.toLocale(ARTICLES)
+        model["title"] = Translator.toLocale(CATEGORIES)
         model[TITLE] = Translator.toLocale(TITLE)
         model[AUTHOR] = Translator.toLocale(AUTHOR)
         return model
@@ -212,6 +212,17 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         model[AUTHOR] = Translator.toLocale(AUTHOR)
         model["lang.excerpt"] = Translator.toLocale("lang.excerpt")
         model["title"] = Translator.toLocale("lang.editArticle")
+        return model
+    }
+
+
+    fun getCategoriesLabels(model: Model): Model{
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
+        model.addAttribute(getContentLabels(model))
+        model["title"] = Translator.toLocale(ARTICLES)
+        model[TITLE] = Translator.toLocale(TITLE)
+        model[AUTHOR] = Translator.toLocale(AUTHOR)
+        model["lang.parent"] = Translator.toLocale("lang.parent")
         return model
     }
 
