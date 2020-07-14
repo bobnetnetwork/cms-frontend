@@ -27,7 +27,7 @@ class FileController(
 
     private final val ROW_PER_PAGE = 10
     private val logger: LogService = LogService(this.javaClass)
-    @Value("\${spring.http.multipart.max-file-size}")
+    @Value("\${spring.servlet.multipart.max-file-size}")
     private lateinit var uploadMaxSize: String
 
 
