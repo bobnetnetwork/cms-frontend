@@ -371,7 +371,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
   width: 80%;
   -webkit-animation-delay: 0.4s;
   animation-delay: 0.4s;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 30px;
   color: #fff;
 }
 
@@ -624,7 +624,7 @@ section {
   padding: 30px;
   position: relative;
   overflow: hidden;
-  margin: 0  0 40px 0;
+  margin: 0 0 40px;
   background: #fff;
   box-shadow: 0 5px 26px 0 rgba(68, 88, 144, 0.14);
   transition: all 0.3s ease-in-out;
@@ -633,7 +633,7 @@ section {
 }
 
 .services .icon {
-  margin: 0 auto 20px auto;
+  margin: 0 auto 20px;
   padding-top: 17px;
   display: inline-block;
   text-align: center;
@@ -944,7 +944,7 @@ section {
 
 .facts .counters p {
   padding: 0;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
   font-family: "Roboto", sans-serif;
   font-size: 14px;
 }
@@ -1005,14 +1005,14 @@ section {
 .testimonials .testimonial-item h3 {
   font-size: 20px;
   font-weight: bold;
-  margin: 10px 0 5px 0;
+  margin: 10px 0 5px;
   color: #111;
 }
 
 .testimonials .testimonial-item h4 {
   font-size: 14px;
   color: #999;
-  margin: 0 0 15px 0;
+  margin: 0 0 15px;
 }
 
 .testimonials .testimonial-item .quote-icon-left, .testimonials .testimonial-item .quote-icon-right {
@@ -1035,7 +1035,7 @@ section {
 
 .testimonials .testimonial-item p {
   font-style: italic;
-  margin: 0 auto 15px auto;
+  margin: 0 auto 15px;
 }
 
 .testimonials .owl-nav, .testimonials .owl-dots {
@@ -1221,7 +1221,7 @@ section {
 
 .pricing .featured {
   z-index: 10;
-  margin: -30px -5px 0 -5px;
+  margin: -30px -5px 0;
 }
 
 .pricing .featured .get-started-btn {
@@ -1235,21 +1235,21 @@ section {
 @media (max-width: 992px) {
   .pricing .box {
     max-width: 60%;
-    margin: 0 auto 30px auto;
+    margin: 0 auto 30px;
   }
 }
 
 @media (max-width: 767px) {
   .pricing .box {
     max-width: 80%;
-    margin: 0 auto 30px auto;
+    margin: 0 auto 30px;
   }
 }
 
 @media (max-width: 420px) {
   .pricing .box {
     max-width: 100%;
-    margin: 0 auto 30px auto;
+    margin: 0 auto 30px;
   }
 }
 
@@ -1262,16 +1262,16 @@ section {
 
 .portfolio #portfolio-flters {
   padding: 0;
-  margin: 0 0 35px 0;
+  margin: 0 0 35px;
   list-style: none;
   text-align: center;
 }
 
 .portfolio #portfolio-flters li {
   cursor: pointer;
-  margin: 0 12px 5px 12px;
+  margin: 0 12px 5px;
   display: inline-block;
-  padding: 0 4px 6px 4px;
+  padding: 0 4px 6px;
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
@@ -1292,7 +1292,7 @@ section {
   min-height: 200px;
   position: relative;
   border-radius: 4px;
-  margin: 0 0 30px 0;
+  margin: 0 0 30px;
 }
 
 .portfolio .portfolio-item img {
@@ -1412,7 +1412,7 @@ section {
 }
 
 .portfolio-details .portfolio-description p {
-  padding: 0 0 0 0;
+  padding: 0;
 }
 
 @media (max-width: 768px) {
@@ -1474,7 +1474,7 @@ section {
 
 .team .member .member-info h4 {
   font-weight: 700;
-  margin: 15px 0 5px 0;
+  margin: 15px 0 5px;
   font-size: 18px;
 }
 
@@ -1511,7 +1511,7 @@ section {
   color: #444;
   text-align: center;
   box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
-  padding: 20px 0 30px 0;
+  padding: 20px 0 30px;
   margin-bottom: 30px;
 }
 
@@ -1546,7 +1546,7 @@ section {
 .contact .php-email-form .validate {
   display: none;
   color: red;
-  margin: 0 0 15px 0;
+  margin: 0 0 15px;
   font-weight: 400;
   font-size: 13px;
 }
@@ -1658,7 +1658,7 @@ section {
 # Blog
 --------------------------------------------------------------*/
 .blog {
-  padding: 40px 0 20px 0;
+  padding: 40px 0 20px;
 }
 
 .blog .entry {
@@ -1669,7 +1669,7 @@ section {
 
 .blog .entry .entry-img {
   max-height: 400px;
-  margin: -30px -30px 20px -30px;
+  margin: -30px -30px 20px;
   overflow: hidden;
 }
 
@@ -1677,7 +1677,7 @@ section {
   font-size: 28px;
   font-weight: bold;
   padding: 0;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
 }
 
 .blog .entry .entry-title a {
@@ -1964,7 +1964,7 @@ section {
 
 .blog .blog-comments .reply-form textarea {
   border-radius: 0;
-  padding: 10px 10px;
+  padding: 10px;
   font-size: 14px;
 }
 
@@ -2043,8 +2043,8 @@ section {
 .blog .sidebar .sidebar-title {
   font-size: 20px;
   font-weight: 700;
-  padding: 0 0 0 0;
-  margin: 0 0 15px 0;
+  padding: 0;
+  margin: 0 0 15px;
   color: #32627b;
   position: relative;
 }
@@ -2180,7 +2180,7 @@ section {
 --------------------------------------------------------------*/
 #footer {
   background: #0b212d;
-  padding: 0 0 30px 0;
+  padding: 0 0 30px;
   color: #fff;
   font-size: 14px;
 }
@@ -2192,7 +2192,7 @@ section {
 
 #footer .footer-newsletter h4 {
   font-size: 24px;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
   padding: 0;
   line-height: 1;
   font-weight: 600;
@@ -2237,7 +2237,7 @@ section {
   background: #0d2735;
   border-top: 1px solid #17455e;
   border-bottom: 1px solid #123649;
-  padding: 60px 0 30px 0;
+  padding: 60px 0 30px;
 }
 
 #footer .footer-top .footer-info {
@@ -2246,8 +2246,8 @@ section {
 
 #footer .footer-top .footer-info h3 {
   font-size: 18px;
-  margin: 0 0 20px 0;
-  padding: 2px 0 2px 0;
+  margin: 0 0 20px;
+  padding: 2px 0;
   line-height: 1;
   color: #a2cce3;
   font-weight: 600;
