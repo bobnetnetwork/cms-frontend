@@ -173,7 +173,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
 
     fun getFrontendLabels(model: Model): Model {
         model.addAttribute(getBasicsLabelsAndInfos(model))
-
+        model["lang.readMore"] = Translator.toLocale("lang.readMore")
         return model
     }
 
