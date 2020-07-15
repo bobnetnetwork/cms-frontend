@@ -106,7 +106,7 @@ body {
     color: #333;
     background: white;
     border-radius: 3px;
-    margin: 0 auto 5px auto;
+    margin: 0 auto 5px;
 }
 /*progressbar connectors*/
 #progressbar li:after {
