@@ -56,6 +56,14 @@
     <jquery-easing.version>1.4.1</jquery-easing.version>
     <webjars.locator.version>0.40</webjars.locator.version>
     <mariadb.version>2.6.1</mariadb.version>
+
+    <animate.css.version>3.5.2</animate.css.version>
+    <aos.version>2.1.1</aos.version>
+    <waypoints.version>4.0.1</waypoints.version>
+    <owl.carousel.version>2.3.4</owl.carousel.version>
+    <isotope-layout.version>3.0.6</isotope-layout.version>
+    <sonar.projectKey>bobnetnetwork_cms</sonar.projectKey>
+
     <sonar.organization>bobnetnetwork</sonar.organization>
   </properties>
 
@@ -205,6 +213,41 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-text</artifactId>
       <version>1.8</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.webjars/animate.css -->
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>animate.css</artifactId>
+      <version>${animate.css.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.webjars.npm/aos -->
+    <dependency>
+      <groupId>org.webjars.npm</groupId>
+      <artifactId>aos</artifactId>
+      <version>${aos.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.webjars.npm/waypoints -->
+    <dependency>
+      <groupId>org.webjars.bower</groupId>
+      <artifactId>waypoints</artifactId>
+      <version>${waypoints.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.webjars.bower/owl.carousel -->
+    <dependency>
+      <groupId>org.webjars.bower</groupId>
+      <artifactId>owl.carousel</artifactId>
+      <version>${owl.carousel.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.webjars.npm/isotope-layout -->
+    <dependency>
+      <groupId>org.webjars.npm</groupId>
+      <artifactId>isotope-layout</artifactId>
+      <version>${isotope-layout.version}</version>
     </dependency>
 
 

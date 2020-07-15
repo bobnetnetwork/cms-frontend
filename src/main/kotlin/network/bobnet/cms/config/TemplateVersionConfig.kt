@@ -16,6 +16,11 @@ class TemplateVersionConfig {
     lateinit var chartJs : String
     lateinit var jqueryEasing : String
     lateinit var datatables : String
+    lateinit var animateCSS: String
+    lateinit var aos: String
+    lateinit var waypoints: String
+    lateinit var owlCarousel: String
+    lateinit var isotopeLayout: String
 
     init {
         readVersions()
@@ -42,6 +47,11 @@ class TemplateVersionConfig {
             chartJs = properties["chart.js.version"] as String
             jqueryEasing = properties["jquery-easing.version"] as String
             datatables = properties["datatables.version"] as String
+            animateCSS = properties["animate.css.version"] as String
+            aos = properties["aos.version"] as String
+            waypoints = properties["waypoints.version"] as String
+            owlCarousel = properties["owl.carousel.version"] as String
+            isotopeLayout = properties["isotope-layout.version"] as String
 
         }catch(ex : Exception){
             ex.printStackTrace()

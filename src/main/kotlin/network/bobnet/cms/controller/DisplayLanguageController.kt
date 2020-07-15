@@ -125,6 +125,11 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         model["chart-js-version"] = templateVersionConfig.chartJs
         model["jquery-easing-version"] = templateVersionConfig.jqueryEasing
         model["datatables-version"] = templateVersionConfig.datatables
+        model["animate-css"] = templateVersionConfig.animateCSS
+        model["aos"] = templateVersionConfig.aos
+        model["waypoints"] = templateVersionConfig.waypoints
+        model["owlCarousel"] = templateVersionConfig.owlCarousel
+        model["isotopeLayout"] = templateVersionConfig.isotopeLayout
         return model
     }
 
