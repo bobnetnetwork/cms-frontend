@@ -4,6 +4,8 @@ import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.repository.content.ArticleRepository
 import network.bobnet.cms.repository.content.CategoryRepository
 import org.apache.commons.text.StringEscapeUtils
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -20,6 +22,7 @@ class FrontendHtmlController(private val repository: ArticleRepository,
     @GetMapping("/")
     fun blog(model: Model): String {
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
+        model.addAttribute(addRecentPosts(model))
         model["articles"] = repository.findAllByOrderByAddedAtDesc().map { it.render() }
         return "frontend/blog"
     }
@@ -27,6 +30,7 @@ class FrontendHtmlController(private val repository: ArticleRepository,
     @GetMapping("/article/{slug}")
     fun article(@PathVariable slug: String, model: Model): String {
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
+        model.addAttribute(addRecentPosts(model))
         val article = repository
                 .findBySlug(slug)
                 .render()
@@ -41,6 +45,7 @@ class FrontendHtmlController(private val repository: ArticleRepository,
     @GetMapping("/categories/{slug}")
     fun category(@PathVariable slug: String, model: Model): String {
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
+        model.addAttribute(addRecentPosts(model))
         val category = categoryRepository
                 .findBySlug(slug)
                 ?.render()
@@ -55,8 +60,14 @@ class FrontendHtmlController(private val repository: ArticleRepository,
     @GetMapping("/categories")
     fun categories(model: Model): String{
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
+        model.addAttribute(addRecentPosts(model))
         model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }
         return "frontend/categories"
+    }
+
+    private fun addRecentPosts(model: Model): Model{
+        model["recentPosts"] = repository.findAll(PageRequest.of(0, 5, Sort.by("addedAt").descending()))
+        return model
     }
 
 }
