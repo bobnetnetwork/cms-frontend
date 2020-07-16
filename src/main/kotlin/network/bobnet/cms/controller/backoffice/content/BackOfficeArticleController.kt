@@ -3,7 +3,7 @@ package network.bobnet.cms.controller.backoffice.content
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.model.content.Tag
-import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.repository.administration.UserRepository
 import network.bobnet.cms.service.ArticleService
 import network.bobnet.cms.service.LogService
 import network.bobnet.cms.service.TagService

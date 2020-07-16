@@ -3,17 +3,17 @@ package network.bobnet.cms.service
 import network.bobnet.cms.model.Options
 import network.bobnet.cms.model.user.Role
 import network.bobnet.cms.model.user.User
-import network.bobnet.cms.repository.OptionsRepository
-import network.bobnet.cms.repository.user.RoleRepository
-import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.repository.administration.OptionsRepository
+import network.bobnet.cms.repository.administration.RoleRepository
+import network.bobnet.cms.repository.administration.UserRepository
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class SetupService (
-                        val optionsRepository: OptionsRepository,
-                        val userRepository: UserRepository,
-                        val roleRepository: RoleRepository){
+        val optionsRepository: OptionsRepository,
+        val userRepository: UserRepository,
+        val roleRepository: RoleRepository){
 
     lateinit var siteName: String
     lateinit var siteDescription: String

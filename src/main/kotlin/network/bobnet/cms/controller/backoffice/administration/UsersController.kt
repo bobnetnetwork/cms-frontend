@@ -1,7 +1,7 @@
 package network.bobnet.cms.controller.backoffice.administration
 
 import network.bobnet.cms.controller.DisplayLanguageController
-import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.repository.administration.UserRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
