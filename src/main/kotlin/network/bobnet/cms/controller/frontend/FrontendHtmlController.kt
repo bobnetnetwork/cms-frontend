@@ -81,7 +81,7 @@ class FrontendHtmlController(private val articleService: ArticleService,
     fun tag(model: Model, @PathVariable slug: String): String{
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
         model.addAttribute(addSidebar(model))
-        model["articles"] = articleService.findAllByOrderByAddedAtDesc().map { it.render() }
+        model["articles"] = tagService.findArticlesByTag(slug).map { it.render() }
         return "frontend/blog"
     }
 

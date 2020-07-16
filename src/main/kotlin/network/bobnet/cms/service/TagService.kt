@@ -1,5 +1,6 @@
 package network.bobnet.cms.service
 
+import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.model.content.Tag
 import network.bobnet.cms.repository.content.TagRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -80,6 +81,18 @@ class TagService {
 
     fun findAll(): Iterable<Tag> {
         return tagRepository.findAll()
+    }
+
+    fun findArticlesByTag(tagSlug: String): Iterable<Article>{
+        val tag = findBySlug(tagSlug)
+        val articles = mutableListOf<Article>()
+        if(tag.articles?.isNotEmpty()!!){
+            val articleIterator = tag.articles!!.iterator()
+            while (articleIterator.hasNext()){
+                articles.add(articleIterator.next())
+            }
+        }
+        return articles
     }
 
 }
