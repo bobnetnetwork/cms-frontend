@@ -1,12 +1,12 @@
 package network.bobnet.cms.controller.backoffice
 
-import network.bobnet.cms.Extensions
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.repository.content.CategoryRepository
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.service.ArticleService
 import network.bobnet.cms.service.LogService
+import network.bobnet.cms.util.Extensions
 import network.bobnet.cms.util.LoggedInUser
 import org.apache.commons.text.StringEscapeUtils
 import org.springframework.stereotype.Controller
@@ -26,6 +26,9 @@ class ArticlesController (
 
     private final val ROW_PER_PAGE: Int = 5
 
+    private final val ARTICLES_TEMPLATE = "backoffice/articles"
+    private final val ARTICLE_TEMPLATE = "backoffice/article"
+
     private val extensions = Extensions()
 
     @GetMapping("/admin/articles")
@@ -42,7 +45,7 @@ class ArticlesController (
         model["hasNext"] = hasNext
         model["next"] = pageNumber + 1
 
-        return "backoffice/articles"
+        return ARTICLES_TEMPLATE
     }
 
     @GetMapping("/admin/articles/{slug}")
@@ -55,11 +58,11 @@ class ArticlesController (
             model["article"] = article
             model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }
 
-            "backoffice/article"
+            ARTICLE_TEMPLATE
         }catch(ex: Exception){
             model["errorMessage"] = ex.stackTrace.toString()
             logger.error(ex.stackTrace.toString())
-            "backoffice/article"
+            ARTICLE_TEMPLATE
         }
 
     }
@@ -80,7 +83,7 @@ class ArticlesController (
             model["errorMessage"] = ex.stackTrace.toString()
             logger.error(ex.stackTrace.toString())
             model["add"] = false
-            "backoffice/article"
+            ARTICLE_TEMPLATE
         }
     }
 
@@ -91,7 +94,7 @@ class ArticlesController (
         model["add"] = true
         model["article"] = article
 
-        return "backoffice/article"
+        return ARTICLE_TEMPLATE
     }
 
     @PostMapping("/admin/articles/new")
@@ -107,7 +110,7 @@ class ArticlesController (
             model["errorMessage"] = ex.stackTrace.toString()
             logger.error(ex.stackTrace.toString())
             model["add"] = true
-            "backoffice/article"
+            ARTICLE_TEMPLATE
         }
     }
 }

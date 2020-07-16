@@ -1,6 +1,6 @@
 package network.bobnet.cms.model.data
 
-import network.bobnet.cms.Extensions
+import network.bobnet.cms.util.Extensions
 import org.springframework.http.HttpStatus
 
 class HttpErrorMessages(var code: Int) {

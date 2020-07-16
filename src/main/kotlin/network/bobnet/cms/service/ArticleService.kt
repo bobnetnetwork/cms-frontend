@@ -3,10 +3,10 @@ package network.bobnet.cms.service
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.repository.content.ArticleRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
+import org.springframework.stereotype.Service
 
 @Service
 class ArticleService{
@@ -27,7 +27,7 @@ class ArticleService{
     }
 
     fun findAll(pageNumber: Int, rowNumber: Int): MutableList<Article>{
-        val articles: MutableList<Article> = mutableListOf<Article>()
+        val articles: MutableList<Article> = mutableListOf()
         val sortedByLastUpdateDesc : Pageable
 
         sortedByLastUpdateDesc = PageRequest.of(pageNumber -1, rowNumber, Sort.by("id").ascending())

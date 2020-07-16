@@ -1,7 +1,7 @@
 package network.bobnet.cms.filestorage
 
+import network.bobnet.cms.util.Extensions
 import org.springframework.web.multipart.MultipartFile
-import network.bobnet.cms.Extensions
 
 class ExtendedFile(var file: MultipartFile){
     var slug: String = ""

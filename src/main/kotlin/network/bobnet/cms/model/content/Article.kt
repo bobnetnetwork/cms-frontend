@@ -9,6 +9,7 @@ import javax.persistence.*
 class Article(
         var title: String = "",
         var headline: String = "",
+        @Column(columnDefinition="LONGTEXT")
         var content: String = "",
         var featuredImage: String = "",
         @ManyToOne(cascade = [CascadeType.ALL]) var author: User = User(),

@@ -8,14 +8,19 @@ import java.io.FileReader
 import java.util.*
 
 @Controller
-class TemplateVersionConfig() {
+class TemplateVersionConfig {
     lateinit var bootstrap : String
-    lateinit var font_awesome : String
+    lateinit var fontAwesome : String
     lateinit var jquery : String
     lateinit var tinymce : String
-    lateinit var chart_js : String
-    lateinit var jquery_easing : String
+    lateinit var chartJs : String
+    lateinit var jqueryEasing : String
     lateinit var datatables : String
+    lateinit var animateCSS: String
+    lateinit var aos: String
+    lateinit var waypoints: String
+    lateinit var owlCarousel: String
+    lateinit var isotopeLayout: String
 
     init {
         readVersions()
@@ -24,9 +29,9 @@ class TemplateVersionConfig() {
     private fun readVersions(){
         val model : Model
         val reader : FileReader
-        val mavenReader : MavenXpp3Reader = MavenXpp3Reader()
+        val mavenReader = MavenXpp3Reader()
         val project : MavenProject
-        val pomFile : String = "pom.xml"
+        val pomFile = "pom.xml"
 
         try{
             reader = FileReader(pomFile)
@@ -36,12 +41,17 @@ class TemplateVersionConfig() {
             val properties : Properties = project.properties
 
             bootstrap = properties["bootstrap.version"] as String
-            font_awesome = properties["font-awesome.version"] as String
+            fontAwesome = properties["font-awesome.version"] as String
             jquery = properties["jquery.version"] as String
             tinymce = properties["tinymce.version"] as String
-            chart_js = properties["chart.js.version"] as String
-            jquery_easing = properties["jquery-easing.version"] as String
+            chartJs = properties["chart.js.version"] as String
+            jqueryEasing = properties["jquery-easing.version"] as String
             datatables = properties["datatables.version"] as String
+            animateCSS = properties["animate.css.version"] as String
+            aos = properties["aos.version"] as String
+            waypoints = properties["waypoints.version"] as String
+            owlCarousel = properties["owl.carousel.version"] as String
+            isotopeLayout = properties["isotope-layout.version"] as String
 
         }catch(ex : Exception){
             ex.printStackTrace()

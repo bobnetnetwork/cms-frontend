@@ -1,11 +1,11 @@
 # BobNET Network CMS 
-[![CodeFactor](https://www.codefactor.io/repository/github/bobnetnetwork/cms/badge)](https://www.codefactor.io/repository/github/bobnetnetwork/cms) ![GitHub language count](https://img.shields.io/github/languages/count/bobnetnetwork/cms)  [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/) [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/) 
+[![CodeFactor](https://www.codefactor.io/repository/github/bobnetnetwork/cms/badge)](https://www.codefactor.io/repository/github/bobnetnetwork/cms) ![GitHub language count](https://img.shields.io/github/languages/count/bobnetnetwork/cms)  [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/) [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/) [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=bobnetnetwork_cms&metric=bugs)](https://sonarcloud.io/dashboard?id=bobnetnetwork_cms) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=bobnetnetwork_cms&metric=code_smells)](https://sonarcloud.io/dashboard?id=bobnetnetwork_cms) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=bobnetnetwork_cms&metric=ncloc)](https://sonarcloud.io/dashboard?id=bobnetnetwork_cms) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=bobnetnetwork_cms&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=bobnetnetwork_cms) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bobnetnetwork_cms&metric=alert_status)](https://sonarcloud.io/dashboard?id=bobnetnetwork_cms) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bobnetnetwork_cms&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=bobnetnetwork_cms) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=bobnetnetwork_cms&metric=security_rating)](https://sonarcloud.io/dashboard?id=bobnetnetwork_cms) 
 
 An open source CMS based on Kotlin and Spring boot. 
 
 ## Motivation
 
-Basically, the project was started for self-training.
+I started the project to develop my skills by myself.
 
 ## Buy me a coffee
 

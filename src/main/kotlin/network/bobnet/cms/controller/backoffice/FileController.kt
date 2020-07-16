@@ -14,9 +14,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
-import org.springframework.web.multipart.MultipartFile
-
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import java.io.InputStream
 import java.nio.file.Files
 import javax.servlet.http.HttpServletResponse
@@ -28,7 +27,7 @@ class FileController(
 
     private final val ROW_PER_PAGE = 10
     private val logger: LogService = LogService(this.javaClass)
-    @Value("\${spring.http.multipart.max-file-size}")
+    @Value("\${spring.servlet.multipart.max-file-size}")
     private lateinit var uploadMaxSize: String
 
 
@@ -63,11 +62,10 @@ class FileController(
             model.addAttribute(displayLanguageController.getMediaLabels(model))
             val newFile = File()
             val extendedFile = ExtendedFile(file)
-            val originalfileName: String = file.originalFilename.toString()
-            newFile.fileName = originalfileName.substring(0, originalfileName.lastIndexOf('.'))
+            val originallyName: String = file.originalFilename.toString()
+            newFile.fileName = originallyName.substring(0, originallyName.lastIndexOf('.'))
             newFile.mimeType = file.contentType.toString()
             newFile.slug = extendedFile.slug
-            //fileStorage.init()
             newFile.url = fileStorage.store(file)
 
             fileService.save(newFile)

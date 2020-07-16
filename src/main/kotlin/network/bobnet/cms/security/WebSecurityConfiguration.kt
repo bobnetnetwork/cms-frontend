@@ -1,6 +1,7 @@
 package network.bobnet.cms.security
 
 import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.security.handler.CustomSimpleUrlAuthenticationSuccessHandler
 import network.bobnet.cms.service.CustomUserDetailsService
 import org.springframework.context.annotation.Bean
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -24,7 +25,6 @@ class WebSecurityConfiguration(private val customUserDetailsService: CustomUserD
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/login")
-                //.successHandler(SavedRequestAwareAuthenticationSuccessHandler())
                 .successHandler(loginSuccessHandler())
                 .and()
                 .logout()
@@ -36,26 +36,6 @@ class WebSecurityConfiguration(private val customUserDetailsService: CustomUserD
         auth.userDetailsService(customUserDetailsService)
                 .passwordEncoder(passwordEncoderAndMatcher)
     }
-
-    /*@Bean
-    fun logoutSuccessHandler(): LogoutSuccessHandler? {
-        return CustomLogoutSuccessHandler()
-    }
-
-    @Bean
-    fun accessDeniedHandler(): AccessDeniedHandler? {
-        return CustomAccessDeniedHandler()
-    }
-
-    @Bean
-    fun authenticationFailureHandler(): AuthenticationFailureHandler? {
-        return CustomAuthenticationFailureHandler()
-    }
-
-    @Bean
-    fun passwordEncoder(): PasswordEncoder? {
-        return BCryptPasswordEncoder()
-    }*/
 
     @Bean
     fun loginSuccessHandler(): AuthenticationSuccessHandler? {

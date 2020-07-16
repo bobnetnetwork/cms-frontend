@@ -1,49 +1,68 @@
 {{> frontend/header}}
 
+<main id="main">
 
-<!-- Page Header -->
-<header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h1>{{sitename}}</h1>
-                    <span class="subheading">{{sitedescription}}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+    {{> frontend/breadcrumbs}}
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-{{#articles}}
-    <div class="post-preview">
-        <a href="/article/{{slug}}">
-            <h2 class="post-title">
-                {{title}}
-            </h2>
-            <h3 class="post-subtitle">
-                {{headline}}
-            </h3>
-        </a>
-        <p class="post-meta">Posted by
-            <a href="#">{{author.firstName}}</a>
-            on {{addedAt}}</p>
-    </div>
-    <hr>
-{{/articles}}
-            <!-- Pager -->
-            <div class="clearfix">
-                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-            </div>
-        </div>
-    </div>
-</div>
+    <!-- ======= Blog Section ======= -->
+    <section class="blog" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+        <div class="container">
 
-<hr>
+            <div class="row">
+
+                <div class="col-lg-8 entries">
+
+                    {{#articles}}
+                        <article class="entry">
+
+                            <div class="entry-img">
+                                <img src="assets/img/blog-post-4.jpg" alt="" class="img-fluid">
+                            </div>
+
+                            <h2 class="entry-title">
+                                <a href="{{home}}/article/{{slug}}">{{title}}</a>
+                            </h2>
+
+                            <div class="entry-meta">
+                                <ul>
+                                    <li class="d-flex align-items-center"><i class="icofont-user"></i> <a href="blog-single.html">{{author.firstName}}</a></li>
+                                    <li class="d-flex align-items-center"><i class="icofont-wall-clock"></i> <time class="date">{{addedAt}}</time></li>
+                                    <li class="d-flex align-items-center"><i class="icofont-comment"></i> <a href="blog-single.html">12
+                                        Comments</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="entry-content">
+                                <p>
+                                    {{headline}}
+                                </p>
+                                <div class="read-more">
+                                    <a href="{{home}}/article/{{slug}}">{{lang.readMore}}</a>
+                                </div>
+                            </div>
+
+                        </article>
+                    {{/articles}}
+
+                    <div class="blog-pagination">
+                        <ul class="justify-content-center">
+                            <li class="disabled"><i class="icofont-rounded-left"></i></li>
+                            <li><a href="#">1</a></li>
+                            <li class="active"><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#"><i class="icofont-rounded-right"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div><!-- End blog entries list -->
+                {{> frontend/sidebar}}
+
+            </div><!-- End .row -->
+
+        </div><!-- End .container -->
+
+    </section><!-- End Blog Section -->
+
+</main><!-- End #main -->
 
 {{> frontend/footer}}
