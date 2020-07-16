@@ -1,6 +1,6 @@
 package network.bobnet.cms.controller.backoffice.content
 
-import network.bobnet.cms.service.LogService
+import network.bobnet.cms.service.administration.LogService
 import org.springframework.stereotype.Controller
 
 @Controller

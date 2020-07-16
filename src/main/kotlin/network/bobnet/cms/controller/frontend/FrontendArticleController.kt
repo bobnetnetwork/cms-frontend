@@ -2,7 +2,7 @@ package network.bobnet.cms.controller.frontend
 
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Tag
-import network.bobnet.cms.service.ArticleService
+import network.bobnet.cms.service.content.ArticleService
 import org.apache.commons.text.StringEscapeUtils
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
@@ -14,9 +14,9 @@ import org.springframework.web.server.ResponseStatusException
 
 @Controller
 class FrontendArticleController(
-                            private val displayLanguageController: DisplayLanguageController,
-                            private val articleService: ArticleService,
-                            private val sidebar: SidebarController) {
+        private val displayLanguageController: DisplayLanguageController,
+        private val articleService: ArticleService,
+        private val sidebar: SidebarController) {
 
     @GetMapping("/article/{slug}")
     fun article(@PathVariable slug: String, model: Model): String {

@@ -4,9 +4,9 @@ import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.model.content.Tag
 import network.bobnet.cms.repository.administration.UserRepository
-import network.bobnet.cms.service.ArticleService
-import network.bobnet.cms.service.LogService
-import network.bobnet.cms.service.TagService
+import network.bobnet.cms.service.content.ArticleService
+import network.bobnet.cms.service.administration.LogService
+import network.bobnet.cms.service.content.TagService
 import network.bobnet.cms.util.Extensions
 import network.bobnet.cms.util.LoggedInUser
 import org.apache.commons.text.StringEscapeUtils
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.*
 
 @Controller
 class BackOfficeArticleController (
-                    private val displayLanguageController: DisplayLanguageController,
-                    private val articleService: ArticleService,
-                    private val userRepository: UserRepository,
-                    private val tagService: TagService) {
+        private val displayLanguageController: DisplayLanguageController,
+        private val articleService: ArticleService,
+        private val userRepository: UserRepository,
+        private val tagService: TagService) {
 
     private val logger: LogService = LogService(this.javaClass)
 

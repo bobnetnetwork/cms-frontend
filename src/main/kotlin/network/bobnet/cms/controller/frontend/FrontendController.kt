@@ -1,7 +1,7 @@
 package network.bobnet.cms.controller.frontend
 
 import network.bobnet.cms.controller.DisplayLanguageController
-import network.bobnet.cms.service.ArticleService
+import network.bobnet.cms.service.content.ArticleService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
