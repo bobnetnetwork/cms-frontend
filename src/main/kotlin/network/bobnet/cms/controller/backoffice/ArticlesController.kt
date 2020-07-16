@@ -3,7 +3,6 @@ package network.bobnet.cms.controller.backoffice
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.model.content.Tag
-import network.bobnet.cms.repository.content.TagRepository
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.service.ArticleService
 import network.bobnet.cms.service.LogService
@@ -162,7 +161,7 @@ class ArticlesController (
         if(article.tags?.isNotEmpty()!!){
             val tagIterator = article.tags!!.iterator()
             while (tagIterator.hasNext()){
-                var tag = tagIterator.next()
+                val tag = tagIterator.next()
                 tag.articles?.add(article)
                 tagService.update(tag)
             }
