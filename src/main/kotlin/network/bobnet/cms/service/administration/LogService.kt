@@ -1,4 +1,4 @@
-package network.bobnet.cms.service
+package network.bobnet.cms.service.administration
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

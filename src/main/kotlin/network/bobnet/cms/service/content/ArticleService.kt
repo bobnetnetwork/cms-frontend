@@ -1,4 +1,4 @@
-package network.bobnet.cms.service
+package network.bobnet.cms.service.content
 
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.repository.content.ArticleRepository

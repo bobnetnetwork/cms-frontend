@@ -1,7 +1,7 @@
 package network.bobnet.cms.controller.frontend
 
-import network.bobnet.cms.service.ArticleService
-import network.bobnet.cms.service.TagService
+import network.bobnet.cms.service.content.ArticleService
+import network.bobnet.cms.service.content.TagService
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Controller

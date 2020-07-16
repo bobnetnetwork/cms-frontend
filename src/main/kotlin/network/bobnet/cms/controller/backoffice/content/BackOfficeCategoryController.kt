@@ -2,7 +2,7 @@ package network.bobnet.cms.controller.backoffice.content
 
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Category
-import network.bobnet.cms.service.CategoryService
+import network.bobnet.cms.service.content.CategoryService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set

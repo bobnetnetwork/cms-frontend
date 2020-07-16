@@ -1,4 +1,4 @@
-package network.bobnet.cms.service
+package network.bobnet.cms.service.administration
 
 import network.bobnet.cms.model.Options
 import network.bobnet.cms.model.user.Role

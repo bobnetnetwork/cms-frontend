@@ -4,8 +4,8 @@ import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.filestorage.ExtendedFile
 import network.bobnet.cms.filestorage.FileStorage
 import network.bobnet.cms.model.content.File
-import network.bobnet.cms.service.FileService
-import network.bobnet.cms.service.LogService
+import network.bobnet.cms.service.content.FileService
+import network.bobnet.cms.service.administration.LogService
 import network.bobnet.cms.util.Translator
 import org.apache.commons.io.IOUtils
 import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException
