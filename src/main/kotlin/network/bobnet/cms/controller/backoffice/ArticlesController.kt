@@ -95,16 +95,20 @@ class ArticlesController (
             val article = articleService.findBySlug(slug)
             article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
             val tags = queryMap["tags"].toString().split(",").toTypedArray()
+            if(article.tags?.isNotEmpty()!!){
+                article.tags!!.clear()
+            }
             if(tags.isNotEmpty()){
                 val tagIterator = tags.iterator()
 
                 while(tagIterator.hasNext()){
                     val tag = tagIterator.next().replace("\\s".toRegex(), "")
+
                     if(tagRepository.countByTitle(tag) > 0 ){
                         if(!article.tags?.contains(tagRepository.findByTitle(tag))!!){
                             article.tags!!.add(tagRepository.findByTitle(tag))
                         }
-                    }else{
+                    }else if(tag.isNotEmpty()){
                         val newTag = Tag()
                         newTag.title = tag
                         val extensions = Extensions()
@@ -125,6 +129,7 @@ class ArticlesController (
             ARTICLE_TEMPLATE
         }
     }
+
 
     @GetMapping("/admin/articles/new")
     fun showAddArticle(model: Model): String{
