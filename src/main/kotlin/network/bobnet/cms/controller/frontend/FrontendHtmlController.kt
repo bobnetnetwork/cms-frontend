@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.server.ResponseStatusException
 
 @Controller
-class FrontendHtmlController(private val repository: ArticleRepository,
+class FrontendHtmlController(private val articleRepository: ArticleRepository,
                              private val categoryRepository: CategoryRepository,
                              private val displayLanguageController: DisplayLanguageController,
                              private val tagRepository: TagRepository) {
@@ -25,16 +25,16 @@ class FrontendHtmlController(private val repository: ArticleRepository,
     @GetMapping("/")
     fun blog(model: Model): String {
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
-        model.addAttribute(addRecentPosts(model))
-        model["articles"] = repository.findAllByOrderByAddedAtDesc().map { it.render() }
+        model.addAttribute(addSidebar(model))
+        model["articles"] = articleRepository.findAllByOrderByAddedAtDesc().map { it.render() }
         return "frontend/blog"
     }
 
     @GetMapping("/article/{slug}")
     fun article(@PathVariable slug: String, model: Model): String {
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
-        model.addAttribute(addRecentPosts(model))
-        val article = repository
+        model.addAttribute(addSidebar(model))
+        val article = articleRepository
                 .findBySlug(slug)
                 .render()
                 ?: throw ResponseStatusException(NOT_FOUND, "This article does not exist")
@@ -57,7 +57,7 @@ class FrontendHtmlController(private val repository: ArticleRepository,
     @GetMapping("/categories/{slug}")
     fun category(@PathVariable slug: String, model: Model): String {
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
-        model.addAttribute(addRecentPosts(model))
+        model.addAttribute(addSidebar(model))
         val category = categoryRepository
                 .findBySlug(slug)
                 ?.render()
@@ -72,13 +72,24 @@ class FrontendHtmlController(private val repository: ArticleRepository,
     @GetMapping("/categories")
     fun categories(model: Model): String{
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
-        model.addAttribute(addRecentPosts(model))
+        model.addAttribute(addSidebar(model))
         model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }
         return "frontend/categories"
     }
 
+    private fun addSidebar(model: Model): Model{
+        model.addAttribute(addRecentPosts(model))
+        model.addAttribute(addTagCloud(model))
+        return model
+    }
+
     private fun addRecentPosts(model: Model): Model{
-        model["recentPosts"] = repository.findAll(PageRequest.of(0, 5, Sort.by("addedAt").descending()))
+        model["recentPosts"] = articleRepository.findAll(PageRequest.of(0, 5, Sort.by("addedAt").descending()))
+        return model
+    }
+
+    private fun addTagCloud(model: Model): Model{
+        model["tagCloud"] = tagRepository.findAll()
         return model
     }
 
