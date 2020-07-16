@@ -78,4 +78,8 @@ class TagService {
         return tagRepository.findByTitle(title)
     }
 
+    fun findAll(): Iterable<Tag> {
+        return tagRepository.findAll()
+    }
+
 }

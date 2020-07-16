@@ -2,9 +2,9 @@ package network.bobnet.cms.controller.frontend
 
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Tag
-import network.bobnet.cms.repository.content.ArticleRepository
 import network.bobnet.cms.repository.content.CategoryRepository
-import network.bobnet.cms.repository.content.TagRepository
+import network.bobnet.cms.service.ArticleService
+import network.bobnet.cms.service.TagService
 import org.apache.commons.text.StringEscapeUtils
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.server.ResponseStatusException
 
 @Controller
-class FrontendHtmlController(private val articleRepository: ArticleRepository,
+class FrontendHtmlController(private val articleService: ArticleService,
                              private val categoryRepository: CategoryRepository,
                              private val displayLanguageController: DisplayLanguageController,
-                             private val tagRepository: TagRepository) {
+                             private val tagService: TagService) {
 
     @GetMapping("/")
     fun blog(model: Model): String {
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
         model.addAttribute(addSidebar(model))
-        model["articles"] = articleRepository.findAllByOrderByAddedAtDesc().map { it.render() }
+        model["articles"] = articleService.findAllByOrderByAddedAtDesc().map { it.render() }
         return "frontend/blog"
     }
 
@@ -34,7 +34,7 @@ class FrontendHtmlController(private val articleRepository: ArticleRepository,
     fun article(@PathVariable slug: String, model: Model): String {
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
         model.addAttribute(addSidebar(model))
-        val article = articleRepository
+        val article = articleService
                 .findBySlug(slug)
                 .render()
                 ?: throw ResponseStatusException(NOT_FOUND, "This article does not exist")
@@ -77,6 +77,14 @@ class FrontendHtmlController(private val articleRepository: ArticleRepository,
         return "frontend/categories"
     }
 
+    @GetMapping("/tag/{slug}")
+    fun tag(model: Model, @PathVariable slug: String): String{
+        model.addAttribute(displayLanguageController.getFrontendLabels(model))
+        model.addAttribute(addSidebar(model))
+        model["articles"] = articleService.findAllByOrderByAddedAtDesc().map { it.render() }
+        return "frontend/blog"
+    }
+
     private fun addSidebar(model: Model): Model{
         model.addAttribute(addRecentPosts(model))
         model.addAttribute(addTagCloud(model))
@@ -84,12 +92,12 @@ class FrontendHtmlController(private val articleRepository: ArticleRepository,
     }
 
     private fun addRecentPosts(model: Model): Model{
-        model["recentPosts"] = articleRepository.findAll(PageRequest.of(0, 5, Sort.by("addedAt").descending()))
+        model["recentPosts"] = articleService.findAll(PageRequest.of(0, 5, Sort.by("addedAt").descending()))
         return model
     }
 
     private fun addTagCloud(model: Model): Model{
-        model["tagCloud"] = tagRepository.findAll()
+        model["tagCloud"] = tagService.findAll()
         return model
     }
 

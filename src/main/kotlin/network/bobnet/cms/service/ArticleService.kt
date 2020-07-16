@@ -3,6 +3,7 @@ package network.bobnet.cms.service
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.repository.content.ArticleRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
@@ -36,6 +37,10 @@ class ArticleService{
         }
 
         return articles
+    }
+
+    fun findAll(pageabel: Pageable): Page<Article> {
+        return articleRepository.findAll(pageabel)
     }
 
     fun save(article: Article): Article{
@@ -74,5 +79,9 @@ class ArticleService{
 
     fun count(): Long{
         return articleRepository.count()
+    }
+
+    fun findAllByOrderByAddedAtDesc(): Iterable<Article> {
+        return articleRepository.findAllByOrderByAddedAtDesc()
     }
 }
