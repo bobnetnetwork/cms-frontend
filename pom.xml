@@ -57,7 +57,7 @@
     <webjars.locator.version>0.40</webjars.locator.version>
     <mariadb.version>2.6.1</mariadb.version>
 
-    <animate.css.version>3.5.2</animate.css.version>
+    <animate.css.version>3.7.2</animate.css.version>
     <aos.version>2.1.1</aos.version>
     <waypoints.version>4.0.1</waypoints.version>
     <owl.carousel.version>2.3.4</owl.carousel.version>
