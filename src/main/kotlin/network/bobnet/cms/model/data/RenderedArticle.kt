@@ -13,6 +13,4 @@ data class RenderedArticle(
         val author: User,
         val addedAt: LocalDateTime,
         val tags: MutableSet<Tag>?,
-        val id: Long) {
-
-}
+        val id: Long)
