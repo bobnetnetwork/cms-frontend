@@ -15,8 +15,9 @@ class Article(
         @ManyToOne(cascade = [CascadeType.ALL]) var author: User = User(),
         var slug: String = "",
         var addedAt: LocalDateTime = LocalDateTime.now(),
-        @Id @GeneratedValue var id: Long? = null/*,
-        @ManyToMany val categoryIds: Set<Category>?= null*/){
+        @Id @GeneratedValue var id: Long? = null,
+        @ManyToMany val tags: Set<Tag>?= null,
+        @ManyToMany val categories: Set<Category>?= null){
 
     fun render() = id?.let {
         RenderedArticle(
