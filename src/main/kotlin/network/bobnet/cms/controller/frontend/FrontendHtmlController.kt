@@ -1,8 +1,10 @@
 package network.bobnet.cms.controller.frontend
 
 import network.bobnet.cms.controller.DisplayLanguageController
+import network.bobnet.cms.model.content.Tag
 import network.bobnet.cms.repository.content.ArticleRepository
 import network.bobnet.cms.repository.content.CategoryRepository
+import network.bobnet.cms.repository.content.TagRepository
 import org.apache.commons.text.StringEscapeUtils
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
@@ -17,7 +19,8 @@ import org.springframework.web.server.ResponseStatusException
 @Controller
 class FrontendHtmlController(private val repository: ArticleRepository,
                              private val categoryRepository: CategoryRepository,
-                             private val displayLanguageController: DisplayLanguageController) {
+                             private val displayLanguageController: DisplayLanguageController,
+                             private val tagRepository: TagRepository) {
 
     @GetMapping("/")
     fun blog(model: Model): String {
@@ -39,6 +42,15 @@ class FrontendHtmlController(private val repository: ArticleRepository,
         article.content = StringEscapeUtils.unescapeHtml4(article.content)
         model["article"] = article
         model["featuredImage"] = article.featuredImage
+        val tagList = mutableListOf<Tag>()
+        if(article.tags?.isNotEmpty()!!){
+            val tagIterator = article.tags.iterator()
+            while (tagIterator.hasNext()){
+                tagList.add(tagIterator.next())
+            }
+        }
+
+        model["tagList"] = tagList
         return "frontend/article"
     }
 

@@ -28,6 +28,7 @@ class Article(
                 featuredImage,
                 author,
                 addedAt,
+                tags,
                 it
         )
     }

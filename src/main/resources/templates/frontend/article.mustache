@@ -43,9 +43,9 @@
 
                                 <i class="icofont-tags"></i>
                                 <ul class="tags">
-                                    <li><a href="#">Creative</a></li>
-                                    <li><a href="#">Tips</a></li>
-                                    <li><a href="#">Marketing</a></li>
+                                    {{#tagList}}
+                                        <li><a href="{{home}}/tag/{{slug}}">{{title}}</a></li>
+                                    {{/tagList}}
                                 </ul>
                             </div>
 

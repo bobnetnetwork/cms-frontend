@@ -1,5 +1,6 @@
 package network.bobnet.cms.model.data
 
+import network.bobnet.cms.model.content.Tag
 import network.bobnet.cms.model.user.User
 import java.time.LocalDateTime
 
@@ -11,4 +12,7 @@ data class RenderedArticle(
         val featuredImage: String,
         val author: User,
         val addedAt: LocalDateTime,
-        val id: Long)
+        val tags: MutableSet<Tag>?,
+        val id: Long) {
+
+}
