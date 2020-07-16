@@ -3,7 +3,6 @@ package network.bobnet.cms.controller.backoffice
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.model.content.Tag
-import network.bobnet.cms.repository.content.CategoryRepository
 import network.bobnet.cms.repository.content.TagRepository
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.service.ArticleService
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.*
 @Controller
 class ArticlesController (
                     private val displayLanguageController: DisplayLanguageController,
-                    private val categoryRepository: CategoryRepository,
                     private val articleService: ArticleService,
                     private val userRepository: UserRepository,
                     private val tagRepository: TagRepository) {
@@ -59,7 +57,6 @@ class ArticlesController (
             article.content = StringEscapeUtils.unescapeHtml4(article.content)
             model["add"] = false
             model["article"] = article
-            //model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }
             if(article.tags?.isNotEmpty()!!){
                 val tagsIterator = article.tags!!.iterator()
                 var first = true
@@ -86,39 +83,13 @@ class ArticlesController (
 
     }
 
-
-
     @PostMapping("/admin/articles/{slug}")
     fun editArticle(@PathVariable slug: String, model: Model, @RequestParam queryMap: Map<String, String>): String{
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
         return try{
             val article = articleService.findBySlug(slug)
             article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
-            val tags = queryMap["tags"].toString().split(",").toTypedArray()
-            if(article.tags?.isNotEmpty()!!){
-                article.tags!!.clear()
-            }
-            if(tags.isNotEmpty()){
-                val tagIterator = tags.iterator()
-
-                while(tagIterator.hasNext()){
-                    val tag = tagIterator.next().replace("\\s".toRegex(), "")
-
-                    if(tagRepository.countByTitle(tag) > 0 ){
-                        if(!article.tags?.contains(tagRepository.findByTitle(tag))!!){
-                            article.tags!!.add(tagRepository.findByTitle(tag))
-                        }
-                    }else if(tag.isNotEmpty()){
-                        val newTag = Tag()
-                        newTag.title = tag
-                        val extensions = Extensions()
-                        newTag.slug = extensions.slugify(tag)
-                        tagRepository.save(newTag)
-                        article.tags!!.add(newTag)
-                    }
-                }
-            }
-
+            article.tags = setTags(queryMap["tags"].toString())
 
             articleService.update(article)
             "redirect:/admin/articles/" + article.slug
@@ -130,24 +101,27 @@ class ArticlesController (
         }
     }
 
-
     @GetMapping("/admin/articles/new")
     fun showAddArticle(model: Model): String{
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
         val article = Article()
         model["add"] = true
         model["article"] = article
+        model["tagsList"] = ""
 
         return ARTICLE_TEMPLATE
     }
 
     @PostMapping("/admin/articles/new")
-    fun addArticle(model: Model, @ModelAttribute("article") article: Article): String{
+    fun addArticle(model: Model, @RequestParam queryMap: Map<String, String>): String{
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
         return try{
+            val article = Article()
             article.author = LoggedInUser(userRepository).getUser()!!
-            article.slug = extensions.slugify(article.title)
-            article.content = StringEscapeUtils.escapeHtml4(article.content)
+            article.title = queryMap["title"].toString()
+            article.slug = extensions.slugify(queryMap["title"].toString())
+            article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
+            article.tags = setTags(queryMap["tags"].toString())
             val newArticle: Article = articleService.save(article)
             "redirect:/admin/articles/" + newArticle.slug
         }catch (ex: Exception){
@@ -156,5 +130,28 @@ class ArticlesController (
             model["add"] = true
             ARTICLE_TEMPLATE
         }
+    }
+
+    fun setTags(tagsList: String): MutableSet<Tag>{
+        val tagList = mutableSetOf<Tag>()
+        val tags = tagsList.split(",").toTypedArray()
+        if(tags.isNotEmpty()){
+            val tagIterator = tags.iterator()
+            while(tagIterator.hasNext()){
+                val tag = tagIterator.next().replace("\\s".toRegex(), "")
+
+                if(tagRepository.countByTitle(tag) > 0 ){
+                    tagList.add(tagRepository.findByTitle(tag))
+                }else if(tag.isNotEmpty()){
+                    val newTag = Tag()
+                    newTag.title = tag
+                    val extensions = Extensions()
+                    newTag.slug = extensions.slugify(tag)
+                    tagRepository.save(newTag)
+                    tagList.add(newTag)
+                }
+            }
+        }
+        return tagList
     }
 }
