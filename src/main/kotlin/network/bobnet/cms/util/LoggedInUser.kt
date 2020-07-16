@@ -1,7 +1,7 @@
 package network.bobnet.cms.util
 
 import network.bobnet.cms.model.user.User
-import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.repository.administration.UserRepository
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes

@@ -1,4 +1,4 @@
-package network.bobnet.cms.repository
+package network.bobnet.cms.repository.administration
 
 import network.bobnet.cms.model.Options
 import org.springframework.data.repository.CrudRepository

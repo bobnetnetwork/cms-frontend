@@ -1,8 +1,8 @@
 package network.bobnet.cms.controller
 
-import network.bobnet.cms.repository.OptionsRepository
-import network.bobnet.cms.repository.user.RoleRepository
-import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.repository.administration.OptionsRepository
+import network.bobnet.cms.repository.administration.RoleRepository
+import network.bobnet.cms.repository.administration.UserRepository
 import network.bobnet.cms.service.SetupService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model

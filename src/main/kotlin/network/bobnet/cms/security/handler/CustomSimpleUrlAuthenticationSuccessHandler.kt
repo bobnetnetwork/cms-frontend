@@ -1,6 +1,6 @@
 package network.bobnet.cms.security.handler
 
-import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.repository.administration.UserRepository
 import network.bobnet.cms.util.LoggedInUser
 import org.springframework.security.core.Authentication
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler

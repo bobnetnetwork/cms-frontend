@@ -2,8 +2,8 @@ package network.bobnet.cms.controller
 
 import network.bobnet.cms.config.TemplateVersionConfig
 import network.bobnet.cms.model.Options
-import network.bobnet.cms.repository.OptionsRepository
-import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.repository.administration.OptionsRepository
+import network.bobnet.cms.repository.administration.UserRepository
 import network.bobnet.cms.util.LoggedInUser
 import network.bobnet.cms.util.Translator
 import org.springframework.context.i18n.LocaleContextHolder

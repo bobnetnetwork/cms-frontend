@@ -1,4 +1,4 @@
-package network.bobnet.cms.repository.user
+package network.bobnet.cms.repository.administration
 
 import network.bobnet.cms.model.user.User
 import org.springframework.data.repository.CrudRepository

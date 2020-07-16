@@ -1,7 +1,7 @@
 package network.bobnet.cms.controller.api
 
 import network.bobnet.cms.model.Options
-import network.bobnet.cms.repository.OptionsRepository
+import network.bobnet.cms.repository.administration.OptionsRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
