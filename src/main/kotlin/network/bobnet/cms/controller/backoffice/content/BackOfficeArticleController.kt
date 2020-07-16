@@ -1,4 +1,4 @@
-package network.bobnet.cms.controller.backoffice
+package network.bobnet.cms.controller.backoffice.content
 
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*
 
 
 @Controller
-class ArticlesController (
+class BackOfficeArticleController (
                     private val displayLanguageController: DisplayLanguageController,
                     private val articleService: ArticleService,
                     private val userRepository: UserRepository,
@@ -27,8 +27,8 @@ class ArticlesController (
 
     private final val ROW_PER_PAGE: Int = 5
 
-    private final val ARTICLES_TEMPLATE = "backoffice/articles"
-    private final val ARTICLE_TEMPLATE = "backoffice/article"
+    private final val ARTICLES_TEMPLATE = "backoffice/content/articles"
+    private final val ARTICLE_TEMPLATE = "backoffice/content/article"
 
     private val extensions = Extensions()
 

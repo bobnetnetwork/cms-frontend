@@ -1,4 +1,4 @@
-package network.bobnet.cms.controller.backoffice
+package network.bobnet.cms.controller.backoffice.administration
 
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.repository.user.UserRepository
@@ -16,7 +16,7 @@ class UsersController (
     fun users(model: Model): String{
         model.addAttribute(displayLanguageController.getUsersLabels(model))
         model["users"] = userRepository.findAll().map { it.render() }
-        return "backoffice/users"
+        return "backoffice/administration/users"
     }
 
 

@@ -1,4 +1,4 @@
-package network.bobnet.cms.controller.backoffice
+package network.bobnet.cms.controller.backoffice.auth
 
 
 import network.bobnet.cms.controller.DisplayLanguageController

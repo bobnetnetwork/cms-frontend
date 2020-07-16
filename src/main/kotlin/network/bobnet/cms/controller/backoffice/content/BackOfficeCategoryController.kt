@@ -1,4 +1,4 @@
-package network.bobnet.cms.controller.backoffice
+package network.bobnet.cms.controller.backoffice.content
 
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Category
@@ -9,14 +9,14 @@ import org.springframework.ui.set
 import org.springframework.web.bind.annotation.*
 
 @Controller
-class CategoriesController (
+class BackOfficeCategoryController (
                         private val displayLanguageController: DisplayLanguageController,
                         private val categoryService: CategoryService){
 
     private final val ROW_PER_PAGE: Int = 5
 
-    private final val CATEGORIES_TEMPLATE = "backoffice/categories"
-    private final val CATEGORY_TEMPLATE = "backoffice/category"
+    private final val CATEGORIES_TEMPLATE = "backoffice/content/categories"
+    private final val CATEGORY_TEMPLATE = "backoffice/content/category"
 
     @GetMapping("/admin/categories")
     fun categories(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String{

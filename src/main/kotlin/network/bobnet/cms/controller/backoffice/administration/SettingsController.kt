@@ -1,4 +1,4 @@
-package network.bobnet.cms.controller.backoffice
+package network.bobnet.cms.controller.backoffice.administration
 
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.repository.OptionsRepository
@@ -14,6 +14,6 @@ class SettingsController(
     @GetMapping("/admin/settings")
     fun settings(model: Model): String{
         model.addAttribute(displayLanguageController.getSettingsLabels(model))
-        return "/backoffice/settings"
+        return "/backoffice/administration/settings"
     }
 }

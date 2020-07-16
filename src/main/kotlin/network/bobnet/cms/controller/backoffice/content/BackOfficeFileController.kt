@@ -1,4 +1,4 @@
-package network.bobnet.cms.controller.backoffice
+package network.bobnet.cms.controller.backoffice.content
 
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.filestorage.ExtendedFile
@@ -21,7 +21,7 @@ import java.nio.file.Files
 import javax.servlet.http.HttpServletResponse
 
 @Controller
-class FileController(
+class BackOfficeFileController(
         private val displayLanguageController: DisplayLanguageController,
         private val fileService: FileService) {
 
@@ -47,13 +47,13 @@ class FileController(
         model["prev"] = pageNumber - 1
         model["hasNext"] = hasNext
         model["next"] = pageNumber + 1
-        return "backoffice/file/list"
+        return "backoffice/content/file/list"
     }
 
     @GetMapping("/admin/file/upload")
     fun fileUpload(model: Model): String{
         model.addAttribute(displayLanguageController.getMediaLabels(model))
-        return "backoffice/file/upload"
+        return "backoffice/content/file/upload"
     }
 
     @PostMapping("/admin/file/upload")
@@ -95,7 +95,7 @@ class FileController(
         var url: String =  model.getAttribute("home") as String
         url += "/filestorage/" + newFile.fileName + "." + ext
         model["mediaURL"] = url
-        return "backoffice/file/show"
+        return "backoffice/content/file/show"
     }
 
     @GetMapping("/filestorage/{slug}")
@@ -114,6 +114,6 @@ class FileController(
         when(message){
             "file_is_to_big" -> model["errorMessage"] = Translator.toLocale("lang.fileSizeLimitExceededException") + " " + uploadMaxSize + "!"
         }
-        return "backoffice/file/upload"
+        return "backoffice/content/file/upload"
     }
 }
