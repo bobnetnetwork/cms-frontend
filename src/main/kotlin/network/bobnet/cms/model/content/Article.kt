@@ -16,8 +16,8 @@ class Article(
         var slug: String = "",
         var addedAt: LocalDateTime = LocalDateTime.now(),
         @Id @GeneratedValue var id: Long? = null,
-        @ManyToMany val tags: Set<Tag>?= null,
-        @ManyToMany val categories: Set<Category>?= null){
+        @ManyToMany var tags: MutableSet<Tag>?= null,
+        @ManyToMany var categories: MutableSet<Category>?= null){
 
     fun render() = id?.let {
         RenderedArticle(

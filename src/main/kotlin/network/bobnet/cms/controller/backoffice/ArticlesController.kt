@@ -2,7 +2,9 @@ package network.bobnet.cms.controller.backoffice
 
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
+import network.bobnet.cms.model.content.Tag
 import network.bobnet.cms.repository.content.CategoryRepository
+import network.bobnet.cms.repository.content.TagRepository
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.service.ArticleService
 import network.bobnet.cms.service.LogService
@@ -20,7 +22,8 @@ class ArticlesController (
                     private val displayLanguageController: DisplayLanguageController,
                     private val categoryRepository: CategoryRepository,
                     private val articleService: ArticleService,
-                    private val userRepository: UserRepository) {
+                    private val userRepository: UserRepository,
+                    private val tagRepository: TagRepository) {
 
     private val logger: LogService = LogService(this.javaClass)
 
@@ -56,7 +59,23 @@ class ArticlesController (
             article.content = StringEscapeUtils.unescapeHtml4(article.content)
             model["add"] = false
             model["article"] = article
-            model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }
+            //model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }
+            if(article.tags?.isNotEmpty()!!){
+                val tagsIterator = article.tags!!.iterator()
+                var first = true
+                val tagsList = StringBuilder()
+                while(tagsIterator.hasNext()){
+                    if(first){
+                        tagsList.append(tagsIterator.next().title)
+                        first = false
+                    }else{
+                        tagsList.append(", ").append(tagsIterator.next().title)
+                    }
+                }
+                model["tagsList"] = tagsList.toString()
+            }else {
+                model["tagsList"] = ""
+            }
 
             ARTICLE_TEMPLATE
         }catch(ex: Exception){
@@ -70,13 +89,33 @@ class ArticlesController (
 
 
     @PostMapping("/admin/articles/{slug}")
-    fun editArticle(@PathVariable slug: String, model: Model, @ModelAttribute("article") article: Article): String{
+    fun editArticle(@PathVariable slug: String, model: Model, @RequestParam queryMap: Map<String, String>): String{
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
         return try{
+            val article = articleService.findBySlug(slug)
+            article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
+            val tags = queryMap["tags"].toString().split(",").toTypedArray()
+            if(tags.isNotEmpty()){
+                val tagIterator = tags.iterator()
 
-            article.slug = slug
-            article.id = articleService.findBySlug(slug).id
-            article.content = StringEscapeUtils.escapeHtml4(article.content)
+                while(tagIterator.hasNext()){
+                    val tag = tagIterator.next().replace("\\s".toRegex(), "")
+                    if(tagRepository.countByTitle(tag) > 0 ){
+                        if(!article.tags?.contains(tagRepository.findByTitle(tag))!!){
+                            article.tags!!.add(tagRepository.findByTitle(tag))
+                        }
+                    }else{
+                        val newTag = Tag()
+                        newTag.title = tag
+                        val extensions = Extensions()
+                        newTag.slug = extensions.slugify(tag)
+                        tagRepository.save(newTag)
+                        article.tags!!.add(newTag)
+                    }
+                }
+            }
+
+
             articleService.update(article)
             "redirect:/admin/articles/" + article.slug
         }catch(ex: Exception){

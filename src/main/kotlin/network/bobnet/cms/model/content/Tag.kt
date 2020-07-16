@@ -10,7 +10,7 @@ class Tag (
         var slug: String = "",
         var addedAt: LocalDateTime = LocalDateTime.now(),
         @Id @GeneratedValue var id: Long? = null,
-        @ManyToMany val articles: Set<Article>?= null){
+        @ManyToMany var articles: MutableSet<Article>?= null){
 
     fun render() = id?.let {
         RenderedTag(
