@@ -7,6 +7,7 @@ import network.bobnet.cms.repository.content.TagRepository
 import network.bobnet.cms.repository.user.UserRepository
 import network.bobnet.cms.service.ArticleService
 import network.bobnet.cms.service.LogService
+import network.bobnet.cms.service.TagService
 import network.bobnet.cms.util.Extensions
 import network.bobnet.cms.util.LoggedInUser
 import org.apache.commons.text.StringEscapeUtils
@@ -21,7 +22,7 @@ class ArticlesController (
                     private val displayLanguageController: DisplayLanguageController,
                     private val articleService: ArticleService,
                     private val userRepository: UserRepository,
-                    private val tagRepository: TagRepository) {
+                    private val tagService: TagService) {
 
     private val logger: LogService = LogService(this.javaClass)
 
@@ -89,9 +90,10 @@ class ArticlesController (
         return try{
             val article = articleService.findBySlug(slug)
             article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
-            article.tags = setTags(queryMap["tags"].toString())
+            article.tags = setTagsToArticle(queryMap["tags"].toString())
 
             articleService.update(article)
+            setArticleToTags(article)
             "redirect:/admin/articles/" + article.slug
         }catch(ex: Exception){
             model["errorMessage"] = ex.stackTrace.toString()
@@ -121,8 +123,9 @@ class ArticlesController (
             article.title = queryMap["title"].toString()
             article.slug = extensions.slugify(queryMap["title"].toString())
             article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
-            article.tags = setTags(queryMap["tags"].toString())
+            article.tags = setTagsToArticle(queryMap["tags"].toString())
             val newArticle: Article = articleService.save(article)
+            setArticleToTags(newArticle)
             "redirect:/admin/articles/" + newArticle.slug
         }catch (ex: Exception){
             model["errorMessage"] = ex.stackTrace.toString()
@@ -132,7 +135,7 @@ class ArticlesController (
         }
     }
 
-    fun setTags(tagsList: String): MutableSet<Tag>{
+    fun setTagsToArticle(tagsList: String): MutableSet<Tag>{
         val tagList = mutableSetOf<Tag>()
         val tags = tagsList.split(",").toTypedArray()
         if(tags.isNotEmpty()){
@@ -140,18 +143,29 @@ class ArticlesController (
             while(tagIterator.hasNext()){
                 val tag = tagIterator.next().replace("\\s".toRegex(), "")
 
-                if(tagRepository.countByTitle(tag) > 0 ){
-                    tagList.add(tagRepository.findByTitle(tag))
+                if(tagService.countByTitle(tag) > 0 ){
+                    tagList.add(tagService.findByTitle(tag))
                 }else if(tag.isNotEmpty()){
                     val newTag = Tag()
                     newTag.title = tag
                     val extensions = Extensions()
                     newTag.slug = extensions.slugify(tag)
-                    tagRepository.save(newTag)
+                    tagService.save(newTag)
                     tagList.add(newTag)
                 }
             }
         }
         return tagList
+    }
+
+    fun setArticleToTags(article: Article){
+        if(article.tags?.isNotEmpty()!!){
+            val tagIterator = article.tags!!.iterator()
+            while (tagIterator.hasNext()){
+                var tag = tagIterator.next()
+                tag.articles?.add(article)
+                tagService.update(tag)
+            }
+        }
     }
 }
