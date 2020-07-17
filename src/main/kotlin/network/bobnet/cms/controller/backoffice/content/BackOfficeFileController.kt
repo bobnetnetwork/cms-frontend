@@ -75,8 +75,6 @@ class BackOfficeFileController(
             model["errorMessage"] = Translator.toLocale("lang.fileSizeLimitExceededException") + " " + uploadMaxSize + "!"
             logger.error(ex.stackTrace.toString())
             return "redirect:/admin/file/upload"
-        } catch (ex: Exception) {
-            logger.error(ex.stackTrace.toString())
         }
 
         return "redirect:/admin/file/"

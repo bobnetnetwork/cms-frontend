@@ -4,7 +4,6 @@ import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.model.content.Tag
 import network.bobnet.cms.repository.administration.UserRepository
-import network.bobnet.cms.service.administration.LogService
 import network.bobnet.cms.service.content.ArticleService
 import network.bobnet.cms.service.content.TagService
 import network.bobnet.cms.util.Extensions
@@ -25,8 +24,6 @@ class BackOfficeArticleController(
         private val articleService: ArticleService,
         private val userRepository: UserRepository,
         private val tagService: TagService) {
-
-    private val logger: LogService = LogService(this.javaClass)
 
     private final val ROW_PER_PAGE: Int = 5
 
@@ -84,20 +81,15 @@ class BackOfficeArticleController(
     @PostMapping("/admin/articles/{slug}")
     fun editArticle(@PathVariable slug: String, model: Model, @RequestParam queryMap: Map<String, String>): String {
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
-        return try {
+
             val article = articleService.findBySlug(slug)
             article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
             article.tags = setTagsToArticle(queryMap["tags"].toString())
 
             articleService.update(article)
             setArticleToTags(article)
-            "redirect:/admin/articles/" + article.slug
-        } catch (ex: Exception) {
-            model["errorMessage"] = ex.stackTrace.toString()
-            logger.error(ex.stackTrace.toString())
-            model["add"] = false
-            ARTICLE_TEMPLATE
-        }
+            return "redirect:/admin/articles/" + article.slug
+
     }
 
     @GetMapping("/admin/articles/new")
@@ -114,7 +106,7 @@ class BackOfficeArticleController(
     @PostMapping("/admin/articles/new")
     fun addArticle(model: Model, @RequestParam queryMap: Map<String, String>): String {
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
-        return try {
+
             val article = Article()
             article.author = LoggedInUser(userRepository).getUser()!!
             article.title = queryMap["title"].toString()
@@ -123,13 +115,8 @@ class BackOfficeArticleController(
             article.tags = setTagsToArticle(queryMap["tags"].toString())
             val newArticle: Article = articleService.save(article)
             setArticleToTags(newArticle)
-            "redirect:/admin/articles/" + newArticle.slug
-        } catch (ex: Exception) {
-            model["errorMessage"] = ex.stackTrace.toString()
-            logger.error(ex.stackTrace.toString())
-            model["add"] = true
-            ARTICLE_TEMPLATE
-        }
+            return "redirect:/admin/articles/" + newArticle.slug
+
     }
 
     fun setTagsToArticle(tagsList: String): MutableSet<Tag> {
