@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
 class SettingsController(
-                    private val displayLanguageController: DisplayLanguageController,
-                    private val optionsRepository: OptionsRepository) {
+        private val displayLanguageController: DisplayLanguageController,
+        private val optionsRepository: OptionsRepository) {
 
     @GetMapping("/admin/settings")
-    fun settings(model: Model): String{
+    fun settings(model: Model): String {
         model.addAttribute(displayLanguageController.getSettingsLabels(model))
         return "/backoffice/administration/settings"
     }

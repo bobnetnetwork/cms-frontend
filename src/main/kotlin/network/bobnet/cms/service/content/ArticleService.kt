@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 
 @Service
 @CacheConfig(cacheNames = ["article"], cacheManager = "cacheManager", keyGenerator = "keyGenerator")
-class ArticleService{
+class ArticleService {
 
     @Autowired
     private lateinit var articleRepository: ArticleRepository
@@ -31,12 +31,12 @@ class ArticleService{
         return articleRepository.findBySlug(slug)
     }
 
-    fun findAll(pageNumber: Int, rowNumber: Int): MutableList<Article>{
+    fun findAll(pageNumber: Int, rowNumber: Int): MutableList<Article> {
         val articles: MutableList<Article> = mutableListOf()
-        val sortedByLastUpdateDesc : Pageable
+        val sortedByLastUpdateDesc: Pageable
 
-        sortedByLastUpdateDesc = PageRequest.of(pageNumber -1, rowNumber, Sort.by("id").ascending())
-        articleRepository.findAll(sortedByLastUpdateDesc).forEach{
+        sortedByLastUpdateDesc = PageRequest.of(pageNumber - 1, rowNumber, Sort.by("id").ascending())
+        articleRepository.findAll(sortedByLastUpdateDesc).forEach {
             articles.add(it)
         }
 
@@ -47,41 +47,41 @@ class ArticleService{
         return articleRepository.findAll(pageabel)
     }
 
-    fun save(article: Article): Article{
-        if(article.title.isEmpty()){
+    fun save(article: Article): Article {
+        if (article.title.isEmpty()) {
             throw Exception("Title is required")
         }
-        if(article.content.isEmpty()){
+        if (article.content.isEmpty()) {
             throw Exception("Content is required")
         }
-        if(article.id != null && existsById(article.id!!)){
+        if (article.id != null && existsById(article.id!!)) {
             throw Exception("Article with id: " + article.id + " already exists")
         }
         return articleRepository.save(article)
     }
 
-    fun update(article: Article){
-        if(article.title.isEmpty()){
+    fun update(article: Article) {
+        if (article.title.isEmpty()) {
             throw Exception("Title is required")
         }
-        if(article.content.isEmpty()){
+        if (article.content.isEmpty()) {
             throw Exception("Content is required")
         }
-        if(!existsById(article.id!!)){
+        if (!existsById(article.id!!)) {
             throw Exception("Cannot find Article with id: " + article.id)
         }
         articleRepository.save(article)
     }
 
-    fun deleteById(id: Long){
-        if(!existsById(id)){
+    fun deleteById(id: Long) {
+        if (!existsById(id)) {
             throw Exception("Cannot find Article with id: $id")
-        }else {
+        } else {
             articleRepository.deleteById(id)
         }
     }
 
-    fun count(): Long{
+    fun count(): Long {
         return articleRepository.count()
     }
 

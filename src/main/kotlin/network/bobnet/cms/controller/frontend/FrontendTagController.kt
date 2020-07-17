@@ -16,7 +16,7 @@ class FrontendTagController(
 ) {
 
     @GetMapping("/tag/{slug}")
-    fun tag(model: Model, @PathVariable slug: String): String{
+    fun tag(model: Model, @PathVariable slug: String): String {
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
         model.addAttribute(sidebar.addSidebar(model))
         model["articles"] = tagService.findArticlesByTag(slug).map { it.render() }

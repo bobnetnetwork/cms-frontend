@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatterBuilder
 import java.time.temporal.ChronoField
 import java.util.*
 
-class Extensions{
+class Extensions {
     fun LocalDateTime.format(): String = this.format(englishDateFormatter)
 
     private val daysLookup = (1..31).associate { it.toLong() to getOrdinal(it) }

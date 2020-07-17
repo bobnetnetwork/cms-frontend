@@ -9,7 +9,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 
 @Service
-class FileService{
+class FileService {
 
     @Autowired
     private lateinit var fileRepository: FileRepository
@@ -22,12 +22,12 @@ class FileService{
         return fileRepository.findBySlug(slug)
     }
 
-    fun findAll(pageNumber: Int, rowNumber: Int): MutableList<File>{
+    fun findAll(pageNumber: Int, rowNumber: Int): MutableList<File> {
         val files: MutableList<File> = mutableListOf()
-        val sortedByLastUpdateDesc : Pageable
+        val sortedByLastUpdateDesc: Pageable
 
-        sortedByLastUpdateDesc = PageRequest.of(pageNumber -1, rowNumber, Sort.by("id").ascending())
-        fileRepository.findAll(sortedByLastUpdateDesc).forEach{
+        sortedByLastUpdateDesc = PageRequest.of(pageNumber - 1, rowNumber, Sort.by("id").ascending())
+        fileRepository.findAll(sortedByLastUpdateDesc).forEach {
             files.add(it)
         }
 
@@ -38,7 +38,7 @@ class FileService{
         return fileRepository.save(file)
     }
 
-    fun count(): Long{
+    fun count(): Long {
         return fileRepository.count()
     }
 }

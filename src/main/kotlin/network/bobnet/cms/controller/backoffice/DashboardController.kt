@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import javax.servlet.http.HttpServletResponse
 
 @Controller
-class DashboardController (private val displayLanguageController: DisplayLanguageController,
-                           private val userRepository: UserRepository){
+class DashboardController(private val displayLanguageController: DisplayLanguageController,
+                          private val userRepository: UserRepository) {
 
     @GetMapping("/admin")
     fun admin(response: HttpServletResponse, model: Model): String {

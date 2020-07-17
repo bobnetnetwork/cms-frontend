@@ -11,8 +11,10 @@
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{home}}/webjars/font-awesome/{{font-awesome-version}}/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="{{home}}/webjars/font-awesome/{{font-awesome-version}}/css/all.min.css" rel="stylesheet"
+          type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -36,39 +38,47 @@
             image_advtab: true,
             content_css: '//www.tiny.cloud/css/codepen.min.css',
             link_list: [
-                { title: 'My page 1', value: 'http://www.tinymce.com' },
-                { title: 'My page 2', value: 'http://www.moxiecode.com' }
+                {title: 'My page 1', value: 'http://www.tinymce.com'},
+                {title: 'My page 2', value: 'http://www.moxiecode.com'}
             ],
             image_list: [
-                { title: 'My page 1', value: 'http://www.tinymce.com' },
-                { title: 'My page 2', value: 'http://www.moxiecode.com' }
+                {title: 'My page 1', value: 'http://www.tinymce.com'},
+                {title: 'My page 2', value: 'http://www.moxiecode.com'}
             ],
             image_class_list: [
-                { title: 'None', value: '' },
-                { title: 'Some class', value: 'class-name' }
+                {title: 'None', value: ''},
+                {title: 'Some class', value: 'class-name'}
             ],
             importcss_append: true,
             height: 400,
             file_picker_callback: function (callback, value, meta) {
                 /* Provide file and text for the link dialog */
                 if (meta.filetype === 'file') {
-                    callback('https://www.google.com/logos/google.jpg', { text: 'My text' });
+                    callback('https://www.google.com/logos/google.jpg', {text: 'My text'});
                 }
 
                 /* Provide image and alt text for the image dialog */
                 if (meta.filetype === 'image') {
-                    callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });
+                    callback('https://www.google.com/logos/google.jpg', {alt: 'My alt text'});
                 }
 
                 /* Provide alternative source and posted for the media dialog */
                 if (meta.filetype === 'media') {
-                    callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg' });
+                    callback('movie.mp4', {source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg'});
                 }
             },
             templates: [
-                { title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
-                { title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
-                { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
+                {
+                    title: 'New Table',
+                    description: 'creates a new table',
+                    content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>'
+                },
+                {title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...'},
+                {
+                    title: 'New list with dates',
+                    description: 'New List with dates',
+                    content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>'
+                }
             ],
             template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
             template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
@@ -80,7 +90,7 @@
             contextmenu: "link image imagetools table",
         });
 
-</script>
+    </script>
 </head>
 
 <body id="page-top">

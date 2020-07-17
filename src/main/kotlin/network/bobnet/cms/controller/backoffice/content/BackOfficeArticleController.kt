@@ -4,8 +4,8 @@ import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
 import network.bobnet.cms.model.content.Tag
 import network.bobnet.cms.repository.administration.UserRepository
-import network.bobnet.cms.service.content.ArticleService
 import network.bobnet.cms.service.administration.LogService
+import network.bobnet.cms.service.content.ArticleService
 import network.bobnet.cms.service.content.TagService
 import network.bobnet.cms.util.Extensions
 import network.bobnet.cms.util.LoggedInUser
@@ -13,11 +13,14 @@ import org.apache.commons.text.StringEscapeUtils
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestParam
 
 
 @Controller
-class BackOfficeArticleController (
+class BackOfficeArticleController(
         private val displayLanguageController: DisplayLanguageController,
         private val articleService: ArticleService,
         private val userRepository: UserRepository,
@@ -33,7 +36,7 @@ class BackOfficeArticleController (
     private val extensions = Extensions()
 
     @GetMapping("/admin/articles")
-    fun articles(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String{
+    fun articles(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String {
         val articles = articleService.findAll(pageNumber, ROW_PER_PAGE)
         val count = articleService.count()
         val hasPrev: Boolean = pageNumber > 1
@@ -50,32 +53,32 @@ class BackOfficeArticleController (
     }
 
     @GetMapping("/admin/articles/{slug}")
-    fun showEditArticle(@PathVariable slug: String, model: Model): String{
+    fun showEditArticle(@PathVariable slug: String, model: Model): String {
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
-        return try{
+        return try {
             val article = articleService.findBySlug(slug)
             article.content = StringEscapeUtils.unescapeHtml4(article.content)
             model["add"] = false
             model["article"] = article
-            if(article.tags?.isNotEmpty()!!){
+            if (article.tags?.isNotEmpty()!!) {
                 val tagsIterator = article.tags!!.iterator()
                 var first = true
                 val tagsList = StringBuilder()
-                while(tagsIterator.hasNext()){
-                    if(first){
+                while (tagsIterator.hasNext()) {
+                    if (first) {
                         tagsList.append(tagsIterator.next().title)
                         first = false
-                    }else{
+                    } else {
                         tagsList.append(", ").append(tagsIterator.next().title)
                     }
                 }
                 model["tagsList"] = tagsList.toString()
-            }else {
+            } else {
                 model["tagsList"] = ""
             }
 
             ARTICLE_TEMPLATE
-        }catch(ex: Exception){
+        } catch (ex: Exception) {
             model["errorMessage"] = ex.stackTrace.toString()
             logger.error(ex.stackTrace.toString())
             ARTICLE_TEMPLATE
@@ -84,9 +87,9 @@ class BackOfficeArticleController (
     }
 
     @PostMapping("/admin/articles/{slug}")
-    fun editArticle(@PathVariable slug: String, model: Model, @RequestParam queryMap: Map<String, String>): String{
+    fun editArticle(@PathVariable slug: String, model: Model, @RequestParam queryMap: Map<String, String>): String {
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
-        return try{
+        return try {
             val article = articleService.findBySlug(slug)
             article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
             article.tags = setTagsToArticle(queryMap["tags"].toString())
@@ -94,7 +97,7 @@ class BackOfficeArticleController (
             articleService.update(article)
             setArticleToTags(article)
             "redirect:/admin/articles/" + article.slug
-        }catch(ex: Exception){
+        } catch (ex: Exception) {
             model["errorMessage"] = ex.stackTrace.toString()
             logger.error(ex.stackTrace.toString())
             model["add"] = false
@@ -103,7 +106,7 @@ class BackOfficeArticleController (
     }
 
     @GetMapping("/admin/articles/new")
-    fun showAddArticle(model: Model): String{
+    fun showAddArticle(model: Model): String {
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
         val article = Article()
         model["add"] = true
@@ -114,9 +117,9 @@ class BackOfficeArticleController (
     }
 
     @PostMapping("/admin/articles/new")
-    fun addArticle(model: Model, @RequestParam queryMap: Map<String, String>): String{
+    fun addArticle(model: Model, @RequestParam queryMap: Map<String, String>): String {
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
-        return try{
+        return try {
             val article = Article()
             article.author = LoggedInUser(userRepository).getUser()!!
             article.title = queryMap["title"].toString()
@@ -126,7 +129,7 @@ class BackOfficeArticleController (
             val newArticle: Article = articleService.save(article)
             setArticleToTags(newArticle)
             "redirect:/admin/articles/" + newArticle.slug
-        }catch (ex: Exception){
+        } catch (ex: Exception) {
             model["errorMessage"] = ex.stackTrace.toString()
             logger.error(ex.stackTrace.toString())
             model["add"] = true
@@ -134,17 +137,17 @@ class BackOfficeArticleController (
         }
     }
 
-    fun setTagsToArticle(tagsList: String): MutableSet<Tag>{
+    fun setTagsToArticle(tagsList: String): MutableSet<Tag> {
         val tagList = mutableSetOf<Tag>()
         val tags = tagsList.split(",").toTypedArray()
-        if(tags.isNotEmpty()){
+        if (tags.isNotEmpty()) {
             val tagIterator = tags.iterator()
-            while(tagIterator.hasNext()){
+            while (tagIterator.hasNext()) {
                 val tag = tagIterator.next().replace("\\s".toRegex(), "")
 
-                if(tagService.countByTitle(tag) > 0 ){
+                if (tagService.countByTitle(tag) > 0) {
                     tagList.add(tagService.findByTitle(tag))
-                }else if(tag.isNotEmpty()){
+                } else if (tag.isNotEmpty()) {
                     val newTag = Tag()
                     newTag.title = tag
                     val extensions = Extensions()
@@ -157,10 +160,10 @@ class BackOfficeArticleController (
         return tagList
     }
 
-    fun setArticleToTags(article: Article){
-        if(article.tags?.isNotEmpty()!!){
+    fun setArticleToTags(article: Article) {
+        if (article.tags?.isNotEmpty()!!) {
             val tagIterator = article.tags!!.iterator()
-            while (tagIterator.hasNext()){
+            while (tagIterator.hasNext()) {
                 val tag = tagIterator.next()
                 tag.articles?.add(article)
                 tagService.update(tag)

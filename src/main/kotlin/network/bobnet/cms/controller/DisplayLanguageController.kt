@@ -71,12 +71,12 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    fun getErrorPageLabels(model: Model): Model{
+    fun getErrorPageLabels(model: Model): Model {
         getSiteInfo(model)
         return model
     }
 
-    fun getSettingsLabels(model: Model): Model{
+    fun getSettingsLabels(model: Model): Model {
         getAdminBasicsLabelsAndInfos(model)
         model["title"] = Translator.toLocale(SETTINGS)
         return model
@@ -103,7 +103,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    private fun getAdminBasicsLabelsAndInfos(model: Model): Model{
+    private fun getAdminBasicsLabelsAndInfos(model: Model): Model {
         getBasicsLabelsAndInfos(model)
         getSideBarLabels(model)
         getTopBarLabels(model)
@@ -117,7 +117,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    fun getCSSJSVersions(model: Model): Model{
+    fun getCSSJSVersions(model: Model): Model {
         model["bootstrap-version"] = templateVersionConfig.bootstrap
         model["font-awesome-version"] = templateVersionConfig.fontAwesome
         model["jquery-version"] = templateVersionConfig.jquery
@@ -178,7 +178,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    fun getContentLabels(model: Model): Model{
+    fun getContentLabels(model: Model): Model {
         model["lang.createdAt"] = Translator.toLocale("lang.createdAt")
         model[PREVIOUS] = Translator.toLocale(PREVIOUS)
         model[NEXT] = Translator.toLocale(NEXT)
@@ -195,7 +195,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    fun getMediaLabels(model: Model): Model{
+    fun getMediaLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model.addAttribute(getContentLabels(model))
         model["title"] = Translator.toLocale(MEDIA)
@@ -222,7 +222,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
     }
 
 
-    fun getCategoriesLabels(model: Model): Model{
+    fun getCategoriesLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model.addAttribute(getContentLabels(model))
         model["title"] = Translator.toLocale(ARTICLES)

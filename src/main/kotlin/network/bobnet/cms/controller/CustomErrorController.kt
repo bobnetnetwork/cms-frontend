@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest
 
 
 @Controller
-class CustomErrorController(private val displayLanguageController: DisplayLanguageController): ErrorController{
+class CustomErrorController(private val displayLanguageController: DisplayLanguageController) : ErrorController {
 
     @RequestMapping("/error")
     fun handleError(request: HttpServletRequest, model: Model): String? {

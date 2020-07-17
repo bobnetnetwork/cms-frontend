@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus
 
 class HttpErrorMessages(var code: Int) {
 
-    var message: String = when(code){
+    var message: String = when (code) {
         /** 4xx **/
         HttpStatus.BAD_REQUEST.value() -> HttpStatus.BAD_REQUEST.reasonPhrase //400
         HttpStatus.UNAUTHORIZED.value() -> HttpStatus.UNAUTHORIZED.reasonPhrase //401

@@ -6,5 +6,5 @@ import javax.persistence.Id
 
 @Entity
 data class Options(var name: String,
-                var value: String,
-                @Id @GeneratedValue var id: Long? = null)
+                   var value: String,
+                   @Id @GeneratedValue var id: Long? = null)

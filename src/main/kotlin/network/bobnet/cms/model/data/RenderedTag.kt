@@ -1,6 +1,5 @@
 package network.bobnet.cms.model.data
 
-import network.bobnet.cms.model.user.User
 import java.time.LocalDateTime
 
 data class RenderedTag(

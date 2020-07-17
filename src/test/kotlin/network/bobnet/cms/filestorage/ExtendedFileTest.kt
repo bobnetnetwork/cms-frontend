@@ -16,19 +16,19 @@ class ExtendedFileTest {
     private lateinit var underTest: ExtendedFile
 
     @Before
-    fun setup(){
+    fun setup() {
         initMocks(this)
         file = MockMultipartFile("file", "test contract.pdf", MediaType.APPLICATION_PDF_VALUE, "<<pdf data>>".toByteArray(StandardCharsets.UTF_8))
         underTest = ExtendedFile(file)
     }
 
     @Test
-    fun checkSlug(){
+    fun checkSlug() {
         assertThat(underTest.slug).isEqualTo("test-contract")
     }
 
     @Test
-    fun checkFullName(){
+    fun checkFullName() {
         assertThat(underTest.fullName).isEqualTo("test-contract.pdf")
     }
 }

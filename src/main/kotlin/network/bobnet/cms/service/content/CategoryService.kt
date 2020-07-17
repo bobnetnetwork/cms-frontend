@@ -26,12 +26,12 @@ class CategoryService {
         return categoryRepository.findBySlug(slug)
     }
 
-    fun findAll(pageNumber: Int, rowNumber: Int): MutableList<Category>{
+    fun findAll(pageNumber: Int, rowNumber: Int): MutableList<Category> {
         val articles: MutableList<Category> = mutableListOf()
-        val sortedByLastUpdateDesc : Pageable
+        val sortedByLastUpdateDesc: Pageable
 
-        sortedByLastUpdateDesc = PageRequest.of(pageNumber -1, rowNumber, Sort.by("id").ascending())
-        categoryRepository.findAll(sortedByLastUpdateDesc).forEach{
+        sortedByLastUpdateDesc = PageRequest.of(pageNumber - 1, rowNumber, Sort.by("id").ascending())
+        categoryRepository.findAll(sortedByLastUpdateDesc).forEach {
             articles.add(it)
         }
 
@@ -39,40 +39,40 @@ class CategoryService {
     }
 
     fun save(category: Category): Category {
-        if(category.name.isEmpty()){
+        if (category.name.isEmpty()) {
             throw Exception("Name is required")
         }
-        if(category.description.isEmpty()){
+        if (category.description.isEmpty()) {
             throw Exception("Description is required")
         }
-        if(category.id != null && existsById(category.id!!)){
+        if (category.id != null && existsById(category.id!!)) {
             throw Exception("Category with id: " + category.id + " already exists")
         }
         return categoryRepository.save(category)
     }
 
-    fun update(category: Category){
-        if(category.name.isEmpty()){
+    fun update(category: Category) {
+        if (category.name.isEmpty()) {
             throw Exception("Name is required")
         }
-        if(category.description.isEmpty()){
+        if (category.description.isEmpty()) {
             throw Exception("Description is required")
         }
-        if(!existsById(category.id!!)){
+        if (!existsById(category.id!!)) {
             throw Exception("Cannot find Category with id: " + category.id)
         }
         categoryRepository.save(category)
     }
 
-    fun deleteById(id: Long){
-        if(!existsById(id)){
+    fun deleteById(id: Long) {
+        if (!existsById(id)) {
             throw Exception("Cannot find Category with id: $id")
-        }else {
+        } else {
             categoryRepository.deleteById(id)
         }
     }
 
-    fun count(): Long{
+    fun count(): Long {
         return categoryRepository.count()
     }
 }

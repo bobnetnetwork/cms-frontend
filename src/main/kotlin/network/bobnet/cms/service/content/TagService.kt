@@ -27,12 +27,12 @@ class TagService {
         return tagRepository.findBySlug(slug)
     }
 
-    fun findAll(pageNumber: Int, rowNumber: Int): MutableList<Tag>{
+    fun findAll(pageNumber: Int, rowNumber: Int): MutableList<Tag> {
         val articles: MutableList<Tag> = mutableListOf()
-        val sortedByLastUpdateDesc : Pageable
+        val sortedByLastUpdateDesc: Pageable
 
-        sortedByLastUpdateDesc = PageRequest.of(pageNumber -1, rowNumber, Sort.by("id").ascending())
-        tagRepository.findAll(sortedByLastUpdateDesc).forEach{
+        sortedByLastUpdateDesc = PageRequest.of(pageNumber - 1, rowNumber, Sort.by("id").ascending())
+        tagRepository.findAll(sortedByLastUpdateDesc).forEach {
             articles.add(it)
         }
 
@@ -40,34 +40,34 @@ class TagService {
     }
 
     fun save(tag: Tag): Tag {
-        if(tag.title.isEmpty()){
+        if (tag.title.isEmpty()) {
             throw Exception("Title is required")
         }
-        if(tag.id != null && existsById(tag.id!!)){
+        if (tag.id != null && existsById(tag.id!!)) {
             throw Exception("Tag with id: " + tag.id + " already exists")
         }
         return tagRepository.save(tag)
     }
 
-    fun update(tag: Tag){
-        if(tag.title.isEmpty()){
+    fun update(tag: Tag) {
+        if (tag.title.isEmpty()) {
             throw Exception("Title is required")
         }
-        if(!existsById(tag.id!!)){
+        if (!existsById(tag.id!!)) {
             throw Exception("Cannot find Tag with id: " + tag.id)
         }
         tagRepository.save(tag)
     }
 
-    fun deleteById(id: Long){
-        if(!existsById(id)){
+    fun deleteById(id: Long) {
+        if (!existsById(id)) {
             throw Exception("Cannot find Tag with id: $id")
-        }else {
+        } else {
             tagRepository.deleteById(id)
         }
     }
 
-    fun count(): Long{
+    fun count(): Long {
         return tagRepository.count()
     }
 
@@ -83,12 +83,12 @@ class TagService {
         return tagRepository.findAll()
     }
 
-    fun findArticlesByTag(tagSlug: String): Iterable<Article>{
+    fun findArticlesByTag(tagSlug: String): Iterable<Article> {
         val tag = findBySlug(tagSlug)
         val articles = mutableListOf<Article>()
-        if(tag.articles?.isNotEmpty()!!){
+        if (tag.articles?.isNotEmpty()!!) {
             val articleIterator = tag.articles!!.iterator()
-            while (articleIterator.hasNext()){
+            while (articleIterator.hasNext()) {
                 articles.add(articleIterator.next())
             }
         }

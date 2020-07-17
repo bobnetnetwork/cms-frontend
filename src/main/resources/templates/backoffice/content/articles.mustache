@@ -25,12 +25,14 @@
                 </tfoot>
                 <tbody>
                 {{#articles}}
-                <tr>
-                    <td>{{id}}</td>
-                    <td><a href="{{home}}/admin/articles/{{slug}}">{{title}}</a></td>
-                    <td><a href="{{home}}/admin/users/{{author.userName}}">{{author.firstName}} {{author.lastName}}</a></td>
-                    <td class="date">{{addedAt}}</td>
-                </tr>
+                    <tr>
+                        <td>{{id}}</td>
+                        <td><a href="{{home}}/admin/articles/{{slug}}">{{title}}</a></td>
+                        <td>
+                            <a href="{{home}}/admin/users/{{author.userName}}">{{author.firstName}} {{author.lastName}}</a>
+                        </td>
+                        <td class="date">{{addedAt}}</td>
+                    </tr>
                 {{/articles}}
                 </tbody>
             </table>

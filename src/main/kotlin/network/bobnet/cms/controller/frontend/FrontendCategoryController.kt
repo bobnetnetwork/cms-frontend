@@ -32,7 +32,7 @@ class FrontendCategoryController(
     }
 
     @GetMapping("/categories")
-    fun categories(model: Model): String{
+    fun categories(model: Model): String {
         model.addAttribute(displayLanguageController.getFrontendLabels(model))
         model.addAttribute(sidebar.addSidebar(model))
         model["categories"] = categoryRepository.findAllByOrderByAddedAtDesc().map { it.render() }

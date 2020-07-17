@@ -9,9 +9,9 @@ import org.springframework.ui.set
 import org.springframework.web.bind.annotation.*
 
 @Controller
-class BackOfficeCategoryController (
-                        private val displayLanguageController: DisplayLanguageController,
-                        private val categoryService: CategoryService){
+class BackOfficeCategoryController(
+        private val displayLanguageController: DisplayLanguageController,
+        private val categoryService: CategoryService) {
 
     private final val ROW_PER_PAGE: Int = 5
 
@@ -19,7 +19,7 @@ class BackOfficeCategoryController (
     private final val CATEGORY_TEMPLATE = "backoffice/content/category"
 
     @GetMapping("/admin/categories")
-    fun categories(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String{
+    fun categories(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String {
         val categories = categoryService.findAll(pageNumber, ROW_PER_PAGE)
         val count = categoryService.count()
         val hasPrev: Boolean = pageNumber > 1
@@ -35,25 +35,25 @@ class BackOfficeCategoryController (
     }
 
     @GetMapping("/admin/categories/{slug}")
-    fun showCategory(@PathVariable slug: String, model: Model): String{
+    fun showCategory(@PathVariable slug: String, model: Model): String {
 
         return CATEGORY_TEMPLATE
     }
 
     @PostMapping("/admin/categories/{slug}")
-    fun editCategory(@PathVariable slug: String, model: Model, @ModelAttribute("category") category: Category): String{
+    fun editCategory(@PathVariable slug: String, model: Model, @ModelAttribute("category") category: Category): String {
 
         return CATEGORY_TEMPLATE
     }
 
     @GetMapping("/admin/categories/new")
-    fun showNewCategory(model: Model): String{
+    fun showNewCategory(model: Model): String {
 
         return CATEGORY_TEMPLATE
     }
 
     @PostMapping("/admin/categories/new")
-    fun addNewCategory(model: Model, @ModelAttribute("category") category: Category): String{
+    fun addNewCategory(model: Model, @ModelAttribute("category") category: Category): String {
 
         return CATEGORY_TEMPLATE
     }

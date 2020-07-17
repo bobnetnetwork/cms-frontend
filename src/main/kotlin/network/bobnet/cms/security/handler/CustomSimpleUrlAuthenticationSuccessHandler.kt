@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class CustomSimpleUrlAuthenticationSuccessHandler(private val userRepository: UserRepository): AuthenticationSuccessHandler, SimpleUrlAuthenticationSuccessHandler() {
-    private val  requestCache = HttpSessionRequestCache()
+class CustomSimpleUrlAuthenticationSuccessHandler(private val userRepository: UserRepository) : AuthenticationSuccessHandler, SimpleUrlAuthenticationSuccessHandler() {
+    private val requestCache = HttpSessionRequestCache()
 
     override fun onAuthenticationSuccess(request: HttpServletRequest?, response: HttpServletResponse?, authentication: Authentication?) {
 
@@ -26,7 +26,7 @@ class CustomSimpleUrlAuthenticationSuccessHandler(private val userRepository: Us
         }
         val targetUrlParameter = targetUrlParameter
         if (request != null) {
-            if(response != null){
+            if (response != null) {
                 LoggedInUser(userRepository).setUser(response)
             }
             if (isAlwaysUseDefaultTargetUrl

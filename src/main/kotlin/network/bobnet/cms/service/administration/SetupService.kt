@@ -10,10 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class SetupService (
+class SetupService(
         val optionsRepository: OptionsRepository,
         val userRepository: UserRepository,
-        val roleRepository: RoleRepository){
+        val roleRepository: RoleRepository) {
 
     lateinit var siteName: String
     lateinit var siteDescription: String
@@ -30,12 +30,12 @@ class SetupService (
         setSiteDetails()
     }
 
-    private fun initRoles(){
+    private fun initRoles() {
         val role = Role("admin")
         roleRepository.save(role)
     }
 
-    private fun addFirstUser(){
+    private fun addFirstUser() {
         val user = User()
         user.userName = userName
         user.passWord = BCryptPasswordEncoder().encode(password)
@@ -44,7 +44,7 @@ class SetupService (
         userRepository.save(user)
     }
 
-    private fun setSiteDetails(){
+    private fun setSiteDetails() {
 
         var options = Options("sitename", siteName)
         optionsRepository.save(options)

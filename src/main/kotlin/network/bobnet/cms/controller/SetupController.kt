@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletRequest
 class SetupController(private val displayLanguageController: DisplayLanguageController, private val optionsRepository: OptionsRepository, private val userRepository: UserRepository, private val roleRepository: RoleRepository) {
 
     @GetMapping("/setup")
-    fun showSetupPage(model: Model): String{
+    fun showSetupPage(model: Model): String {
         model.addAttribute(displayLanguageController.getDashboardLabels(model))
         return "/setup"
     }
 
     @PostMapping("/setup")
-    fun runSetup(request: HttpServletRequest, model: Model, @RequestParam queryMap: Map<String, String>):String {
+    fun runSetup(request: HttpServletRequest, model: Model, @RequestParam queryMap: Map<String, String>): String {
         model.addAttribute(displayLanguageController.getDashboardLabels(model))
         val installer = SetupService(optionsRepository, userRepository, roleRepository)
 

@@ -20,8 +20,10 @@ class User(var firstName: String = "",
     final var credentialsNonExpired: Boolean = true
     final var enabled: Boolean = true
     final var registeredAt: LocalDateTime = LocalDateTime.now()
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
     var roles: MutableSet<Role> = HashSet()
+
     constructor(user: User) : this(user.firstName, user.lastName, user.userName, user.email, user.passWord) {
         id = user.id
         version = user.version

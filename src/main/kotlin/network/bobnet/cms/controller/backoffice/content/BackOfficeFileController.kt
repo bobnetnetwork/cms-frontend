@@ -4,8 +4,8 @@ import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.filestorage.ExtendedFile
 import network.bobnet.cms.filestorage.FileStorage
 import network.bobnet.cms.model.content.File
-import network.bobnet.cms.service.content.FileService
 import network.bobnet.cms.service.administration.LogService
+import network.bobnet.cms.service.content.FileService
 import network.bobnet.cms.util.Translator
 import org.apache.commons.io.IOUtils
 import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException
@@ -27,6 +27,7 @@ class BackOfficeFileController(
 
     private final val ROW_PER_PAGE = 10
     private val logger: LogService = LogService(this.javaClass)
+
     @Value("\${spring.servlet.multipart.max-file-size}")
     private lateinit var uploadMaxSize: String
 
@@ -35,7 +36,7 @@ class BackOfficeFileController(
     lateinit var fileStorage: FileStorage
 
     @GetMapping("/admin/file")
-    fun files(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String{
+    fun files(model: Model, @RequestParam(value = "page", defaultValue = "1") pageNumber: Int): String {
         val files = fileService.findAll(pageNumber, ROW_PER_PAGE)
         val count = fileService.count()
         val hasPrev: Boolean = pageNumber > 1
@@ -51,14 +52,14 @@ class BackOfficeFileController(
     }
 
     @GetMapping("/admin/file/upload")
-    fun fileUpload(model: Model): String{
+    fun fileUpload(model: Model): String {
         model.addAttribute(displayLanguageController.getMediaLabels(model))
         return "backoffice/content/file/upload"
     }
 
     @PostMapping("/admin/file/upload")
     fun uploadMultipartFile(@RequestParam("uploadfile") file: MultipartFile, model: Model): String {
-        try{
+        try {
             model.addAttribute(displayLanguageController.getMediaLabels(model))
             val newFile = File()
             val extendedFile = ExtendedFile(file)
@@ -69,13 +70,12 @@ class BackOfficeFileController(
             newFile.url = fileStorage.store(file)
 
             fileService.save(newFile)
-        }catch(ex: FileSizeLimitExceededException){
+        } catch (ex: FileSizeLimitExceededException) {
             model["error"] = true
             model["errorMessage"] = Translator.toLocale("lang.fileSizeLimitExceededException") + " " + uploadMaxSize + "!"
             logger.error(ex.stackTrace.toString())
             return "redirect:/admin/file/upload"
-        }
-        catch (ex: Exception){
+        } catch (ex: Exception) {
             logger.error(ex.stackTrace.toString())
         }
 
@@ -88,11 +88,11 @@ class BackOfficeFileController(
     }
 
     @GetMapping("/admin/file/{slug}")
-    fun showMedia(model: Model, @PathVariable slug: String): String{
+    fun showMedia(model: Model, @PathVariable slug: String): String {
         model.addAttribute(displayLanguageController.getMediaLabels(model))
         val newFile: File = fileService.findById(slug.toLong())!!
-        val ext: String = newFile.mimeType.substring(newFile.mimeType.lastIndexOf('/')+1, newFile.mimeType.lastIndex+1)
-        var url: String =  model.getAttribute("home") as String
+        val ext: String = newFile.mimeType.substring(newFile.mimeType.lastIndexOf('/') + 1, newFile.mimeType.lastIndex + 1)
+        var url: String = model.getAttribute("home") as String
         url += "/filestorage/" + newFile.fileName + "." + ext
         model["mediaURL"] = url
         return "backoffice/content/file/show"
@@ -100,7 +100,7 @@ class BackOfficeFileController(
 
     @GetMapping("/filestorage/{slug}")
     @ResponseBody
-    fun downloadFile(@PathVariable slug: String, response: HttpServletResponse){
+    fun downloadFile(@PathVariable slug: String, response: HttpServletResponse) {
         val file = fileStorage.loadFile(slug)
         val ins: InputStream = file.inputStream
         response.contentType = Files.probeContentType(file.file.toPath())
@@ -108,10 +108,10 @@ class BackOfficeFileController(
     }
 
     @GetMapping("/admin/file/upload/error/{message}")
-    fun uploadError(model: Model, @PathVariable message: String): String{
+    fun uploadError(model: Model, @PathVariable message: String): String {
         model.addAttribute(displayLanguageController.getMediaLabels(model))
         model["error"] = true
-        when(message){
+        when (message) {
             "file_is_to_big" -> model["errorMessage"] = Translator.toLocale("lang.fileSizeLimitExceededException") + " " + uploadMaxSize + "!"
         }
         return "backoffice/content/file/upload"

@@ -31,9 +31,9 @@ class FrontendArticleController(
         model["article"] = article
         model["featuredImage"] = article.featuredImage
         val tagList = mutableListOf<Tag>()
-        if(article.tags?.isNotEmpty()!!){
+        if (article.tags?.isNotEmpty()!!) {
             val tagIterator = article.tags.iterator()
-            while (tagIterator.hasNext()){
+            while (tagIterator.hasNext()) {
                 tagList.add(tagIterator.next())
             }
         }
