@@ -232,6 +232,15 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
+    fun getTagsLabels(model: Model): Model {
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
+        model.addAttribute(getContentLabels(model))
+        model["title"] = Translator.toLocale(ARTICLES)
+        model[TITLE] = Translator.toLocale(TITLE)
+        model[AUTHOR] = Translator.toLocale(AUTHOR)
+        return model
+    }
+
     fun getUsersLabels(model: Model): Model {
         model.addAttribute(getBasicsLabelsAndInfos(model))
         model["title"] = Translator.toLocale(USERS)
