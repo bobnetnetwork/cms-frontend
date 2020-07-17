@@ -52,7 +52,7 @@ class BackOfficePageController(
         val page = pageService.findBySlug(slug)
         page.content = StringEscapeUtils.unescapeHtml4(page.content)
         model["add"] = false
-        model["article"] = page
+        model["page"] = page
 
         return PAGE_TEMPLATE
 
