@@ -33,31 +33,24 @@ class TemplateVersionConfig {
         val project: MavenProject
         val pomFile = "pom.xml"
 
-        try {
-            reader = FileReader(pomFile)
-            model = mavenReader.read(reader)
-            project = MavenProject(model)
+        reader = FileReader(pomFile)
+        model = mavenReader.read(reader)
+        project = MavenProject(model)
 
-            val properties: Properties = project.properties
+        val properties: Properties = project.properties
 
-            bootstrap = properties["bootstrap.version"] as String
-            fontAwesome = properties["font-awesome.version"] as String
-            jquery = properties["jquery.version"] as String
-            tinymce = properties["tinymce.version"] as String
-            chartJs = properties["chart.js.version"] as String
-            jqueryEasing = properties["jquery-easing.version"] as String
-            datatables = properties["datatables.version"] as String
-            animateCSS = properties["animate.css.version"] as String
-            aos = properties["aos.version"] as String
-            waypoints = properties["waypoints.version"] as String
-            owlCarousel = properties["owl.carousel.version"] as String
-            isotopeLayout = properties["isotope-layout.version"] as String
-
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        }
-
-
+        bootstrap = properties["bootstrap.version"] as String
+        fontAwesome = properties["font-awesome.version"] as String
+        jquery = properties["jquery.version"] as String
+        tinymce = properties["tinymce.version"] as String
+        chartJs = properties["chart.js.version"] as String
+        jqueryEasing = properties["jquery-easing.version"] as String
+        datatables = properties["datatables.version"] as String
+        animateCSS = properties["animate.css.version"] as String
+        aos = properties["aos.version"] as String
+        waypoints = properties["waypoints.version"] as String
+        owlCarousel = properties["owl.carousel.version"] as String
+        isotopeLayout = properties["isotope-layout.version"] as String
     }
 
 }

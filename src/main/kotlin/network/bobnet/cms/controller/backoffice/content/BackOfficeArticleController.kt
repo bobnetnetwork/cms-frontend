@@ -55,7 +55,7 @@ class BackOfficeArticleController(
     @GetMapping("/admin/articles/{slug}")
     fun showEditArticle(@PathVariable slug: String, model: Model): String {
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
-        return try {
+
             val article = articleService.findBySlug(slug)
             article.content = StringEscapeUtils.unescapeHtml4(article.content)
             model["add"] = false
@@ -77,12 +77,7 @@ class BackOfficeArticleController(
                 model["tagsList"] = ""
             }
 
-            ARTICLE_TEMPLATE
-        } catch (ex: Exception) {
-            model["errorMessage"] = ex.stackTrace.toString()
-            logger.error(ex.stackTrace.toString())
-            ARTICLE_TEMPLATE
-        }
+            return ARTICLE_TEMPLATE
 
     }
 
