@@ -29,6 +29,7 @@ class FrontendArticleController(
         model["title"] = article.title
         article.content = StringEscapeUtils.unescapeHtml4(article.content)
         model["article"] = article
+        model["author"] = article.author
         model["featuredImage"] = article.featuredImage
         val tagList = mutableListOf<Tag>()
         if (article.tags?.isNotEmpty()!!) {

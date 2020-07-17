@@ -27,6 +27,7 @@ class FrontendPageController(
         model["title"] = page.title
         page.content = StringEscapeUtils.unescapeHtml4(page.content)
         model["page"] = page
+        model["author"] = page.author
         model["featuredImage"] = page.featuredImage
 
         return "frontend/page"
