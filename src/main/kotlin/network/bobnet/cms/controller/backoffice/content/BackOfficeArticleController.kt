@@ -53,28 +53,28 @@ class BackOfficeArticleController(
     fun showEditArticle(@PathVariable slug: String, model: Model): String {
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
 
-            val article = articleService.findBySlug(slug)
-            article.content = StringEscapeUtils.unescapeHtml4(article.content)
-            model["add"] = false
-            model["article"] = article
-            model["tagsList"] = if (article.tags?.isNotEmpty()!!) {
-                val tagsIterator = article.tags!!.iterator()
-                var first = true
-                val tagsList = StringBuilder()
-                while (tagsIterator.hasNext()) {
-                    if (first) {
-                        tagsList.append(tagsIterator.next().title)
-                        first = false
-                    } else {
-                        tagsList.append(", ").append(tagsIterator.next().title)
-                    }
+        val article = articleService.findBySlug(slug)
+        article.content = StringEscapeUtils.unescapeHtml4(article.content)
+        model["add"] = false
+        model["article"] = article
+        model["tagsList"] = if (article.tags?.isNotEmpty()!!) {
+            val tagsIterator = article.tags!!.iterator()
+            var first = true
+            val tagsList = StringBuilder()
+            while (tagsIterator.hasNext()) {
+                if (first) {
+                    tagsList.append(tagsIterator.next().title)
+                    first = false
+                } else {
+                    tagsList.append(", ").append(tagsIterator.next().title)
                 }
-                 tagsList.toString()
-            } else {
-                 ""
             }
+            tagsList.toString()
+        } else {
+            ""
+        }
 
-            return ARTICLE_TEMPLATE
+        return ARTICLE_TEMPLATE
 
     }
 
@@ -82,13 +82,13 @@ class BackOfficeArticleController(
     fun editArticle(@PathVariable slug: String, model: Model, @RequestParam queryMap: Map<String, String>): String {
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
 
-            val article = articleService.findBySlug(slug)
-            article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
-            article.tags = setTagsToArticle(queryMap["tags"].toString())
+        val article = articleService.findBySlug(slug)
+        article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
+        article.tags = setTagsToArticle(queryMap["tags"].toString())
 
-            articleService.update(article)
-            setArticleToTags(article)
-            return "redirect:/admin/articles/" + article.slug
+        articleService.update(article)
+        setArticleToTags(article)
+        return "redirect:/admin/articles/" + article.slug
 
     }
 
@@ -107,15 +107,15 @@ class BackOfficeArticleController(
     fun addArticle(model: Model, @RequestParam queryMap: Map<String, String>): String {
         model.addAttribute(displayLanguageController.getArticleEditorLabels(model))
 
-            val article = Article()
-            article.author = LoggedInUser(userRepository).getUser()!!
-            article.title = queryMap["title"].toString()
-            article.slug = extensions.slugify(queryMap["title"].toString())
-            article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
-            article.tags = setTagsToArticle(queryMap["tags"].toString())
-            val newArticle: Article = articleService.save(article)
-            setArticleToTags(newArticle)
-            return "redirect:/admin/articles/" + newArticle.slug
+        val article = Article()
+        article.author = LoggedInUser(userRepository).getUser()!!
+        article.title = queryMap["title"].toString()
+        article.slug = extensions.slugify(queryMap["title"].toString())
+        article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
+        article.tags = setTagsToArticle(queryMap["tags"].toString())
+        val newArticle: Article = articleService.save(article)
+        setArticleToTags(newArticle)
+        return "redirect:/admin/articles/" + newArticle.slug
 
     }
 
