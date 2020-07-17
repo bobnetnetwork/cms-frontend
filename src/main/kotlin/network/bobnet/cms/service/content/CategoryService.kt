@@ -40,33 +40,33 @@ class CategoryService {
 
     fun save(category: Category): Category {
         if (category.name.isEmpty()) {
-            throw Exception("Name is required")
+            throw IllegalArgumentException("Name is required")
         }
         if (category.description.isEmpty()) {
-            throw Exception("Description is required")
+            throw IllegalArgumentException("Description is required")
         }
         if (category.id != null && existsById(category.id!!)) {
-            throw Exception("Category with id: " + category.id + " already exists")
+            throw IllegalArgumentException("Category with id: " + category.id + " already exists")
         }
         return categoryRepository.save(category)
     }
 
     fun update(category: Category) {
         if (category.name.isEmpty()) {
-            throw Exception("Name is required")
+            throw IllegalArgumentException("Name is required")
         }
         if (category.description.isEmpty()) {
-            throw Exception("Description is required")
+            throw IllegalArgumentException("Description is required")
         }
         if (!existsById(category.id!!)) {
-            throw Exception("Cannot find Category with id: " + category.id)
+            throw IllegalArgumentException("Cannot find Category with id: " + category.id)
         }
         categoryRepository.save(category)
     }
 
     fun deleteById(id: Long) {
         if (!existsById(id)) {
-            throw Exception("Cannot find Category with id: $id")
+            throw IllegalArgumentException("Cannot find Category with id: $id")
         } else {
             categoryRepository.deleteById(id)
         }

@@ -49,33 +49,33 @@ class ArticleService {
 
     fun save(article: Article): Article {
         if (article.title.isEmpty()) {
-            throw Exception("Title is required")
+            throw IllegalArgumentException("Title is required")
         }
         if (article.content.isEmpty()) {
-            throw Exception("Content is required")
+            throw IllegalArgumentException("Content is required")
         }
         if (article.id != null && existsById(article.id!!)) {
-            throw Exception("Article with id: " + article.id + " already exists")
+            throw IllegalArgumentException("Article with id: " + article.id + " already exists")
         }
         return articleRepository.save(article)
     }
 
     fun update(article: Article) {
         if (article.title.isEmpty()) {
-            throw Exception("Title is required")
+            throw IllegalArgumentException("Title is required")
         }
         if (article.content.isEmpty()) {
-            throw Exception("Content is required")
+            throw IllegalArgumentException("Content is required")
         }
         if (!existsById(article.id!!)) {
-            throw Exception("Cannot find Article with id: " + article.id)
+            throw IllegalArgumentException("Cannot find Article with id: " + article.id)
         }
         articleRepository.save(article)
     }
 
     fun deleteById(id: Long) {
         if (!existsById(id)) {
-            throw Exception("Cannot find Article with id: $id")
+            throw IllegalArgumentException("Cannot find Article with id: $id")
         } else {
             articleRepository.deleteById(id)
         }

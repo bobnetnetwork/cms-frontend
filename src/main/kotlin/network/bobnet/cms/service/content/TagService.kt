@@ -41,27 +41,27 @@ class TagService {
 
     fun save(tag: Tag): Tag {
         if (tag.title.isEmpty()) {
-            throw Exception("Title is required")
+            throw IllegalArgumentException("Title is required")
         }
         if (tag.id != null && existsById(tag.id!!)) {
-            throw Exception("Tag with id: " + tag.id + " already exists")
+            throw IllegalArgumentException("Tag with id: " + tag.id + " already exists")
         }
         return tagRepository.save(tag)
     }
 
     fun update(tag: Tag) {
         if (tag.title.isEmpty()) {
-            throw Exception("Title is required")
+            throw IllegalArgumentException("Title is required")
         }
         if (!existsById(tag.id!!)) {
-            throw Exception("Cannot find Tag with id: " + tag.id)
+            throw IllegalArgumentException("Cannot find Tag with id: " + tag.id)
         }
         tagRepository.save(tag)
     }
 
     fun deleteById(id: Long) {
         if (!existsById(id)) {
-            throw Exception("Cannot find Tag with id: $id")
+            throw IllegalArgumentException("Cannot find Tag with id: $id")
         } else {
             tagRepository.deleteById(id)
         }
