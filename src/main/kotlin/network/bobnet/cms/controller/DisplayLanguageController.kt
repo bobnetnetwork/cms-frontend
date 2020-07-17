@@ -189,7 +189,16 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
     fun getArticlesLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model.addAttribute(getContentLabels(model))
-        model["title"] = Translator.toLocale(CATEGORIES)
+        model["title"] = Translator.toLocale(ARTICLES)
+        model[TITLE] = Translator.toLocale(TITLE)
+        model[AUTHOR] = Translator.toLocale(AUTHOR)
+        return model
+    }
+
+    fun getPagesLabels(model: Model): Model {
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
+        model.addAttribute(getContentLabels(model))
+        model["title"] = Translator.toLocale("lang.pages")
         model[TITLE] = Translator.toLocale(TITLE)
         model[AUTHOR] = Translator.toLocale(AUTHOR)
         return model
@@ -221,6 +230,20 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
+    fun getPageEditorLabels(model: Model): Model {
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
+        model["lang.delete"] = Translator.toLocale("lang.delete")
+        model[TITLE] = Translator.toLocale(TITLE)
+        model["lang.content"] = Translator.toLocale("lang.content")
+        model["lang.saveAsDraft"] = Translator.toLocale("lang.saveAsDraft")
+        model["lang.general"] = Translator.toLocale("lang.general")
+        model["lang.publish"] = Translator.toLocale("lang.publish")
+        model["lang.featuredImage"] = Translator.toLocale("lang.featuredImage")
+        model[AUTHOR] = Translator.toLocale(AUTHOR)
+        model["lang.excerpt"] = Translator.toLocale("lang.excerpt")
+        model["title"] = Translator.toLocale("lang.editPage")
+        return model
+    }
 
     fun getCategoriesLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
