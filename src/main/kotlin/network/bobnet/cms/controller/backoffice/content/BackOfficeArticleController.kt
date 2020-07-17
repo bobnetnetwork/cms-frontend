@@ -60,7 +60,7 @@ class BackOfficeArticleController(
             article.content = StringEscapeUtils.unescapeHtml4(article.content)
             model["add"] = false
             model["article"] = article
-            if (article.tags?.isNotEmpty()!!) {
+            model["tagsList"] = if (article.tags?.isNotEmpty()!!) {
                 val tagsIterator = article.tags!!.iterator()
                 var first = true
                 val tagsList = StringBuilder()
@@ -72,9 +72,9 @@ class BackOfficeArticleController(
                         tagsList.append(", ").append(tagsIterator.next().title)
                     }
                 }
-                model["tagsList"] = tagsList.toString()
+                 tagsList.toString()
             } else {
-                model["tagsList"] = ""
+                 ""
             }
 
             return ARTICLE_TEMPLATE
