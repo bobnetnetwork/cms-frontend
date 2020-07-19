@@ -5,7 +5,7 @@
 
 version: 2
 updates:
-  - package-ecosystem: "maven"
+  - package-ecosystem: "javascript"
     directory: "/bakend"
     schedule:
       interval: "daily"
@@ -13,4 +13,13 @@ updates:
       - "dependencies"
     assignees:
       - "bobesz"
-    target-branch: "dev"
+    target-branch: "conceptualchange"
+  - package-ecosystem: "javascript"
+      directory: "/frontend"
+      schedule:
+        interval: "daily"
+      labels:
+        - "dependencies"
+      assignees:
+        - "bobesz"
+      target-branch: "conceptualchange"
