@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Dashboard</h1>
+                    <h1>{{title}}</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -15,7 +15,175 @@
 
     <!-- Main content -->
     <section class="content">
+        {{#article}}
+            <form action="{{#add}}/admin/articles/new{{/add}}{{^add}}/admin/articles/{{article.slug}}{{/add}}" name="article"
+                  method="POST">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="card card-outline card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    {{lang.title}}
+                                </h3>
+                                <!-- tools box -->
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                                            title="Collapse">
+                                        <i class="fas fa-minus"></i></button>
+                                </div>
+                                <!-- /. tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body pad">
+                                <div class="mb-3">
+                                    <input type="text" id="title" name="title" value="{{article.title}}" class="form-control">
+                                </div>
+                            </div>
+                        </div>
 
+
+                        <div class="card card-outline card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    {{lang.content}}
+                                </h3>
+                                <!-- tools box -->
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                                            title="Collapse">
+                                        <i class="fas fa-minus"></i></button>
+                                </div>
+                                <!-- /. tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body pad">
+                                <div class="mb-3">
+                                    <textarea name="content" class="textarea" style="width: 100%; height: 400px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                                        {{article.content}}
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+
+                            <div class="card card-outline card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        {{lang.general}}
+                                    </h3>
+                                    <!-- tools box -->
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                                                title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                    <!-- /. tools -->
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body pad">
+                                    <div class="mb-3">
+                                        <p><b>{{lang.author}}: </b>{{article.author.firstName}} {{article.author.lastName}}</p>
+                                        <a href="#" class="btn btn-info btn-icon-split">
+                                            <span class="icon text-white-50">
+                                              <i class="fas fa-info-circle"></i>
+                                            </span>
+                                            <span class="text">{{lang.saveAsDraft}}</span>
+                                        </a>
+                                        <div class="my-2"></div>
+                                        <a href="#" class="btn btn-success btn-icon-split">
+                                            <span class="icon text-white-50">
+                                              <i class="fas fa-check"></i>
+                                            </span>
+                                            <span class="text">{{lang.publish}}</span>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-icon-split">
+                                            <span class="icon text-white-50">
+                                              <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">{{lang.delete}}</span>
+                                        </a>
+                                        <br/>
+                                        <input type="submit" value="{{#add}}Publish{{/add}}{{^add}}Update{{/add}}"
+                                               class="btn btn-success btn-icon-split"/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="card card-outline card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        {{lang.featuredImage}}
+                                    </h3>
+                                    <!-- tools box -->
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                                                title="Collapse">
+                                            <i class="fas fa-minus"></i></button>
+                                    </div>
+                                    <!-- /. tools -->
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body pad">
+                                    <div class="mb-3">
+                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                                             src="../../{{article.featuredImage}}" alt="featured image">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        <div class="card card-outline card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    {{lang.categories}}
+                                </h3>
+                                <!-- tools box -->
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                                            title="Collapse">
+                                        <i class="fas fa-minus"></i></button>
+                                </div>
+                                <!-- /. tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body pad">
+                                <div class="mb-3">
+                                    <select class="form-control" name="categories" searchable="Search here..">
+                                        {{#ct}}
+                                            <option value="{{slug}}">{{name}}</option>
+                                        {{/ct}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                {{lang.tags}}
+                            </div>
+                            <div class="card-body">
+                                <input type="text" id="tags" name="tags" value="{{tagsList}}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                {{lang.excerpt}}
+                            </div>
+                            <div class="card-body">
+                        <textarea class="form-control" id="exampleFormControlTextarea2"
+                                  rows="10">{{#errorMessage}}{{errorMessage}}{{/errorMessage}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        {{/article}}
     </section>
     <!-- /.content -->
 </div>

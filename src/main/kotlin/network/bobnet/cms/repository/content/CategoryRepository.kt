@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository
 interface CategoryRepository : JpaRepository<Category, Long> {
     fun findBySlug(slug: String): Category?
     fun findAllByOrderByAddedAtDesc(): Iterable<Category>
+    fun countBySlug(slug: String): Long
 }

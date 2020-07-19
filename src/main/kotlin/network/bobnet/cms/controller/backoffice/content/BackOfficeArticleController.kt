@@ -2,9 +2,11 @@ package network.bobnet.cms.controller.backoffice.content
 
 import network.bobnet.cms.controller.DisplayLanguageController
 import network.bobnet.cms.model.content.Article
+import network.bobnet.cms.model.content.Category
 import network.bobnet.cms.model.content.Tag
 import network.bobnet.cms.repository.administration.UserRepository
 import network.bobnet.cms.service.content.ArticleService
+import network.bobnet.cms.service.content.CategoryService
 import network.bobnet.cms.service.content.TagService
 import network.bobnet.cms.util.Extensions
 import network.bobnet.cms.util.LoggedInUser
@@ -23,7 +25,8 @@ class BackOfficeArticleController(
         private val displayLanguageController: DisplayLanguageController,
         private val articleService: ArticleService,
         private val userRepository: UserRepository,
-        private val tagService: TagService) {
+        private val tagService: TagService,
+        private val categoryService: CategoryService) {
 
     private final val ROW_PER_PAGE: Int = 5
 
@@ -73,6 +76,7 @@ class BackOfficeArticleController(
         } else {
             ""
         }
+        model["ct"] = categoryService.findAllCategories()
 
         return ARTICLE_TEMPLATE
 
@@ -85,9 +89,13 @@ class BackOfficeArticleController(
         val article = articleService.findBySlug(slug)
         article.content = StringEscapeUtils.escapeHtml4(queryMap["content"].toString())
         article.tags = setTagsToArticle(queryMap["tags"].toString())
-
+        article.title = queryMap["title"].toString()
+        article.slug = extensions.slugify(queryMap["title"].toString())
+        article.categories?.add(categoryService.findBySlug(queryMap["categories"].toString())!!)
+        article.categories = setCategoriesToArticle(queryMap["categories"].toString())
         articleService.update(article)
         setArticleToTags(article)
+        setArticleToCategory(article)
         return "redirect:/admin/articles/" + article.slug
 
     }
@@ -117,6 +125,41 @@ class BackOfficeArticleController(
         setArticleToTags(newArticle)
         return "redirect:/admin/articles/" + newArticle.slug
 
+    }
+
+    fun setCategoriesToArticle(categoriesList: String): MutableSet<Category>{
+        val categoryList = mutableSetOf<Category>()
+        val categories = categoriesList.split(",").toTypedArray()
+        if(categories.isNotEmpty()) {
+            val categoryIterator = categories.iterator()
+            while (categoryIterator.hasNext()){
+                val category = categoryIterator.next().replace("\\s".toRegex(), "")
+
+                if(categoryService.countBySlug(category) > 0){
+                    categoryService.findBySlug(category)?.let { categoryList.add(it) }
+                }else if(category.isNotEmpty()){
+                    val newCategory = Category()
+                    newCategory.name = category
+                    val extensions = Extensions()
+                    newCategory.slug = extensions.slugify(category)
+                    categoryService.save(newCategory)
+                    categoryList.add(newCategory)
+                }
+            }
+        }
+
+        return categoryList
+    }
+
+    fun setArticleToCategory(article: Article){
+        if (article.categories?.isNotEmpty()!!) {
+            val categoryIterator = article.categories!!.iterator()
+            while (categoryIterator.hasNext()) {
+                val category = categoryIterator.next()
+                category.articles?.add(article)
+                categoryService.update(category)
+            }
+        }
     }
 
     fun setTagsToArticle(tagsList: String): MutableSet<Tag> {

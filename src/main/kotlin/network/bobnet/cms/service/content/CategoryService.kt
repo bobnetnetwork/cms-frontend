@@ -26,16 +26,20 @@ class CategoryService {
         return categoryRepository.findBySlug(slug)
     }
 
+    fun findAllCategories(): MutableList<Category>{
+        return categoryRepository.findAll()
+    }
+
     fun findAll(pageNumber: Int, rowNumber: Int): MutableList<Category> {
-        val articles: MutableList<Category> = mutableListOf()
+        val categories: MutableList<Category> = mutableListOf()
         val sortedByLastUpdateDesc: Pageable
 
         sortedByLastUpdateDesc = PageRequest.of(pageNumber - 1, rowNumber, Sort.by("id").ascending())
         categoryRepository.findAll(sortedByLastUpdateDesc).forEach {
-            articles.add(it)
+            categories.add(it)
         }
 
-        return articles
+        return categories
     }
 
     fun save(category: Category): Category {
@@ -55,9 +59,9 @@ class CategoryService {
         if (category.name.isEmpty()) {
             throw IllegalArgumentException("Name is required")
         }
-        if (category.description.isEmpty()) {
+        /*if (category.description.isEmpty()) {
             throw IllegalArgumentException("Description is required")
-        }
+        }*/
         if (!existsById(category.id!!)) {
             throw IllegalArgumentException("Cannot find Category with id: " + category.id)
         }
@@ -74,5 +78,9 @@ class CategoryService {
 
     fun count(): Long {
         return categoryRepository.count()
+    }
+
+    fun countBySlug(slug: String): Long {
+        return categoryRepository.countBySlug(slug)
     }
 }

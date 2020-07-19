@@ -28,6 +28,21 @@
 <script src="{{home}}/assets/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{home}}/assets/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="{{home}}/assets/js/dateFormatter.js"></script>
+<!-- Summernote -->
+<script src="{{home}}/assets/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- bs-custom-file-input -->
+<script src="{{home}}/assets/adminlte/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
+</script>
+<script>
+    $(function () {
+        // Summernote
+        $('.textarea').summernote()
+    })
+</script>
 <script>
     $(function () {
         $("#example1").DataTable({
