@@ -1,103 +1,24 @@
 {{> backoffice/header}}
-{{#article}}
-    <form action="{{#add}}/admin/articles/new{{/add}}{{^add}}/admin/articles/{{article.slug}}{{/add}}" name="article"
-          method="POST">
-        <div class="row">
-            <div class="col-lg-9">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        {{lang.title}}
-                    </div>
-                    <div class="card-body">
-                        <input type="text" id="title" name="title" value="{{article.title}}" class="form-control">
-                    </div>
-                </div>
 
-                <div class="card mb-4">
-                    <div class="card-header">
-                        {{lang.content}}
-                    </div>
-                    <div class="card-body">
-                        <textarea class="form-control" id="contentEditor" name="content"
-                                  rows="10">{{article.content}}</textarea>
-                    </div>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Dashboard</h1>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        {{lang.general}}
-                    </div>
-                    <div class="card-body">
-                        <p><b>{{lang.author}}: </b>{{article.author.firstName}} {{article.author.lastName}}</p>
-                        <a href="#" class="btn btn-info btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-info-circle"></i>
-                    </span>
-                            <span class="text">{{lang.saveAsDraft}}</span>
-                        </a>
-                        <div class="my-2"></div>
-                        <a href="#" class="btn btn-success btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-check"></i>
-                    </span>
-                            <span class="text">{{lang.publish}}</span>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
-                      <i class="fas fa-trash"></i>
-                    </span>
-                            <span class="text">{{lang.delete}}</span>
-                        </a>
-                        <br/>
-                        <input type="submit" value="{{#add}}Publish{{/add}}{{^add}}Update{{/add}}"
-                               class="btn btn-success btn-icon-split"/>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        {{lang.featuredImage}}
-                    </div>
-                    <div class="card-body">
-                        <div class="text-center">
-                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                 src="../../{{article.featuredImage}}" alt="featured image">
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        {{lang.categories}}
-                    </div>
-                    <div class="card-body">
-                        {{#categories}}
-                            <input type="checkbox" class="form-check-input" id="{{slug}}" name="{{slug}}"
-                                   value="{{name}}">
-                            <label class="form-check-label" for="{{slug}}">{{name}}</label><br>
-                        {{/categories}}
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        {{lang.tags}}
-                    </div>
-                    <div class="card-body">
-                        <input type="text" id="tags" name="tags" value="{{tagsList}}" class="form-control">
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        {{lang.excerpt}}
-                    </div>
-                    <div class="card-body">
-                        <textarea class="form-control" id="exampleFormControlTextarea2"
-                                  rows="10">{{#errorMessage}}{{errorMessage}}{{/errorMessage}}</textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+        </div><!-- /.container-fluid -->
+    </section>
 
-{{/article}}
-<div class="error">{{#errorMessage}}{{errorMessage}}{{/errorMessage}}</div>
+    <!-- Main content -->
+    <section class="content">
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
 {{> backoffice/footer}}

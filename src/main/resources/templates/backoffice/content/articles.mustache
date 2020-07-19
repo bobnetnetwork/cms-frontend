@@ -1,53 +1,67 @@
 {{> backoffice/header}}
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary"><a href="{{home}}/admin/articles/new">{{lang.addNew}}</a></h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>{{lang.title}}</th>
-                    <th>{{lang.author}}</th>
-                    <th>{{lang.createdAt}}</th>
-                </tr>
-                </thead>
-                <tfoot>
-                <tr>
-                    <th>ID</th>
-                    <th>{{lang.title}}</th>
-                    <th>{{lang.author}}</th>
-                    <th>{{lang.createdAt}}</th>
-                </tr>
-                </tfoot>
-                <tbody>
-                {{#articles}}
-                    <tr>
-                        <td>{{id}}</td>
-                        <td><a href="{{home}}/admin/articles/{{slug}}">{{title}}</a></td>
-                        <td>
-                            <a href="{{home}}/admin/users/{{author.userName}}">{{author.firstName}} {{author.lastName}}</a>
-                        </td>
-                        <td class="date">{{addedAt}}</td>
-                    </tr>
-                {{/articles}}
-                </tbody>
-            </table>
-            <div>
-                <nobr>
-                    {{#hasPrev}}<a href="/admin/articles?page={{prev}}">Prev</a>&nbsp;&nbsp;&nbsp;{{/hasPrev}}
-                    {{#hasNext}}<a href="/admin/articles?page={{next}}">Next</a>{{/hasNext}}
-                </nobr>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>{{title}}</h1>
+                </div>
             </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
-        </div>
-    </div>
+    <!-- Main content -->
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"><a href="{{home}}/admin/articles/new">{{lang.addNew}}</a></h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>{{lang.title}}</th>
+                        <th>{{lang.author}}</th>
+                        <th>{{lang.createdAt}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#articles}}
+                        <tr>
+                            <td>{{id}}</td>
+                            <td><a href="{{home}}/admin/articles/{{slug}}">{{title}}</a></td>
+                            <td>
+                                <a href="{{home}}/admin/users/{{author.userName}}">{{author.firstName}} {{author.lastName}}</a>
+                            </td>
+                            <td class="date">{{addedAt}}</td>
+                        </tr>
+                    {{/articles}}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>{{lang.title}}</th>
+                        <th>{{lang.author}}</th>
+                        <th>{{lang.createdAt}}</th>
+                    </tr>
+                    </tfoot>
+                </table>
+                <div>
+                    <nobr>
+                        {{#hasPrev}}<a href="/admin/articles?page={{prev}}">Prev</a>&nbsp;&nbsp;&nbsp;{{/hasPrev}}
+                        {{#hasNext}}<a href="/admin/articles?page={{next}}">Next</a>{{/hasNext}}
+                    </nobr>
+                </div>
+            </div>
+            <!-- /.card-body -->
+    </section>
+    <!-- /.content -->
 </div>
-
-
-
+<!-- /.content-wrapper -->
 
 {{> backoffice/footer}}
