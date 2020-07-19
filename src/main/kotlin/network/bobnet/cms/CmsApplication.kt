@@ -8,7 +8,7 @@ import org.springframework.boot.runApplication
 class CmsApplication
 
 fun main(args: Array<String>) {
-	runApplication<CmsApplication>(*args){
-		setBannerMode(Banner.Mode.OFF)
-	}
+    runApplication<CmsApplication>(*args) {
+        setBannerMode(Banner.Mode.OFF)
+    }
 }

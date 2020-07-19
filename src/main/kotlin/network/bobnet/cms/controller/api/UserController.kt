@@ -1,7 +1,7 @@
 package network.bobnet.cms.controller.api
 
 import network.bobnet.cms.model.user.User
-import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.repository.administration.UserRepository
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -18,5 +18,6 @@ class UserController(private val repository: UserRepository) {
 
     @GetMapping("/{login}")
     fun findOne(@PathVariable login: String) =
-            repository.findOneByUserName(login) ?: ResponseStatusException(HttpStatus.NOT_FOUND, "This user does not exist")
+            repository.findOneByUserName(login)
+                    ?: ResponseStatusException(HttpStatus.NOT_FOUND, "This user does not exist")
 }

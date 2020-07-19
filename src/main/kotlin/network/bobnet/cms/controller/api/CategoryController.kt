@@ -22,8 +22,8 @@ class CategoryController(private val categoryRepository: CategoryRepository) {
         val id: Long? = category?.id
         return id?.let {
             categoryRepository.findById(it).map { category ->
-            ResponseEntity.ok(category)
-        }.orElse(ResponseEntity.notFound().build())
+                ResponseEntity.ok(category)
+            }.orElse(ResponseEntity.notFound().build())
         }
     }
 }

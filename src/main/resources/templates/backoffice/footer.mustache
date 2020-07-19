@@ -1,76 +1,64 @@
-</div>
-<!-- /.container-fluid -->
 
-</div>
-<!-- End of Main Content -->
-
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>{{copyright}}</span>
-        </div>
+<footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+        <b>Version</b> 3.0.5
     </div>
+    {{copyright}}
 </footer>
-<!-- End of Footer -->
 
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
 </div>
-<!-- End of Content Wrapper -->
+<!-- ./wrapper -->
 
-</div>
-<!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{lang.readyToLeave}}</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">{{lang.readyToLeaveDesc}}</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">{{lang.cancel}}</button>
-                <a class="btn btn-primary" href="{{home}}/logout">{{lang.logout}}</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Page level plugins -->
-<script src="{{home}}/webjars/chart.js/{{chart-js-version}}/dist/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="/assets/js/demo/chart-area-demo.js"></script>
-<script src="/assets/js/demo/chart-pie-demo.js"></script>
-
-<!-- Bootstrap core JavaScript-->
+<!-- jQuery -->
 <script src="{{home}}/webjars/jquery/{{jquery-version}}/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
 <script src="{{home}}/webjars/bootstrap/{{bootstrap-version}}/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="{{home}}/webjars/jquery-easing/{{jquery-easing-version}}/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="/assets/js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="{{home}}/webjars/datatables/{{datatables-version}}/js/jquery.dataTables.min.js"></script>
-<script src="{{home}}/webjars/datatables/{{datatables-version}}/js/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="/assets/js/demo/datatables-demo.js"></script>
-
-<script src="/assets/js/dateFormatter.js"></script>
-
-
+<!-- AdminLTE App -->
+<script src="{{home}}/assets/adminlte/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{home}}/assets/adminlte/dist/js/demo.js"></script>
+<!-- DataTables -->
+<script src="{{home}}/assets/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{home}}/assets/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{home}}/assets/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{home}}/assets/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="{{home}}/assets/js/dateFormatter.js"></script>
+<!-- Summernote -->
+<script src="{{home}}/assets/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- bs-custom-file-input -->
+<script src="{{home}}/assets/adminlte/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
+</script>
+<script>
+    $(function () {
+        // Summernote
+        $('.textarea').summernote()
+    })
+</script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
 </body>
-
 </html>

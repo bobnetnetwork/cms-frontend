@@ -1,8 +1,8 @@
 package network.bobnet.cms.security
 
-import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.repository.administration.UserRepository
 import network.bobnet.cms.security.handler.CustomSimpleUrlAuthenticationSuccessHandler
-import network.bobnet.cms.service.CustomUserDetailsService
+import network.bobnet.cms.service.administration.CustomUserDetailsService
 import org.springframework.context.annotation.Bean
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity

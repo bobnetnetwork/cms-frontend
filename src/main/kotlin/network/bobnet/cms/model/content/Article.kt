@@ -9,14 +9,15 @@ import javax.persistence.*
 class Article(
         var title: String = "",
         var headline: String = "",
-        @Column(columnDefinition="LONGTEXT")
+        @Column(columnDefinition = "LONGTEXT")
         var content: String = "",
         var featuredImage: String = "",
         @ManyToOne(cascade = [CascadeType.ALL]) var author: User = User(),
         var slug: String = "",
         var addedAt: LocalDateTime = LocalDateTime.now(),
-        @Id @GeneratedValue var id: Long? = null/*,
-        @ManyToMany val categoryIds: Set<Category>?= null*/){
+        @Id @GeneratedValue var id: Long? = null,
+        @ManyToMany var tags: MutableSet<Tag>? = null,
+        @ManyToMany var categories: MutableSet<Category>? = null) {
 
     fun render() = id?.let {
         RenderedArticle(
@@ -27,6 +28,7 @@ class Article(
                 featuredImage,
                 author,
                 addedAt,
+                tags,
                 it
         )
     }

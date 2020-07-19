@@ -7,5 +7,5 @@ data class RenderCategory(
         val name: String,
         val featuredImage: String,
         val description: String,
-        val parent: Category,
+        val parent: Category?,
         val id: Long?)

@@ -13,42 +13,42 @@ import java.nio.file.Paths
 import java.util.stream.Stream
 
 @Service
-class FileStorageImpl(vararg subDir: String = arrayOf()): FileStorage{
+class FileStorageImpl(vararg subDir: String = arrayOf()) : FileStorage {
 
     val log: Logger = LoggerFactory.getLogger(this::class.java)
 
 
     private var root = "filestorage"
     private val sDir = subDir
-    var location: Path = if(subDir.isEmpty()){
+    var location: Path = if (subDir.isEmpty()) {
         Paths.get(root)
-    }else{
+    } else {
         Paths.get(root, *subDir)
     }
 
 
-    override fun store(file: MultipartFile): String{
+    override fun store(file: MultipartFile): String {
         val extendedFile = ExtendedFile(file)
-        if(!Files.isDirectory(location)){
+        if (!Files.isDirectory(location)) {
             init()
         }
         Files.copy(file.inputStream, this.location.resolve(extendedFile.fullName))
         return getLocationString(extendedFile.fullName)
     }
 
-    private fun getLocationString(fileName: String = ""): String{
+    private fun getLocationString(fileName: String = ""): String {
         val location: StringBuilder = StringBuilder()
         location.append("/").append(root)
-        if(sDir.isEmpty()){
+        if (sDir.isEmpty()) {
             location.append("/")
-        }else{
+        } else {
             sDir.forEach {
                 location.append("/").append(it)
             }
             location.append("/")
         }
 
-        if(fileName.isNotEmpty()){
+        if (fileName.isNotEmpty()) {
             location.append(fileName)
         }
 
@@ -65,19 +65,19 @@ class FileStorageImpl(vararg subDir: String = arrayOf()): FileStorage{
         FileSystemUtils.deleteRecursively(location.toFile())
     }
 
-    fun delete(fileName: String){
+    fun delete(fileName: String) {
         Files.delete(location.resolve(fileName))
     }
 
     override fun init() {
         val loc: Path = Paths.get(root)
-        if(!Files.isDirectory(loc)){
+        if (!Files.isDirectory(loc)) {
             Files.createDirectory(loc)
         }
         Files.createDirectory(location)
     }
 
     override fun loadFiles(): Stream<Path> {
-        return Files.walk(this.location, 1).filter{path -> path != this.location }.map(this.location::relativize)
+        return Files.walk(this.location, 1).filter { path -> path != this.location }.map(this.location::relativize)
     }
 }

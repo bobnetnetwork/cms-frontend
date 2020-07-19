@@ -10,13 +10,13 @@ import javax.persistence.Id
 @Entity
 class File(
 
-    var fileName: String = "",
-    var url: String = "",
-    var slug: String = "",
-    var mimeType: String = "",
-    var addedAt: LocalDateTime = LocalDateTime.now(),
-    @Id @GeneratedValue
-    var id: Long? = null){
+        var fileName: String = "",
+        var url: String = "",
+        var slug: String = "",
+        var mimeType: String = "",
+        var addedAt: LocalDateTime = LocalDateTime.now(),
+        @Id @GeneratedValue
+        var id: Long? = null) {
 
     fun render() = id?.let {
         RenderedFile(

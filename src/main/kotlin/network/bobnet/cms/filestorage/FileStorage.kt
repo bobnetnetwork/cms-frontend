@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile
 import java.nio.file.Path
 import java.util.stream.Stream
 
-interface FileStorage{
+interface FileStorage {
     fun store(file: MultipartFile): String
     fun loadFile(filename: String): Resource
     fun deleteAll()

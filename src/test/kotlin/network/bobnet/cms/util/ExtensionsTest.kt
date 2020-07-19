@@ -11,13 +11,13 @@ class ExtensionsTest {
     private lateinit var underTest: Extensions
 
     @Before
-    fun setup(){
+    fun setup() {
         initMocks(this)
         underTest = Extensions()
     }
 
     @Test
-    fun checkSlugify(){
+    fun checkSlugify() {
         val rawString = "[Example String]"
         val slug = "example-string"
 
@@ -25,7 +25,7 @@ class ExtensionsTest {
     }
 
     @Test
-    fun checkSlugifyCode(){
+    fun checkSlugifyCode() {
         val rawString = "[Example String]"
         val slug = "example_string"
 

@@ -2,8 +2,8 @@ package network.bobnet.cms.controller
 
 import network.bobnet.cms.config.TemplateVersionConfig
 import network.bobnet.cms.model.Options
-import network.bobnet.cms.repository.OptionsRepository
-import network.bobnet.cms.repository.user.UserRepository
+import network.bobnet.cms.repository.administration.OptionsRepository
+import network.bobnet.cms.repository.administration.UserRepository
 import network.bobnet.cms.util.LoggedInUser
 import network.bobnet.cms.util.Translator
 import org.springframework.context.i18n.LocaleContextHolder
@@ -71,12 +71,12 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    fun getErrorPageLabels(model: Model): Model{
+    fun getErrorPageLabels(model: Model): Model {
         getSiteInfo(model)
         return model
     }
 
-    fun getSettingsLabels(model: Model): Model{
+    fun getSettingsLabels(model: Model): Model {
         getAdminBasicsLabelsAndInfos(model)
         model["title"] = Translator.toLocale(SETTINGS)
         return model
@@ -103,7 +103,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    private fun getAdminBasicsLabelsAndInfos(model: Model): Model{
+    private fun getAdminBasicsLabelsAndInfos(model: Model): Model {
         getBasicsLabelsAndInfos(model)
         getSideBarLabels(model)
         getTopBarLabels(model)
@@ -117,7 +117,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    fun getCSSJSVersions(model: Model): Model{
+    fun getCSSJSVersions(model: Model): Model {
         model["bootstrap-version"] = templateVersionConfig.bootstrap
         model["font-awesome-version"] = templateVersionConfig.fontAwesome
         model["jquery-version"] = templateVersionConfig.jquery
@@ -178,7 +178,7 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
-    fun getContentLabels(model: Model): Model{
+    fun getContentLabels(model: Model): Model {
         model["lang.createdAt"] = Translator.toLocale("lang.createdAt")
         model[PREVIOUS] = Translator.toLocale(PREVIOUS)
         model[NEXT] = Translator.toLocale(NEXT)
@@ -189,13 +189,22 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
     fun getArticlesLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model.addAttribute(getContentLabels(model))
-        model["title"] = Translator.toLocale(CATEGORIES)
+        model["title"] = Translator.toLocale(ARTICLES)
         model[TITLE] = Translator.toLocale(TITLE)
         model[AUTHOR] = Translator.toLocale(AUTHOR)
         return model
     }
 
-    fun getMediaLabels(model: Model): Model{
+    fun getPagesLabels(model: Model): Model {
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
+        model.addAttribute(getContentLabels(model))
+        model["title"] = Translator.toLocale("lang.pages")
+        model[TITLE] = Translator.toLocale(TITLE)
+        model[AUTHOR] = Translator.toLocale(AUTHOR)
+        return model
+    }
+
+    fun getMediaLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model.addAttribute(getContentLabels(model))
         model["title"] = Translator.toLocale(MEDIA)
@@ -221,14 +230,37 @@ class DisplayLanguageController(private val optionsRepository: OptionsRepository
         return model
     }
 
+    fun getPageEditorLabels(model: Model): Model {
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
+        model["lang.delete"] = Translator.toLocale("lang.delete")
+        model[TITLE] = Translator.toLocale(TITLE)
+        model["lang.content"] = Translator.toLocale("lang.content")
+        model["lang.saveAsDraft"] = Translator.toLocale("lang.saveAsDraft")
+        model["lang.general"] = Translator.toLocale("lang.general")
+        model["lang.publish"] = Translator.toLocale("lang.publish")
+        model["lang.featuredImage"] = Translator.toLocale("lang.featuredImage")
+        model[AUTHOR] = Translator.toLocale(AUTHOR)
+        model["lang.excerpt"] = Translator.toLocale("lang.excerpt")
+        model["title"] = Translator.toLocale("lang.editPage")
+        return model
+    }
 
-    fun getCategoriesLabels(model: Model): Model{
+    fun getCategoriesLabels(model: Model): Model {
         model.addAttribute(getAdminBasicsLabelsAndInfos(model))
         model.addAttribute(getContentLabels(model))
         model["title"] = Translator.toLocale(ARTICLES)
         model[TITLE] = Translator.toLocale(TITLE)
         model[AUTHOR] = Translator.toLocale(AUTHOR)
         model["lang.parent"] = Translator.toLocale("lang.parent")
+        return model
+    }
+
+    fun getTagsLabels(model: Model): Model {
+        model.addAttribute(getAdminBasicsLabelsAndInfos(model))
+        model.addAttribute(getContentLabels(model))
+        model["title"] = Translator.toLocale(ARTICLES)
+        model[TITLE] = Translator.toLocale(TITLE)
+        model[AUTHOR] = Translator.toLocale(AUTHOR)
         return model
     }
 
