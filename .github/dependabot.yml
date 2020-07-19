@@ -6,7 +6,7 @@
 version: 2
 updates:
   - package-ecosystem: "maven"
-    directory: "/"
+    directory: "/bakend"
     schedule:
       interval: "daily"
     labels:
