@@ -13,7 +13,7 @@ updates:
       - "dependencies"
     assignees:
       - "bobesz"
-    target-branch: "conceptualchange"
+    target-branch: "dev"
   - package-ecosystem: "javascript"
       directory: "/frontend"
       schedule:
@@ -22,4 +22,4 @@ updates:
         - "dependencies"
       assignees:
         - "bobesz"
-      target-branch: "conceptualchange"
+      target-branch: "dev"
