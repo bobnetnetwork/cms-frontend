@@ -30,3 +30,6 @@ build/
 ### VS Code ###
 .vscode/
 filestorage/*
+
+### Sonar ###
+backend/.scannerwork/
