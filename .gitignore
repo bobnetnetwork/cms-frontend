@@ -33,3 +33,5 @@ filestorage/*
 
 ### Sonar ###
 backend/.scannerwork/
+.scannerwork/
+frontend/.scannerwork/
