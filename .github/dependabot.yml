@@ -12,11 +12,11 @@ updates:
       - "bobesz"
     target-branch: "develop"
   - package-ecosystem: "npm"
-    directory: "/frontend"
-    schedule:
-      interval: "daily"
-    labels:
-      - "dependencies"
-    assignees:
-      - "bobesz"
-    target-branch: "develop"
+      directory: "/frontend"
+      schedule:
+        interval: "daily"
+      labels:
+        - "dependencies"
+      assignees:
+        - "bobesz"
+      target-branch: "develop"
