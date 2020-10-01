@@ -23,7 +23,7 @@
     "@angular/router": "~10.0.5",
     "@tinymce/tinymce-angular": "^4.2.0",
     "rxjs": "~6.6.3",
-    "tinymce": "^5.4.2",
+    "tinymce": "^5.5.1",
     "tslib": "^2.0.0",
     "typescript": "~3.9.5",
     "zone.js": "~0.10.3",
